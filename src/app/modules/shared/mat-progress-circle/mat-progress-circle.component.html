@@ -1,0 +1,8 @@
+
+<div class="mat-progress-circle">
+    <mat-progress-spinner class="filler" mode="determinate" [value]="100">
+    </mat-progress-spinner>
+    <mat-progress-spinner class="content" mode="determinate" [value]="value">
+    </mat-progress-spinner>
+    <span *ngIf="displayText" class="text">{{ value }}%</span>
+</div>

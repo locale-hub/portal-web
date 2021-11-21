@@ -1,0 +1,44 @@
+
+<div class="content" role="main" style="align-items: unset;">
+
+  <div *ngIf="projects" class="row">
+
+    <div class="col-12 cards-container">
+      <mat-card class="col-12 mat-elevation-z0 row projects-header">
+            <span class="row">
+                <span class="col-7">Project Name</span>
+                <span class="col-2 center">Status</span>
+                <span class="col-2 center">Creation Date</span>
+                <span class="col-1 center"><!-- Actions --></span>
+            </span>
+      </mat-card>
+
+      <div *ngFor="let project of projects" class="project-row">
+        <mat-card class="col-12 mat-elevation-z0 row">
+                <span class="row">
+                    <span class="col-7 project-item">
+                        <span [routerLink]="['/projects', project.id]">
+                            {{ project.name }}
+                        </span>
+                    </span>
+                    <span class="col-2">
+                        <span>{{ getProgress(project.id) }}%</span>
+                        <mat-progress-bar mode="determinate" color="primary" [value]="getProgress(project.id)">
+                        </mat-progress-bar>
+                    </span>
+                    <span class="col-2 center">{{ project.createdAt | date: 'dd/MM/yyyy' }}</span>
+                    <span class="col-1 center">
+                        <button mat-icon-button [matMenuTriggerFor]="projectActionMenu">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #projectActionMenu xPosition="before">
+                          <button mat-menu-item class="mat-warn-text" (click)="openDeleteDialogForProject(project)">Delete</button>
+                        </mat-menu>
+                    </span>
+                </span>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</div>

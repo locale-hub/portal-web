@@ -1,0 +1,146 @@
+@import "src/colors";
+
+mat-card {
+  background-color: $background-grey;
+
+  .icon {
+    position: relative;
+    display: inline-block;
+    background-color: $background-dark;
+    border-radius: 4px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    transform: scale(1.5);
+    margin: 4px;
+    left: 6px;
+
+    mat-icon {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .title-container {
+    display: inline-block;
+    margin-left: 16px;
+
+    mat-card-title {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    .description {
+      font-size: small;
+      font-weight: 100;
+    }
+  }
+
+  .right-actions {
+    position: relative;
+    display: inline-block;
+    float: right;
+
+  }
+
+  mat-card-content {
+    display: inline-block;
+    vertical-align: text-top;
+    text-align: right;
+    margin-right: 4px;
+    white-space: pre-line;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: initial;
+  }
+
+  mat-card-actions {
+    display: inline-block;
+    text-align: right;
+    margin: 0 !important;
+
+    & > * {
+      margin-left: 8px;
+    }
+
+    a, button {
+      background-color: $background-dark;
+      border-radius: 12px;
+
+      &.delete {
+        background-color: $warn-color;
+      }
+    }
+  }
+}
+
+.notification-wrapper {
+  display: inline-block;
+
+  .notification-btn {
+    cursor: pointer;
+
+    &:hover {
+      color: #c8c8c8;
+    }
+  }
+
+  .notification-container {
+    position: absolute;
+    top: 64px;
+    right: 160px;
+    width: 512px;
+    max-width: 90vw;
+    height: 692px;
+    max-height: calc(75vh + 52px);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: $background-dark;
+    z-index: 300;
+    border-radius: 4px;
+  }
+
+  .notification-header {
+    height: 64px;
+    padding: 10px 10px 6px;
+
+    button {
+      height: 100%;
+      background-color: $background-light;
+      border-radius: 8px;
+      color: white;
+      margin-right: 20px;
+
+      &.active {
+        background-color: #3F434B;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .notification-content {
+    height: 628px;
+    max-height: 75vh;
+    overflow-y: scroll;
+
+    img {
+      margin: 16px auto;
+    }
+
+    .notification-card {
+      margin: 12px;
+      padding: 8px;
+
+      .empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100% - 24px);
+        background-color: #393939;
+        border-radius: 4px;
+      }
+    }
+  }
+}

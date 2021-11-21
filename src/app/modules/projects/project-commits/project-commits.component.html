@@ -1,0 +1,101 @@
+
+<div class="row">
+  <h1 class="col-12">Commits</h1>
+
+  <mat-form-field appearance="fill">
+    <div matPrefix class="branch-select-prefix">
+      <img src="assets/icons/branch.svg" />
+    </div>
+    <mat-label>
+      Branch
+    </mat-label>
+    <mat-select [(value)]="selectedBranch">
+      <mat-option value="master">master</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- Waiting results from API -->
+<div *ngIf="!commits" class="row">
+  <div style="margin: auto;">
+    <mat-spinner [diameter]="128"></mat-spinner>
+  </div>
+</div>
+
+<!-- This project does not have commits yet -->
+<div class="row" *ngIf="commits && commits.length === 0">
+  <div class="offset-sm-3 col-sm-6">
+    <div style="text-align: center;">
+      <h2>No commits found yet!</h2>
+      <p>Create some entries and commit them to begin you history</p>
+    </div>
+    <img mat-card-image style="width: 100%;" src="../../../../assets/images/no_data.svg" alt="No commits found image.">
+  </div>
+</div>
+
+<!-- Show commits -->
+<div class="row commits-container" *ngIf="commits && commits.length !== 0 && users">
+
+  <div *ngFor="let group of commitsPerDate()" class="col-12 commit-group">
+    <p>Commits on {{ group[0] }}</p>
+    <div class="commit-card-container">
+
+      <mat-card *ngFor="let commit of group[1].reverse()" class="col-12 commit-card">
+      <ng-container *ngIf="getCommitAuthor(commit); let author;">
+
+        <mat-card-title-group class="col-sm-12 col-md-6" style="padding-left: 0;">
+          <app-avatar class="commit-user"
+            [user]="author"
+            avatarSize="64"
+                      size="46"
+            [class.avatar]="author.avatar"
+            [class.initials]="!author.avatar"
+          ></app-avatar>
+
+          <div class="commit-title"
+               [class.avatar]="author.avatar"
+               [class.initials]="!author.avatar">
+            <mat-card-title>
+              {{ commit.title }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{ formatCommitDate(commit) }}
+              <span *ngIf="users" style="color: grey;">- by {{ getCommitAuthor(commit).name }}</span>
+            </mat-card-subtitle>
+          </div>
+        </mat-card-title-group>
+
+        <div class="actions-container col-sm-12 col-md-6">
+          <div class="row" style="margin: -8px 0 0 0;">
+            <div class="col-sm-12 col-md-9">
+              <button mat-stroked-button>
+                <span class="commit-id">{{ commit.id }}</span>
+              </button>
+            </div>
+            <div class="col-sm-12 col-md-3 actions-button">
+              <mat-button-toggle-group>
+                <mat-button-toggle [cdkCopyToClipboard]="commit.id" (mouseup)="copyToClipboard(commit.id)">
+                  <mat-icon>content_copy</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle (mouseup)="showCommitDetails(commit.id)">
+                  <mat-icon>code</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle *ngIf="!commit.deployed" (mouseup)="publishCommit(commit.id)">
+                  <mat-icon>publish</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle *ngIf="commit.deployed" (mouseup)="displayDeployedCommitTooltip()">
+                  <mat-icon color="primary">publish</mat-icon>
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+      </mat-card>
+
+    </div>
+  </div>
+
+</div>
+

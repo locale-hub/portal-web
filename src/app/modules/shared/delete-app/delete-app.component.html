@@ -1,0 +1,27 @@
+
+<h2 mat-dialog-title>Are you sure?</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form class="modal-form">
+
+    <p>
+      This action cannot be undone.<br />
+      This will permanently delete the {{ app.name }} app and all the APIs access with the app key will be blocked.<br />
+      Please type <b>{{ app.name }}</b> to confirm.
+    </p>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>App Name</mat-label>
+      <input matInput [(ngModel)]="appNameConfirmation" id="name" name="name" required>
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
+  <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+  <button (click)="deleteApp()" [disabled]="appNameConfirmation !== app.name" mat-flat-button color="warn" style="color: white;">
+    I understand the consequences, delete this app
+  </button>
+</mat-dialog-actions>

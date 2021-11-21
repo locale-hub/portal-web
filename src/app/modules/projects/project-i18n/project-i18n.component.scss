@@ -1,0 +1,97 @@
+@import "src/colors";
+
+
+::ng-deep {
+  .locales .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    padding: 0;
+    width: 100%;
+  }
+
+  .mat-tooltip {
+    font-size: 12px !important;
+  }
+}
+
+.header {
+  p {
+    margin: 0 64px 12px 0;
+  }
+
+  code {
+    border-radius: 2px;
+    border: 1px solid $accent-color;
+    padding-bottom: 4px;
+  }
+}
+
+button.action {
+  width: 100%;
+  padding: 4px 0;
+  font-weight: 600;
+  color: white;
+
+  &.add-locale {
+    background-color: #747F8D;
+  }
+
+  &.commit {
+    margin-bottom: 32px;
+  }
+
+  &.add-entry {
+    border: 1px solid $accent-color;
+  }
+}
+
+hr.separator {
+  border-color: $primary-color;
+}
+
+mat-button-toggle {
+  min-width: 64px;
+
+  &:hover .remove-locale-badge {
+    visibility: visible;
+  }
+
+  .remove-locale-badge {
+    visibility: hidden;
+    z-index: 1;
+    position: absolute;
+    top: -11px;
+    right: -11px;
+    font-size: 11px;
+    line-height: 13px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    border: 4px solid #ff0000;
+    color: #ffffff;
+    text-align: center;
+
+    &:hover {
+      transform: scale(1.2);
+      background-color: #f63a3a;
+      border: 4px solid #f63a3a;
+    }
+  }
+}
+
+.cards-container {
+  padding: 0;
+}
+
+mat-card.translation-header {
+  background-color: $background-dark;
+  margin-bottom: 36px;
+
+  & > span.row {
+    height: fit-content;
+    margin-top: 3px;
+
+    & > span {
+      margin: auto;
+    }
+  }
+}

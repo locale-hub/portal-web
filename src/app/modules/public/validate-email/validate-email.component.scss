@@ -1,0 +1,17 @@
+@import "src/colors";
+
+.content {
+  display: flex;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+}
+
+mat-card {
+  background-color: $background-dark;
+  border-radius: 4px;
+  box-shadow: unset;
+  margin: 12px 0;
+  padding: 24px;
+}

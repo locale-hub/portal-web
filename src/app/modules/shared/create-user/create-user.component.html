@@ -1,0 +1,24 @@
+
+<h2 mat-dialog-title>Invite a user</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form class="modal-form">
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="userInvite.name" id="name" name="name" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="userInvite.email" id="email" name="email" required>
+        </mat-form-field>
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="float: right">
+    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+    <button (click)="create()" mat-flat-button color="primary">Invite</button>
+</mat-dialog-actions>

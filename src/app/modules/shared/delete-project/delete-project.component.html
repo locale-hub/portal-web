@@ -1,0 +1,27 @@
+
+<h2 mat-dialog-title>Are you sure?</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form class="modal-form">
+
+    <p>
+      This action cannot be undone.<br />
+      This will permanently delete the {{ project.name }} project and all it commits and entries.<br />
+      Please type <b>{{ project.name }}</b> to confirm.
+    </p>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Project Name</mat-label>
+      <input matInput [(ngModel)]="projectNameConfirmation" id="name" name="name" required>
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
+  <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+  <button (click)="deleteProject()" [disabled]="projectNameConfirmation !== project.name" mat-flat-button color="warn" mat-dialog-close style="color: white;">
+    I understand the consequences, delete this project
+  </button>
+</mat-dialog-actions>

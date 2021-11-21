@@ -1,0 +1,62 @@
+@import "src/colors";
+
+.upload-file-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin: 20px 0;
+  border: 2px dashed #707070;
+  border-radius: 8px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $background-grey !important;
+    opacity: 0.8;
+  }
+
+  .placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    p:first-of-type {
+      margin-top: 20px;
+      margin-bottom: 24px;
+
+      mat-icon {
+        transform: scale(3.5);
+      }
+    }
+  }
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0;
+  background-color: $background-light;
+  border: 1px dashed;
+  border-radius: 12px;
+  padding: 5px;
+  color: #707070;
+
+  p {
+    margin: auto 24px;
+  }
+
+  .delete-file {
+    background: transparent;
+    color: $warn-color;
+    border: none;
+    cursor: pointer;
+
+    img {
+      width: 30px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+
+.no-description {
+  color: rgba(0,0,0,.54);
+  font-style: italic;
+}
+
+mat-table {
+  padding: 0;
+}
+
+.mat-column-locale {
+  flex: 0.15;
+}
+
+.mat-column-key {
+  flex: 0.3;
+}
+
+.entry-created {
+  background-color: rgba(232, 245, 233, 0.7);
+}
+
+.entry-edited {
+  background-color: rgba(255, 253, 231, 0.7);
+}
+
+.entry-deleted {
+  background-color: rgba(255, 235, 238, 0.7);
+}
+

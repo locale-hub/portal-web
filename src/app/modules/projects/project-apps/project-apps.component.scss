@@ -1,0 +1,109 @@
+@import "../../../../colors";
+
+mat-card {
+  background-color: $background-dark;
+  border-radius: 4px;
+  box-shadow: unset;
+  margin: 12px 0;
+  padding: 0;
+}
+
+.project-id  {
+  height: 42px;
+  border-radius: 8px;
+
+  .pid-header {
+    background-color: $background-dark;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    border-radius: 4px 0 0 4px;
+
+    p {
+      text-align: center;
+      margin: auto;
+    }
+  }
+
+  .pid-content {
+    background-color: #747F8D;
+    display: flex;
+    justify-content: flex-start;
+
+    p {
+      margin: auto 0;
+    }
+  }
+
+  .pid-action {
+    background-color: $background-grey;
+    padding: 0;
+    border-radius: 0 4px 4px 0;
+
+    button {
+      width: 100%;
+      height: 100%;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+}
+
+
+.app-card {
+
+  mat-card-title-group {
+    display: inline-block;
+
+    position: relative;
+    top: 12px;
+
+    mat-card-title {
+      mat-icon {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  mat-card-content {
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+
+  .app-key {
+    background-color: #747F8D;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    border-radius: 4px 0 0 4px;
+
+    p {
+      margin: auto 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .app-key-copy {
+    background-color: $background-grey;
+    padding: 0;
+    border-radius: 0 4px 4px 0;
+
+    button {
+      width: 100%;
+      height: 100%;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  .app-actions {
+    button {
+      width: 100%;
+      color: white;
+    }
+  }
+}
+

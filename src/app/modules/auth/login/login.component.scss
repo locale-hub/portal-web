@@ -1,0 +1,41 @@
+@import "node_modules/@angular/material/theming";
+@import "src/colors";
+
+.back-to-home {
+  position: absolute;
+  width: 100%;
+  left: 8%;
+  top: 64px;
+}
+
+a {
+  margin-left: 12px;
+}
+
+mat-tab-group {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+::ng-deep mat-tab-body {
+  background-color: $dark-black;
+}
+
+::ng-deep .mat-tab-label {
+  color: white;
+  background-color: $dark-grey;
+}
+
+::ng-deep .mat-tab-label-active {
+  background-color: $dark-black;
+}
+
+.modal-form {
+  padding: 24px;
+  margin-bottom: 0;
+}
+
+.mat-raised-button {
+  height: 48px;
+}

@@ -1,0 +1,64 @@
+
+<div class="content" role="main" style="align-items: unset;">
+
+    <div class="row">
+        <div class="col-12 header">
+            <h1>Users</h1>
+        </div>
+
+        <div class="col-12" *ngIf="organizationUsers">
+            <mat-form-field class="col-12 col-md-10">
+                <input type="text" placeholder="Type user name or email"
+                       matInput [matAutocomplete]="auto" [formControl]="myControl" [(ngModel)]="userEmailToAdd">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let user of filteredUsers | async" [value]="user.primaryEmail">
+                        {{user.name}} <{{ user.primaryEmail }}>
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" class="col-12 col-md-2 action"
+                    (click)="inviteUser();" [disabled]="project && project.archived || inputExistsAsUserEmail()">
+                <span>Add User</span>
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="users" class="row">
+
+        <div class="col-12 cards-container">
+            <mat-card class="col-12 mat-elevation-z0 row users-header">
+            <span class="row">
+                <span class="col-4">Name</span>
+                <span class="col-4">Email</span>
+                <span class="col-3 center">Role</span>
+                <span class="col-1 center"><!-- Actions --></span>
+            </span>
+            </mat-card>
+
+            <div *ngFor="let user of users" class="user-row">
+                <mat-card class="col-12 mat-elevation-z0 row">
+                <span class="row">
+                    <span class="col-4 user-item">
+                        {{ user.name }}
+                    </span>
+                    <span class="col-4">
+                        {{ user.primaryEmail }}
+                    </span>
+                    <span class="col-3 center">{{ user.role }}</span>
+                    <span class="col-1 center">
+                        <button *ngIf="isUserAdmin" mat-icon-button [matMenuTriggerFor]="userActionMenu">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #userActionMenu xPosition="before">
+                          <button mat-menu-item class="mat-warn-text" (click)="openDeleteUser(user)">Delete</button>
+                        </mat-menu>
+                    </span>
+                </span>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>

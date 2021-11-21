@@ -1,0 +1,22 @@
+
+mat-button-toggle {
+  min-width: 64px;
+}
+
+mat-table {
+  width: 60vw;
+  min-width: 704px;
+  padding: 0;
+}
+
+.mat-column-date {
+  flex: 0.2;
+}
+
+.mat-column-value {
+  flex: 0.75;
+}
+
+.mat-column-action {
+  flex: 0.05;
+}

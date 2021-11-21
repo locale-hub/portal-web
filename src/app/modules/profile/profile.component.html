@@ -1,0 +1,141 @@
+
+<div class="content row" style="padding: 5vh 2vw;">
+
+    <div *ngIf="user" class="row" style="width: 100%;">
+        <div class="col-sm-12 col-md-8 user-information" style="padding-left: 0;">
+        <mat-card>
+            <h3>Profile</h3>
+
+            <div class="row">
+                <mat-form-field appearance="fill" class="col-12">
+                    <mat-label>Name</mat-label>
+                    <input matInput id="name" name="name" [(ngModel)]="user.name" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="col-12">
+                    <mat-label>Primary Email</mat-label>
+                    <mat-hint>This is the email we will use to contact you, and the one you need to login</mat-hint>
+                    <mat-select [(ngModel)]="user.primaryEmail" required>
+                        <mat-option *ngFor="let email of this.user.emails" value="{{ email.email }}">
+                            {{ email.email }}
+                        </mat-option>
+                    </mat-select>
+                    <!--
+                    <input matInput id="primary-email" name="primary-email" [(ngModel)]="user.primaryEmail" type="email" required>
+                    -->
+                </mat-form-field>
+
+            </div>
+
+            <div class="row">
+                <button mat-raised-button color="primary" (click)="updateUser()">
+                    Update profile
+                </button>
+            </div>
+        </mat-card>
+        </div>
+
+        <div class="col-sm-12 col-md-4 bighead-editor" style="padding-right: 0;">
+        <mat-card style="height: 289px;">
+            <h3>Avatar</h3>
+
+            <div class="row avatar-container">
+                <app-avatar style="margin: auto;"
+                    [user]="user"
+                            size="140"
+                            fontSize="5"
+                    avatarSize="192"
+                ></app-avatar>
+            </div>
+        </mat-card>
+        </div>
+    </div>
+
+    <mat-card class="col-12">
+        <h3>Account security</h3>
+
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-12">
+                <mat-label>Old password</mat-label>
+                <input matInput id="passwordOld" name="passwordOld" [(ngModel)]="password.old" type="password"
+                       autocomplete="current-password" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-sm-12 col-md-6">
+                <mat-label>New password</mat-label>
+                <input matInput id="passwordNew1" name="passwordNew1" [(ngModel)]="password.new1" type="password"
+                       autocomplete="new-password" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-sm-12 col-md-6">
+                <mat-label>Confirm new password</mat-label>
+                <input matInput id="passwordNew2" name="passwordNew2" [(ngModel)]="password.new2" type="password"
+                       autocomplete="new-password" required>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <span class="col-sm-12" style="color: #586069;">
+                Make sure it's at least 15 characters OR at least 8 characters including a number and a
+                lowercase letter. Learn more.
+            </span>
+
+            <div class="col-sm-12" style="margin-top: 8px;">
+                <button mat-raised-button color="primary" (click)="updateUserPassword()">
+                    Update password
+                </button>
+                <a *ngIf="false" href="#!" style="margin-left: 16px; text-decoration-line: unset;">I forgot my password</a>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="user" class="col-12">
+        <h3>Emails</h3>
+
+        <div class="row">
+            <mat-list style="width: 100%;">
+                <mat-list-item *ngFor="let email of user.emails" class="col-12">
+                    <span>
+                        {{email.email}}
+                    </span>
+                    <span *ngIf="email.status === emailStatus.PRIMARY">
+                        &nbsp;&mdash;
+                        <span style="font-weight: 500;" class="mat-warn-text">Primary Email</span>
+                        <span style="vertical-align: middle; margin-left: 4px;">
+                            <mat-icon matTooltipPosition="above" matTooltip="This email will be used for notifications ans is the email to use for login"
+                            >info_outline</mat-icon>
+                        </span>
+                    </span>
+                    <span *ngIf="email.status === emailStatus.PENDING">
+                        &nbsp;&mdash;
+                        <span style="font-weight: 500; color: lightsteelblue;">Pending</span>
+                        <span style="vertical-align: middle; margin-left: 4px;">
+                            <mat-icon matTooltipPosition="above" matTooltip="This email is waiting for validation, check your mailbox"
+                            >info_outline</mat-icon>
+                        </span>
+                    </span>
+                    <span class="email-delete" matTooltipPosition="above" matTooltip="Cannot delete primary email"
+                          [matTooltipDisabled]="email.email !== user.primaryEmail">
+                        <button mat-icon-button [disabled]="email.email === user.primaryEmail" (click)="deleteEmail(email)" >
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-12 col-md-6">
+                <mat-label>Email address</mat-label>
+                <input matInput id="newEmail" name="newEmail" [(ngModel)]="newEmail" type="email" required>
+            </mat-form-field>
+            <div class="col-sm-12 col-md-4">
+                <button mat-raised-button color="primary" style="height: 51px;" (click)="addEmail()"
+                    [disabled]="invalidEmail()">
+                    Add another email
+                </button>
+            </div>
+        </div>
+    </mat-card>
+
+</div>

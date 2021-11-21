@@ -1,0 +1,18 @@
+
+<h2 mat-dialog-title>Name of the new translation key</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form class="modal-form">
+        <mat-form-field class="full-width">
+            <input [(ngModel)]="keyName" name="keyName" matInput>
+        </mat-form-field>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
+    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+    <button (click)="addKey()" mat-flat-button color="primary" mat-dialog-close>
+        Add Key
+    </button>
+</mat-dialog-actions>

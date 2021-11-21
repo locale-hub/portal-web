@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "i18n-services-admin",
+    "public": "portal-web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

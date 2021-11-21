@@ -1,0 +1,30 @@
+
+<h2 mat-dialog-title>Add new locale</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form class="modal-form">
+        <mat-form-field *ngIf="locales" appearance="fill" class="full-width">
+            <mat-label>Select a locale</mat-label>
+            <input type="text" placeholder="French, English, ..." matInput
+                   [formControl]="myControl" [matAutocomplete]="autocomplete">
+            <mat-autocomplete #autocomplete class="full-width">
+                <mat-option *ngFor="let locale of filteredLocales | async" [value]="locale.name" (click)="selectedLocale = locale.tag">
+                    {{ locale.tag }} - {{ locale.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <app-file-upload
+            accept=".json, .xml, .strings"
+            [(file)]="file"
+        ></app-file-upload>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
+    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+    <button [disabled]="!selectedLocale" (click)="addLocale()" mat-flat-button color="primary" mat-dialog-close>
+        Add this locale
+    </button>
+</mat-dialog-actions>

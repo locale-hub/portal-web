@@ -1,0 +1,30 @@
+@import "src/colors";
+
+h3 {
+  color: $primary-color;
+}
+
+mat-card {
+  background-color: $background-dark;
+  border-radius: 4px;
+  box-shadow: unset;
+  margin: 12px 0;
+  padding: 24px;
+}
+
+mat-card img {
+  height: 200px;
+  margin-bottom: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.default-locale-download {
+  display: inline-block;
+  float: right;
+  margin-top: -18px;
+}
+
+.default-locale-download button {
+  margin: auto 4px;
+}

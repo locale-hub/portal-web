@@ -1,0 +1,5 @@
+@import "src/colors";
+
+::ng-deep mat-dialog-container.mat-dialog-container {
+  background-color: $background-light;
+}

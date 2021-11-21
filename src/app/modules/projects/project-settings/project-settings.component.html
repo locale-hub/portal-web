@@ -1,0 +1,51 @@
+
+<mat-card *ngIf="this.project" class="row">
+  <h3>Project Information</h3>
+  <p *ngIf="project.archived">Archived projects cannot be updated</p>
+
+  <mat-form-field appearance="fill" class="col-sm-4">
+    <mat-label>Project Name</mat-label>
+    <input matInput id="name" name="name" [(ngModel)]="project.name" required [disabled]="project.archived">
+  </mat-form-field>
+
+  <mat-form-field *ngIf="users" appearance="fill" class="col-sm-4">
+    <mat-label>Owner</mat-label>
+    <mat-select [(ngModel)]="project.userId" required [disabled]="project.archived">
+      <mat-option *ngFor="let user of this.users" value="{{ user.id }}">
+        {{ user.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="col-sm-4">
+    <mat-label>Default locale</mat-label>
+    <mat-select [(ngModel)]="project.defaultLocale" required [disabled]="project.archived">
+      <mat-option *ngFor="let locale of this.locales" value="{{ locale.tag }}">
+        {{ locale.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="col-sm-12" style="text-align: right;">
+    <button (click)="saveProject()" mat-raised-button color="primary" [disabled]="project.archived">Save</button>
+  </div>
+
+</mat-card>
+
+<mat-card *ngIf="this.project" class="row danger">
+  <h3>Danger Zone</h3>
+
+  <div class="entry">
+    <span class="header">Archive this project?</span>
+    <br />
+    <span class="text">Mark this repository as archived, read-only and API disabled.</span>
+    <button class="action" [disabled]="project.archived" (click)="openArchiveDialog()" mat-flat-button color="warn">Archive</button>
+  </div>
+
+  <div class="entry">
+    <span class="header">Delete this project?</span>
+    <br />
+    <span class="text">Once you delete a repository, there is no going back. Please be certain.</span>
+    <button class="action" (click)="openDeleteDialog()" mat-flat-button color="warn">Delete</button>
+  </div>
+</mat-card>

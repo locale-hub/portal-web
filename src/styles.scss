@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "src/colors";
+@import 'themes';
+
+html {
+  height: 100%;
+  background-color: $background-light;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1, h2, h3, h4, h5, p, .mat-raised-button.mat-accent {
+  color: white;
+}
+
+mat-toolbar {
+  border-bottom: solid 1px rgba(255, 255, 255, 0.12);
+}
+
+.content {
+  display: flex;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  margin: 0 0 20px;
+}
+
+.modal-form {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+// Remove autofill color for Chrome autocomplete
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: #fff !important;
+}
+
+input.mat-input-element {
+  caret-color: white;
+}

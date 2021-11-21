@@ -1,0 +1,76 @@
+
+<div class="content" role="main" style="align-items: unset;">
+
+  <div class="row">
+    <h1 class="col-12 col-md-8 col-lg-10">Apps</h1>
+    <p class="col-12 col-md-8 col-lg-10">
+      This feature allows you to serve translated content dynamically and update it without re-releasing your app.
+    </p>
+    <div *ngIf="false === isFeatureEnabled" class="col-12">
+      <p>This feature require a plan upgrade at the organization level. Please contact your administrator.</p>
+    </div>
+
+    <div class="col-12 col-md-4 col-lg-2">
+      <button *ngIf="isFeatureEnabled" (click)="openCreateAppDialog()" mat-raised-button color="primary" style="width: 100%;">
+        New App
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <div *ngIf="apps" class="row">
+    <div class="col-12 project-id row">
+      <div class="col-2 pid-header">
+        <p>Project Id</p>
+      </div>
+      <div class="col-9 pid-content">
+        <p>{{ this.projectId }}</p>
+      </div>
+      <div class="col-1 pid-action">
+        <button mat-button [cdkCopyToClipboard]="projectId" (click)="messageService.log('Project id copied to clipboard')">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <mat-card *ngFor="let app of apps" class="app-card row">
+        <mat-card-title-group class="col-sm-12 col-md-4">
+          <mat-card-title>
+            <img *ngIf="'ios' === app.type" src="assets/icons/apple.svg" width="16" />
+            <mat-icon *ngIf="'android' === app.type">android</mat-icon>
+            <mat-icon *ngIf="'web' === app.type">computer</mat-icon>
+            <mat-icon *ngIf="'other' === app.type">device_unknown</mat-icon>
+            {{ app.name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ app.identifier }}
+          </mat-card-subtitle>
+        </mat-card-title-group>
+
+        <mat-card-content class="col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-7 app-key">
+            <p>{{ app.key }}</p>
+          </div>
+          <div class="col-2 app-key-copy">
+            <button mat-button [cdkCopyToClipboard]="app.key" (click)="messageService.log('App Key copied in clipboard')">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+          <div class="col-3 app-actions">
+            <button mat-flat-button color="warn" (click)="openDeleteAppDialog(app)" style="color: white">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          </div>
+        </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>

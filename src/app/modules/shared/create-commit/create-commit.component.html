@@ -1,0 +1,78 @@
+
+<h2 mat-dialog-title>Commit your changes</h2>
+
+<mat-dialog-content class="mat-typography">
+
+    <form class="full-width">
+        <mat-form-field class="full-width">
+            <mat-label>Commit Subject</mat-label>
+            <input [(ngModel)]="commitTitle" name="commit-title" matInput required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="commitDescription" name="commit-description" matInput></textarea>
+        </mat-form-field>
+    </form>
+
+    <div class="row">
+        <mat-button-toggle-group *ngIf="manifest">
+            <mat-button-toggle *ngFor="let locale of manifest.locales" (click)="selectLocale(locale)" [class.mat-button-toggle-checked]="selectedLocale == locale">
+                <mat-icon *ngIf="isLocaleMissAKey(locale)"
+                          matTooltip="This locale is missing translation."
+                          matTooltipPosition="above"
+                >warning</mat-icon>
+                {{ locale }}
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+
+    <div class="row">
+        <mat-table *ngIf="manifest" [dataSource]="selectedKeys" class="col-12 mat-elevation-z2">
+
+            <!-- # Column -->
+            <ng-container matColumnDef="info">
+                <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+                <mat-cell *matCellDef="let key">
+                    <mat-icon *ngIf="isLocaleKeyValid(selectedLocale, key)"
+                              matTooltip="Missing translation"
+                              matTooltipPosition="above"
+                    >warning</mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Key Column -->
+            <ng-container matColumnDef="key">
+                <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
+                <mat-cell *matCellDef="let key">
+                    {{ key }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Value Column -->
+            <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+                <mat-cell *matCellDef="let key">
+                    <mat-form-field class="no-bottom-line full-width">
+                        <input matInput [(ngModel)]="manifest.manifest[selectedLocale][key].value" disabled>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['info', 'key', 'value']"></mat-header-row>
+            <mat-row *matRowDef="let key; columns: ['info', 'key', 'value'];"
+                     [ngClass]="entryStatus(selectedLocale, key)"></mat-row>
+        </mat-table>
+    </div>
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions  align="end" style="margin-bottom: 0;">
+    <button mat-stroked-button mat-dialog-close="false">
+        Cancel
+    </button>
+    <button (click)="updateManifest()" mat-flat-button color="primary">
+        Commit
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,15 @@
+
+<div class="upload-file-container" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)">
+    <input #fileInput hidden type="file" [accept]="accept" (change)="uploadFile($event.target.files)">
+    <div class="placeholder">
+        <p><mat-icon>upload</mat-icon></p>
+        <p>Allowed formats: {{ accept }}</p>
+        <p>Optional: Chose a file or drag it here</p>
+    </div>
+</div>
+<div *ngIf="file" class="files-list">
+    <p>{{ file.name}}</p>
+    <button class="delete-file" (click)="deleteFile()">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>

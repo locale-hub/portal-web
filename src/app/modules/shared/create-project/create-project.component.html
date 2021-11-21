@@ -1,0 +1,27 @@
+
+<h2 mat-dialog-title>Create a new project</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form class="modal-form">
+    <mat-form-field *ngIf="organizations" appearance="fill" class="full-width">
+      <mat-label>Organization</mat-label>
+      <mat-select [(ngModel)]="project.organizationId" [ngModelOptions]="{standalone: true}">
+        <mat-option *ngFor="let organization of organizations" [value]="organization.id">
+          {{ organization.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="project.name" id="name" name="name" required>
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="float: right">
+  <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+  <button (click)="create()" mat-flat-button color="primary">Create</button>
+</mat-dialog-actions>

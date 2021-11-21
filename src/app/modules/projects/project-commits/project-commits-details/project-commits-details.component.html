@@ -1,0 +1,45 @@
+
+<div class="content" role="main" style="align-items: unset;">
+
+    <div class="row" *ngIf="commit">
+        <h1 class="col-12">{{ commit.title }}</h1>
+        <p class="col-12">{{ formatCommitDate(commit.createdAt) }}</p>
+
+        <p *ngIf="null !== commit.description && 0 !== commit.description.trim().length" class="col-12">
+            {{ commit.description }}
+        </p>
+        <p *ngIf="null === commit.description || 0 === commit.description.trim().length" class="col-12 no-description">
+            No description
+        </p>
+    </div>
+
+
+    <div class="row">
+        <mat-table *ngIf="commit" [dataSource]="getFlatManifest()" class="col-12 mat-elevation-z2">
+
+            <!-- # Column -->
+            <ng-container matColumnDef="locale">
+                <mat-header-cell *matHeaderCellDef>Locale</mat-header-cell>
+                <mat-cell *matCellDef="let entry">{{ entry.locale }}</mat-cell>
+            </ng-container>
+
+            <!-- Key Column -->
+            <ng-container matColumnDef="key">
+                <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
+                <mat-cell *matCellDef="let entry">{{ entry.key }}</mat-cell>
+            </ng-container>
+
+            <!-- Value Column -->
+            <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+                <mat-cell *matCellDef="let entry">{{ entry.value }}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['locale', 'key', 'value']"></mat-header-row>
+            <mat-row *matRowDef="let entry; columns: ['locale', 'key', 'value'];"></mat-row>
+
+        </mat-table>
+    </div>
+
+
+</div>

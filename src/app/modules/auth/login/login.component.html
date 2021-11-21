@@ -1,0 +1,87 @@
+
+<div class="content" role="main" style="align-items: unset;">
+
+    <div class="row back-to-home">
+        <a [href]="config.publicWeb.hostname" class="col-12 mat-primary-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="7.308" height="12.784" viewBox="0 0 7.308 12.784">
+                <path id="ios-arrow-back" d="M162.211,94.478l4.837-4.833a.914.914,0,0,0-1.294-1.29l-5.48,5.476a.912.912,0,0,0-.027,1.26l5.5,5.514a.914.914,0,0,0,1.294-1.29Z" transform="translate(-160.008 -88.087)" fill="#02CFFC"/>
+            </svg>
+            <span style="vertical-align: text-bottom; margin-left: 8px;">Back to Home</span>
+        </a>
+    </div>
+
+    <div class="row">
+        <h1 class="col-12" style="text-align: center">
+            <img src="assets/logo-white.svg" alt="Locale Hub logo"
+                style="vertical-align: middle" />
+            <span style="vertical-align: middle; margin-left: 12px;">Locale Hub</span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <mat-tab-group mat-stretch-tabs dynamicHeight animationDuration="0ms">
+            <mat-tab class="col-12 row" label="Login">
+                <div class="row modal-form">
+                    <mat-form-field appearance="fill" class="col-12">
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="email" id="email" name="email" type="email" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="col-12">
+                        <mat-label>Password</mat-label>
+                        <input matInput [(ngModel)]="password" id="name" name="name" type="password" required>
+                    </mat-form-field>
+
+                    <div class="col-12 center">
+                        <button mat-raised-button color="primary"
+                            style="width: 100%; margin-bottom: 12px"
+                            [disabled]="loginInProgress"
+                            (click)="login()"
+                        >Login</button>
+
+                        <a routerLink="/password-reset" class="col-12 mat-warn-text">
+                            Forgot Password?
+                        </a>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab class="col-12 row" label="Register">
+                <div class="row modal-form">
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Name</mat-label>
+                        <input [(ngModel)]="name" matInput name="name" type="text" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input [(ngModel)]="email" matInput name="email" type="email" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input [(ngModel)]="password" matInput name="password" type="password" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Confirm password</mat-label>
+                        <input [(ngModel)]="password2" matInput type="password" required>
+                    </mat-form-field>
+
+                    <div class="col-12 center" style="padding: 0;">
+                        <button mat-raised-button color="primary"
+                                style="width: 100%;"
+                                [disabled]="registerInProgress || undefined == password || password !== password2"
+                                (click)="register()"
+                        >Register</button>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+        <div *ngIf="loginInProgress" class="col-12 col-md-12 col-lg-12">
+            <mat-spinner style="margin: auto;" color="accent"></mat-spinner>
+        </div>
+    </div>
+
+</div>

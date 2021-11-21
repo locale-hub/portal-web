@@ -1,0 +1,143 @@
+@import "src/colors";
+
+mat-drawer {
+  width: 12vw;
+  background-color: $background-black;
+}
+
+.mat-drawer-reduced {
+  width: 64px;
+}
+
+mat-drawer button {
+  color: white;
+  width: 100%;
+  height: 48px;
+  text-align: left;
+  border-radius: 0;
+  margin: 4px 0;
+}
+
+mat-drawer button mat-icon {
+  margin-top: -2px;
+}
+mat-drawer button span {
+  margin-left: 6px;
+}
+
+mat-drawer button.active {
+  border-left: 4px solid $primary-color;
+}
+
+mat-drawer .sub-menu {
+  padding-left: 42px;
+}
+
+mat-drawer button.extend-close-navbar-btn {
+  position: absolute;
+  width: initial;
+  height: 24px;
+  right: 12px;
+  bottom: 8px;
+}
+
+mat-drawer button.extend-close-navbar-btn mat-icon {
+  background-color: $background-light;
+  border-radius: 4px;
+  margin-top: -18px;
+}
+
+mat-drawer-content {
+  margin-left: 0;
+  height: 100vh;
+  background-color: $background-light;
+}
+
+mat-drawer-content:not(.no-margin) {
+  margin-left: 64px;
+}
+
+.mat-drawer-opened-margin {
+  margin-left: 12vw;
+}
+
+
+.title {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.title * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.title h1 {
+  margin-left: 8px;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.homepage-link {
+  outline: none;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.homepage-link:hover {
+  cursor: pointer;
+}
+
+mat-toolbar .mat-flat-button {
+  color: white;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  background-color: $dark-black;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 24px;
+  z-index: 12;
+  margin: 0;
+  padding-right: 36px;
+  text-align: center;
+
+  a {
+    color: darkgrey;
+    text-decoration: none;
+  }
+}
+
+mat-drawer button.extend-close-navbar-btn.menu-reducer-btn-reduced {
+  margin-right: 8px;
+}
+
+::ng-deep .dialog-size-big {
+  width: 960px;
+}

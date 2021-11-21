@@ -1,0 +1,37 @@
+@import "src/colors";
+
+
+mat-card.row {
+  background-color: $background-dark;
+  border-radius: 4px;
+  box-shadow: unset;
+  margin: 12px 0;
+  padding: 24px;
+
+  .action {
+    color: white;
+    padding: 0 36px;
+  }
+}
+
+
+mat-card.danger {
+  h3 {
+    color: $warn-color;
+  }
+
+  .entry {
+    margin-top: 16px;
+
+    .header {
+      font-weight: 500;
+    }
+
+    .action {
+      color: white;
+      float: right;
+      margin-top: -18px;
+      padding: 0 36px;
+    }
+  }
+}

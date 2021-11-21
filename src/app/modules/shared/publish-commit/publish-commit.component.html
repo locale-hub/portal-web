@@ -1,0 +1,17 @@
+
+<h2 mat-dialog-title>You are about to release new changes?</h2>
+
+<mat-dialog-content class="mat-typography">
+    <p>
+        This action will publish all changes since last published version.<br />
+        It means that the changes made until that commit will be sent to you apps.<br />
+        Note: This will unpublished the previous published commit.<br />
+    </p>
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
+    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+    <button (click)="deleteApp()" mat-flat-button color="warn" style="color: white;">
+        Publish changes
+    </button>
+</mat-dialog-actions>

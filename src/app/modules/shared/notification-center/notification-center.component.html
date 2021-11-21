@@ -1,0 +1,76 @@
+
+<div class="notification-wrapper">
+  <button mat-button class="notification-btn" (click)="toggleNotification()">
+    <mat-icon *ngIf="undefined === allNotifications || 0 === newNotificationsCount()"
+    >notifications</mat-icon>
+    <mat-icon *ngIf="undefined !== allNotifications && 0 !== newNotificationsCount()"
+        matBadgePosition="before" matBadgeColor="primary"
+        [matBadge]="newNotificationsCount()"
+    >notifications</mat-icon>
+  </button>
+
+  <div *ngIf="opened" class="notification-container"
+       (clickOutside)="opened = false"
+       [exclude]="'.notification-wrapper, .notification-action'"
+  >
+    <div class="notification-header">
+      <button mat-flat-button class="notification-btn" [class.active]="notificationStatus.UNREAD === showStatus"
+              (click)="showStatus = notificationStatus.UNREAD">
+        Unread notifications
+      </button>
+      <button mat-flat-button class="notification-btn" [class.active]="notificationStatus.READ === showStatus"
+              (click)="showStatus = notificationStatus.READ">
+        Archived
+      </button>
+    </div>
+
+    <div class="notification-content">
+      <div *ngIf="0 === listByStatus(showStatus).length"
+           class="notification-card empty row">
+        <span class="col-12" style="text-align: center;">All clear!</span>
+        <img mat-card-image class="offset-1 col-10" alt="Firework image"
+             src="../../../../assets/images/fireworks.svg">
+      </div>
+
+      <mat-card *ngFor="let notification of listByStatus(showStatus)" class="notification-card">
+        <div class="title-container">
+          <mat-card-title>
+            {{
+              (notification.title.length > 32)
+                  ? (notification.title | slice:0:29) + '...'
+                  : (notification.title)
+            }}
+          </mat-card-title>
+          <div class="description">
+            {{
+              (notification.text?.length > 32)
+                  ? (clearText(notification.text) | slice:0:29) + '...'
+                  : clearText(notification.text)
+            }}
+          </div>
+        </div>
+        <div class="right-actions">
+          <mat-card-content>
+            {{ notification.createdAt | date: 'yyyy/MM/dd \n hh:mm' }}
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button class="notification-action"
+                (click)="show(notification)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <a mat-icon-button class="notification-action" [href]="notification.link"
+               [style.visibility]="null !== notification.link ? 'visible' : 'hidden'">
+              <mat-icon>read_more</mat-icon>
+            </a>
+            <button mat-icon-button class="notification-action delete"
+              *ngIf="notificationStatus.UNREAD === showStatus"
+              (click)="discard(notification.id)">
+              <mat-icon>archive</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+
+    </div>
+  </div>
+</div>

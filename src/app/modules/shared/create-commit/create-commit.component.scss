@@ -1,0 +1,32 @@
+
+mat-button-toggle {
+  min-width: 64px;
+}
+
+mat-table {
+  padding: 0;
+}
+
+.mat-column-info {
+  flex: 0.1;
+}
+
+.mat-column-key {
+  flex: 0.4;
+}
+
+.mat-input-element:disabled {
+  color: black;
+}
+
+.entry-created {
+  background-color: rgba(232, 245, 233, 0.7);
+}
+
+.entry-edited {
+  background-color: rgba(255, 253, 231, 0.7);
+}
+
+.entry-deleted {
+  background-color: rgba(255, 235, 238, 0.7);
+}
