@@ -36,7 +36,7 @@
   <div class="col-sm-12 col-md-10">
     <mat-button-toggle-group class="locales" style="overflow:visible;">
       <mat-button-toggle style="width: 72px;" *ngFor="let locale of manifest.locales" (click)="selectedLocale = locale"
-                         [class.mat-button-toggle-checked]="selectedLocale == locale">
+                         [class.mat-button-toggle-checked]="selectedLocale === locale">
         <span (click)="deleteLocale(locale)" class="remove-locale-badge">X</span>
         <mat-icon *ngIf="isLocaleMissAKey(locale)"
           matTooltip="{{ countMissingTranslationForLocale(locale) }}/{{ manifest.keys.length }} missing"

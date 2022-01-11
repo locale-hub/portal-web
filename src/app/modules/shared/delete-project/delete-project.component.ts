@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './delete-project.component.html',
   styleUrls: ['./delete-project.component.scss']
 })
-export class DeleteProjectComponent implements OnInit {
+export class DeleteProjectComponent {
   projectNameConfirmation: string;
   project: Project;
 
@@ -20,9 +20,6 @@ export class DeleteProjectComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.project = data.project;
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

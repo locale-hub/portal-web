@@ -6,15 +6,12 @@ import {MatDialogRef} from '@angular/material/dialog';
   templateUrl: './add-entry.component.html',
   styleUrls: ['./add-entry.component.scss']
 })
-export class AddEntryComponent implements OnInit {
+export class AddEntryComponent {
   keyName: string;
 
   constructor(
     private dialogRef: MatDialogRef<AddEntryComponent>,
   ) {
-  }
-
-  ngOnInit(): void {
   }
 
   addKey() {

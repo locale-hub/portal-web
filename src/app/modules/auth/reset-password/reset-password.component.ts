@@ -7,16 +7,13 @@ import {MessageService} from '../../../logic/services/message.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent {
   email: string;
 
   constructor(
     private authService: AuthService,
     private messageService: MessageService
   ) { }
-
-  ngOnInit(): void {
-  }
 
   sendResetPasswordRequest() {
     this.authService.resetPasswordRequest(this.email).subscribe((_) => {

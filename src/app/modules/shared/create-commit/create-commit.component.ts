@@ -13,7 +13,7 @@ import {CommitService} from '../../../logic/services/commit.service';
   templateUrl: './create-commit.component.html',
   styleUrls: ['./create-commit.component.scss']
 })
-export class CreateCommitComponent implements OnInit {
+export class CreateCommitComponent {
   project: Project;
   fullManifest: ManifestWithStatus;
   manifest: ManifestWithStatus;
@@ -55,9 +55,6 @@ export class CreateCommitComponent implements OnInit {
     this.fullManifest = this.getManifestToPublish(JSON.parse(JSON.stringify(data.manifest)));
 
     this.selectLocale(this.manifest.locales[0]);
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

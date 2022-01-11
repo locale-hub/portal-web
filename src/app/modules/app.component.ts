@@ -12,7 +12,7 @@ import {Organization} from '../data/models/organization.model';
 import {UserService} from '../logic/services/user.service';
 import {RouteDataModel} from '../data/models/route-data.model';
 
-// tslint:disable-next-line:ban-types
+// eslint-disable-next-line @typescript-eslint/ban-types
 declare let gtag: Function;
 
 @Component({

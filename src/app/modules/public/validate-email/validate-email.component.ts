@@ -9,7 +9,7 @@ import {UserService} from '../../../logic/services/user.service';
   templateUrl: './validate-email.component.html',
   styleUrls: ['./validate-email.component.scss']
 })
-export class ValidateEmailComponent implements OnInit {
+export class ValidateEmailComponent {
 
   token: string;
   invitation: UserInvitation;
@@ -30,8 +30,5 @@ export class ValidateEmailComponent implements OnInit {
         this.display = true;
       });
     });
-  }
-
-  ngOnInit(): void {
   }
 }

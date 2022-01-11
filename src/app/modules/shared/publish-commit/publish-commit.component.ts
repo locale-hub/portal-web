@@ -9,7 +9,7 @@ import {CommitService} from '../../../logic/services/commit.service';
   templateUrl: './publish-commit.component.html',
   styleUrls: ['./publish-commit.component.scss']
 })
-export class PublishCommitComponent implements OnInit {
+export class PublishCommitComponent {
   commitId: string;
   projectId: string;
 
@@ -20,9 +20,6 @@ export class PublishCommitComponent implements OnInit {
   ) {
     this.projectId = data.projectId;
     this.commitId = data.commitId;
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

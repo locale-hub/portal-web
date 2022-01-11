@@ -16,7 +16,7 @@
 
     <div class="row">
         <mat-button-toggle-group *ngIf="manifest">
-            <mat-button-toggle *ngFor="let locale of manifest.locales" (click)="selectLocale(locale)" [class.mat-button-toggle-checked]="selectedLocale == locale">
+            <mat-button-toggle *ngFor="let locale of manifest.locales" (click)="selectLocale(locale)" [class.mat-button-toggle-checked]="selectedLocale === locale">
                 <mat-icon *ngIf="isLocaleMissAKey(locale)"
                           matTooltip="This locale is missing translation."
                           matTooltipPosition="above"

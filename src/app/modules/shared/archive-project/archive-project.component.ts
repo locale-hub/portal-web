@@ -9,7 +9,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   templateUrl: './archive-project.component.html',
   styleUrls: ['./archive-project.component.scss']
 })
-export class ArchiveProjectComponent implements OnInit {
+export class ArchiveProjectComponent {
   projectNameConfirmation: string;
   project: Project;
 
@@ -20,9 +20,6 @@ export class ArchiveProjectComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.project = data.project;
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

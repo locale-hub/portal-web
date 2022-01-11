@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './organizations-settings.component.html',
   styleUrls: ['./organizations-settings.component.scss']
 })
-export class OrganizationsSettingsComponent implements OnInit {
+export class OrganizationsSettingsComponent {
   organization: Organization;
   users: User[];
 
@@ -39,9 +39,6 @@ export class OrganizationsSettingsComponent implements OnInit {
         this.users = data.users;
       });
     });
-  }
-
-  ngOnInit(): void {
   }
 
   saveOrganization() {

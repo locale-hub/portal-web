@@ -11,7 +11,7 @@ import {OrganizationService} from '../../../logic/services/organization.service'
   templateUrl: './delete-organization.component.html',
   styleUrls: ['./delete-organization.component.scss']
 })
-export class DeleteOrganizationComponent implements OnInit {
+export class DeleteOrganizationComponent {
   organizationNameConfirmation: string;
   organization: Organization;
 
@@ -22,9 +22,6 @@ export class DeleteOrganizationComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.organization = data.organization;
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

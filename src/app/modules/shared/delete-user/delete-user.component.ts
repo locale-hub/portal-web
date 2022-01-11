@@ -8,7 +8,7 @@ import {OrganizationService} from '../../../logic/services/organization.service'
   templateUrl: './delete-user.component.html',
   styleUrls: ['./delete-user.component.scss']
 })
-export class DeleteUserComponent implements OnInit {
+export class DeleteUserComponent {
   userId: string;
   userName: string;
 
@@ -19,9 +19,6 @@ export class DeleteUserComponent implements OnInit {
   ) {
     this.userId = data.userId;
     this.userName = data.userName;
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

@@ -71,7 +71,7 @@
                     <div class="col-12 center" style="padding: 0;">
                         <button mat-raised-button color="primary"
                                 style="width: 100%;"
-                                [disabled]="registerInProgress || undefined == password || password !== password2"
+                                [disabled]="registerInProgress || undefined === password || password !== password2"
                                 (click)="register()"
                         >Register</button>
                     </div>

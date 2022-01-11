@@ -9,7 +9,7 @@ import {MessageService} from '../../../logic/services/message.service';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent {
   organizationId: string;
   userInviteForm: FormGroup;
   userInvite: { organizationId: string, email: string, name: string } = {
@@ -34,9 +34,6 @@ export class CreateUserComponent implements OnInit {
         Validators.email,
       ])
     });
-  }
-
-  ngOnInit(): void {
   }
 
   close() {

@@ -10,7 +10,7 @@ import {AppService} from '../../../logic/services/app.service';
   templateUrl: './delete-app.component.html',
   styleUrls: ['./delete-app.component.scss']
 })
-export class DeleteAppComponent implements OnInit {
+export class DeleteAppComponent {
   appNameConfirmation: string;
   app: App;
 
@@ -20,9 +20,6 @@ export class DeleteAppComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.app = data.app;
-  }
-
-  ngOnInit(): void {
   }
 
   close() {
