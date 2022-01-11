@@ -1,9 +1,11 @@
 /**
 * Generated theme by Material Theme Generator
 * https://materialtheme.arcsine.dev
+* Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzAyY2ZmYyIsIj9lcjwjYjNmMWZlIiwiO2VyPCMwMWJkZmJ$LCIlPmBePCMyZTMxMzciLCI~ZXI8I2MwYzFjMyIsIjtlcjwjMWQxZjIzfiwid2Fybj5gXjwjZWQ2YjdhIiwiP2VyPCNmYWQzZDciLCI7ZXI8I2U1NGU1ZH4sIj9UZXh0PCMwMDAwMDAiLCI~PTwjZmFmYWZhIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCMyYzJjMmN$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxGaWxsZWQiLCI~bmVzcz5mYWxzZSwidmVyc2lvbj4xM30=
 */
 
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 
@@ -11,22 +13,20 @@
 @import url('https://fonts.googleapis.com/css?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
-@import "./colors";
-
 $fontConfig: (
-        display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
-        display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
-        display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
-        display-1: mat-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
-        headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
-        title: mat-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
-        subheading-2: mat-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
-        subheading-1: mat-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
-        body-2: mat-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
-        body-1: mat-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
-        button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
-        caption: mat-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
-        input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
+        display-4: mat.define-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
+        display-3: mat.define-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
+        display-2: mat.define-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
+        display-1: mat.define-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
+        headline: mat.define-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
+        title: mat.define-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
+        subheading-2: mat.define-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
+        subheading-1: mat.define-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
+        body-2: mat.define-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
+        body-1: mat.define-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
+        button: mat.define-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
+        caption: mat.define-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
+        input: mat.define-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
 );
 
 // Foreground Elements
@@ -144,84 +144,98 @@ $mat-dark-theme-background: (
 );
 
 // Compute font config
-@include mat-core($fontConfig);
+@include mat.core($fontConfig);
 
 // Theme Config
 
 body {
-  --primary-color: $primary-color;
-  --primary-lighter-color: #bfc2c3;
-  --primary-darker-color: #181f23;
-  --text-primary-color: #{$light-primary-text};
+  --primary-color: #02cffc;
+  --primary-lighter-color: #b3f1fe;
+  --primary-darker-color: #01bdfb;
+  --text-primary-color: #{$dark-primary-text};
   --text-primary-lighter-color: #{$dark-primary-text};
-  --text-primary-darker-color: #{$light-primary-text};
+  --text-primary-darker-color: #{$dark-primary-text};
 }
-
 $mat-primary: (
-        main: $primary-color,
-        lighter: #bfc2c3,
-        darker: #181f23,
-        200: $primary-color, // For slide toggle,
+        main: #02cffc,
+        lighter: #b3f1fe,
+        darker: #01bdfb,
+        200: #02cffc, // For slide toggle,
+        contrast : (
+                main: $dark-primary-text,
+                lighter: $dark-primary-text,
+                darker: $dark-primary-text,
+        )
+);
+$theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
+
+
+body {
+  --accent-color: #2e3137;
+  --accent-lighter-color: #c0c1c3;
+  --accent-darker-color: #1d1f23;
+  --text-accent-color: #{$light-primary-text};
+  --text-accent-lighter-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$light-primary-text};
+}
+$mat-accent: (
+        main: #2e3137,
+        lighter: #c0c1c3,
+        darker: #1d1f23,
+        200: #2e3137, // For slide toggle,
         contrast : (
                 main: $light-primary-text,
                 lighter: $dark-primary-text,
                 darker: $light-primary-text,
         )
 );
-$theme-primary: mat-palette($mat-primary, main, lighter, darker);
+$theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
+
 
 body {
-  --accent-color: $accent-color;
-  --accent-lighter-color: #caecf3;
-  --accent-darker-color: #35a9c6;
-  --text-accent-color: #{$dark-primary-text};
-  --text-accent-lighter-color: #{$dark-primary-text};
-  --text-accent-darker-color: #{$dark-primary-text};
-}
-
-$mat-accent: (
-        main: $accent-color,
-        lighter: #caecf3,
-        darker: #35a9c6,
-        200: $accent-color, // For slide toggle,
-        contrast : (
-                main: $dark-primary-text,
-                lighter: $dark-primary-text,
-                darker: $dark-primary-text,
-        )
-);
-$theme-accent: mat-palette($mat-accent, main, lighter, darker);
-
-body {
-  --warn-color: $warn-color;
-  --warn-lighter-color: #f7f8c8;
-  --warn-darker-color: #dadb2f;
+  --warn-color: #ed6b7a;
+  --warn-lighter-color: #fad3d7;
+  --warn-darker-color: #e54e5d;
   --text-warn-color: #{$dark-primary-text};
   --text-warn-lighter-color: #{$dark-primary-text};
-  --text-warn-darker-color: #{$dark-primary-text};
+  --text-warn-darker-color: #{$light-primary-text};
 }
-
 $mat-warn: (
-        main: $warn-color,
-        lighter: #f7f8c8,
-        darker: #dadb2f,
-        200: $warn-color, // For slide toggle,
+        main: #ed6b7a,
+        lighter: #fad3d7,
+        darker: #e54e5d,
+        200: #ed6b7a, // For slide toggle,
         contrast : (
                 main: $dark-primary-text,
                 lighter: $dark-primary-text,
-                darker: $dark-primary-text,
+                darker: $light-primary-text,
         )
 );
-$theme-warn: mat-palette($mat-warn, main, lighter, darker);;
+$theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
+;
 
-$theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
-$altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+$theme: (
+        primary: $theme-primary,
+        accent: $theme-accent,
+        warn: $theme-warn,
+        is-dark: true,
+        foreground: $mat-dark-theme-foreground,
+        background: $mat-dark-theme-background,
+);
+$altTheme: (
+        primary: $theme-primary,
+        accent: $theme-accent,
+        warn: $theme-warn,
+        is-dark: false,
+        foreground: $mat-light-theme-foreground,
+        background: $mat-light-theme-background,
+);
 
 // Theme Init
-@include angular-material-theme($theme);
+@include mat.all-component-themes($theme);
 
 .theme-alternate {
-  @include angular-material-theme($altTheme);
+  @include mat.all-component-themes($altTheme);
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
@@ -245,41 +259,4 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   .mat-badge-content {
     font-family: 'Roboto', serif;
   }
-}
-
-input, select, textarea, .mat-input-element {
-  color: white !important;
-}
-
-.mat-primary-background {
-  background-color: $primary-color;
-}
-
-.mat-primary-text {
-  color: $primary-color;
-}
-
-.mat-accent-text {
-  color: $accent-color;
-}
-
-.mat-warn-text {
-  color: $warn-color;
-}
-
-.mat-red-text {
-  color: $warn-color;
-}
-
-.mat-card-border-accent {
-  border: 1px solid $accent-color;
-}
-
-.mat-card-border-top-accent {
-  border-top: 1px solid $accent-color;
-}
-
-.mat-accent-underline {
-  text-decoration: underline !important;
-  text-decoration-color: $accent-color !important;
 }

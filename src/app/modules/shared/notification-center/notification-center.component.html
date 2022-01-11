@@ -10,8 +10,6 @@
   </button>
 
   <div *ngIf="opened" class="notification-container"
-       (clickOutside)="opened = false"
-       [exclude]="'.notification-wrapper, .notification-action'"
   >
     <div class="notification-header">
       <button mat-flat-button class="notification-btn" [class.active]="notificationStatus.UNREAD === showStatus"

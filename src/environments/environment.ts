@@ -20,7 +20,7 @@ export const environment = {
     releasesRoute: '/releases'
   },
   documentation: {
-    uri: 'https://doc.locale-hub.com',
+    uri: 'https://locale-hub.gitbook.io/',
   },
   sentry: {
     uri: '',

@@ -72,7 +72,6 @@ import { AvatarComponent } from './shared/avatar/avatar.component';
 import { IndexComponent } from './dashboard/index/index.component';
 import { OrganizationsUsageComponent } from './organizations/organizations-usage/organizations-usage.component';
 import { NotificationCenterComponent } from './shared/notification-center/notification-center.component';
-import { ClickOutsideModule } from 'ng-click-outside';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatProgressCircleComponent } from './shared/mat-progress-circle/mat-progress-circle.component';
 import { TranslationEditorComponent } from './shared/translation-editor/translation-editor.component';
@@ -159,7 +158,6 @@ import { ModalComponent } from './shared/modal/modal.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    ClickOutsideModule,
     MatTabsModule,
   ],
   providers: [
