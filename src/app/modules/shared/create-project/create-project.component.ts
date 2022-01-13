@@ -6,13 +6,14 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {MessageService} from '../../../logic/services/message.service';
 import {Organization} from '../../../data/models/organization.model';
 import {UserService} from '../../../logic/services/user.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.scss']
 })
-export class CreateProjectComponent {
+export class CreateProjectComponent extends BaseComponent {
   organizations: Organization[];
   projectFrom: FormGroup;
   project: Project = {
@@ -33,6 +34,7 @@ export class CreateProjectComponent {
     private userService: UserService,
     private messageService: MessageService
   ) {
+    super();
     this.projectFrom = new FormGroup({
       name: new FormControl(this.project.name, [
         Validators.required,

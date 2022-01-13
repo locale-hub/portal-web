@@ -3,13 +3,14 @@ import {OrganizationUsage} from '../../../data/models/usage.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {environment} from '../../../../environments/environment';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-organizations-usage',
   templateUrl: './organizations-usage.component.html',
   styleUrls: ['./organizations-usage.component.scss']
 })
-export class OrganizationsUsageComponent implements OnInit {
+export class OrganizationsUsageComponent extends BaseComponent implements OnInit {
   sdkFeatureEnabled = environment.features.sdk;
   usage: OrganizationUsage;
 
@@ -17,7 +18,9 @@ export class OrganizationsUsageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private organizationService: OrganizationService,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

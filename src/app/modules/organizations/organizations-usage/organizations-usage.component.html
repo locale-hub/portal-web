@@ -15,7 +15,7 @@
 
         <div class="col-9 projects-usage">
             <p class="title mat-primary-text">Projects usage</p>
-            <div *ngFor="let project of usage.storage.projects" class="usage">
+            <div *ngFor="let project of usage.storage.projects; trackBy: trackByProjectUsageName" class="usage">
                 <div class="full-width">
                     <span class="title">{{ project.name }}</span>
                     <span class="amount" style="color: #a1a2a5;">

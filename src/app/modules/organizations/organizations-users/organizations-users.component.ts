@@ -6,13 +6,14 @@ import {DeleteUserComponent} from '../../shared/delete-user/delete-user.componen
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../../logic/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-organizations-users',
   templateUrl: './organizations-users.component.html',
   styleUrls: ['./organizations-users.component.scss']
 })
-export class OrganizationsUsersComponent implements OnInit {
+export class OrganizationsUsersComponent extends BaseComponent implements OnInit {
   organizationId: string;
   users: User[];
   isUserOwner = false;
@@ -23,7 +24,9 @@ export class OrganizationsUsersComponent implements OnInit {
     public dialog: MatDialog,
     private organizationService: OrganizationService,
     private authService: AuthService,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

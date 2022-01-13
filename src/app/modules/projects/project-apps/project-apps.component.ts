@@ -6,13 +6,14 @@ import {AppService} from '../../../logic/services/app.service';
 import {CreateAppComponent} from '../../shared/create-app/create-app.component';
 import {MessageService} from '../../../logic/services/message.service';
 import {DeleteAppComponent} from '../../shared/delete-app/delete-app.component';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-project-apps',
   templateUrl: './project-apps.component.html',
   styleUrls: ['./project-apps.component.scss']
 })
-export class ProjectAppsComponent implements OnInit {
+export class ProjectAppsComponent extends BaseComponent implements OnInit {
   projectId: string;
   apps: App[];
   isFeatureEnabled = false;
@@ -24,6 +25,7 @@ export class ProjectAppsComponent implements OnInit {
     public messageService: MessageService,
     public dialog: MatDialog
   ) {
+    super();
     this.route.paramMap.subscribe(params => {
       this.projectId = params.get('projectId');
     });

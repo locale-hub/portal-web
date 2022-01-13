@@ -10,7 +10,7 @@
     <mat-form-field *ngIf="users" appearance="fill" class="col-sm-6">
         <mat-label>Owner</mat-label>
         <mat-select [(ngModel)]="organization.owner" required>
-            <mat-option *ngFor="let user of this.users" value="{{ user.id }}">
+            <mat-option *ngFor="let user of this.users; trackBy: trackByUserId" value="{{ user.id }}">
                 {{ user.name }}
             </mat-option>
         </mat-select>

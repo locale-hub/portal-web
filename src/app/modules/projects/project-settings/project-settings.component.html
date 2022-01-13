@@ -11,7 +11,7 @@
   <mat-form-field *ngIf="users" appearance="fill" class="col-sm-4">
     <mat-label>Owner</mat-label>
     <mat-select [(ngModel)]="project.userId" required [disabled]="project.archived">
-      <mat-option *ngFor="let user of this.users" value="{{ user.id }}">
+      <mat-option *ngFor="let user of this.users; trackBy: trackByUserId" value="{{ user.id }}">
         {{ user.name }}
       </mat-option>
     </mat-select>

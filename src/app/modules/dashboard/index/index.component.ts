@@ -5,13 +5,14 @@ import {Organization} from '../../../data/models/organization.model';
 import {ProjectTranslationProgress} from '../../../data/models/project-translation-progress.model';
 import {DeleteProjectComponent} from '../../shared/delete-project/delete-project.component';
 import {MatDialog} from '@angular/material/dialog';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent extends BaseComponent implements OnInit {
   organizations: Organization[];
   projects: Project[];
   progress: ProjectTranslationProgress[];
@@ -19,7 +20,9 @@ export class IndexComponent implements OnInit {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.userService.dashboard().subscribe((data) => {

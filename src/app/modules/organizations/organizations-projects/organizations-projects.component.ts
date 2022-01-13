@@ -8,13 +8,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectTranslationProgress} from '../../../data/models/project-translation-progress.model';
 import {DeleteProjectComponent} from '../../shared/delete-project/delete-project.component';
 import {MatDialog} from '@angular/material/dialog';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-organizations-projects',
   templateUrl: './organizations-projects.component.html',
   styleUrls: ['./organizations-projects.component.scss']
 })
-export class OrganizationsProjectsComponent implements OnInit {
+export class OrganizationsProjectsComponent extends BaseComponent implements OnInit {
   projects: Project[];
   progress: ProjectTranslationProgress[];
   users: { [id: string]: User };
@@ -25,7 +26,9 @@ export class OrganizationsProjectsComponent implements OnInit {
     private projectsService: ProjectService,
     private organizationService: OrganizationService,
     private dialog: MatDialog,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

@@ -37,7 +37,7 @@
             </span>
             </mat-card>
 
-            <div *ngFor="let user of users" class="user-row">
+            <div *ngFor="let user of users; trackBy: trackByUserId" class="user-row">
                 <mat-card class="col-12 mat-elevation-z0 row">
                 <span class="row">
                     <span class="col-4 user-item">

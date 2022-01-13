@@ -12,13 +12,14 @@ import {map, startWith, tap} from 'rxjs/operators';
 import {DeleteUserComponent} from '../../shared/delete-user/delete-user.component';
 import {AuthService} from '../../../logic/services/auth.service';
 import {UserRoles} from '../../../data/enums/UserRoles.enum';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-project-users',
   templateUrl: './project-users.component.html',
   styleUrls: ['./project-users.component.scss']
 })
-export class ProjectUsersComponent implements OnInit {
+export class ProjectUsersComponent extends BaseComponent implements OnInit {
   projectId: string;
   project: Project;
   organizationUsers: User[];
@@ -38,7 +39,9 @@ export class ProjectUsersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

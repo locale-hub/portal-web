@@ -6,13 +6,14 @@ import {MessageService} from '../../../logic/services/message.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DeleteOrganizationComponent} from '../../shared/delete-organization/delete-organization.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-organizations-settings',
   templateUrl: './organizations-settings.component.html',
   styleUrls: ['./organizations-settings.component.scss']
 })
-export class OrganizationsSettingsComponent {
+export class OrganizationsSettingsComponent extends BaseComponent {
   organization: Organization;
   users: User[];
 
@@ -23,6 +24,7 @@ export class OrganizationsSettingsComponent {
     private organizationService: OrganizationService,
     private messageService: MessageService,
   ) {
+    super();
     this.route.paramMap.subscribe(params => {
       const organizationId = params.get('organizationId');
       this.organizationService.get(organizationId).subscribe(async (data) => {

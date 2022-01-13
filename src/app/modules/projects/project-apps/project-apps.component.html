@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-12">
-      <mat-card *ngFor="let app of apps" class="app-card row">
+      <mat-card *ngFor="let app of apps; trackBy: trackByAppId" class="app-card row">
         <mat-card-title-group class="col-sm-12 col-md-4">
           <mat-card-title>
             <img *ngIf="'ios' === app.type" src="assets/icons/apple.svg" width="16" />

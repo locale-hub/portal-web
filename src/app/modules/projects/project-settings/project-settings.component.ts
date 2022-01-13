@@ -10,13 +10,14 @@ import {DeleteProjectComponent} from '../../shared/delete-project/delete-project
 import {ArchiveProjectComponent} from '../../shared/archive-project/archive-project.component';
 import {User} from '../../../data/models/user.model';
 import {OrganizationService} from '../../../logic/services/organization.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-project-settings',
   templateUrl: './project-settings.component.html',
   styleUrls: ['./project-settings.component.scss']
 })
-export class ProjectSettingsComponent implements OnInit {
+export class ProjectSettingsComponent extends BaseComponent implements OnInit {
   projectId: string;
   project: Project;
   users: User[];
@@ -30,7 +31,9 @@ export class ProjectSettingsComponent implements OnInit {
     private projectService: ProjectService,
     private localeService: LocaleService,
     private organizationService: OrganizationService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

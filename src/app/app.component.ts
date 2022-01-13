@@ -11,6 +11,7 @@ import {CreateOrganizationComponent} from './modules/shared/create-organization/
 import {Organization} from './data/models/organization.model';
 import {UserService} from './logic/services/user.service';
 import {RouteDataModel} from './data/models/route-data.model';
+import {BaseComponent} from './modules/helpers/BaseComponent';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 declare let gtag: Function;
@@ -20,7 +21,7 @@ declare let gtag: Function;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
   config = environment;
   refreshTokenSubscription: Subscription;
 
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private router: Router
   ) {
+    super();
   }
 
   ngOnInit() {

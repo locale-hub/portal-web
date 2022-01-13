@@ -16,7 +16,7 @@
       <mat-icon *ngIf="!isReducedMenu">keyboard_arrow_down</mat-icon>
     </button>
     <div *ngIf="showOrganizations && !isReducedMenu">
-      <button *ngFor="let organization of organizations" mat-menu-item class="mat-primary sub-menu"
+      <button *ngFor="let organization of organizations; trackBy: trackByOrganizationId" mat-menu-item class="mat-primary sub-menu"
               [routerLink]="['/organizations', organization.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}"
       >
         — {{ organization.name }}
@@ -29,7 +29,7 @@
       <mat-icon *ngIf="!isReducedMenu">keyboard_arrow_down</mat-icon>
     </button>
     <div *ngIf="showProjects && !isReducedMenu">
-      <button *ngFor="let project of projects" mat-menu-item class="mat-primary sub-menu"
+      <button *ngFor="let project of projects; trackBy: trackByProjectId" mat-menu-item class="mat-primary sub-menu"
               [routerLink]="['/projects', project.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}"
       >
         — {{ project.name }}
