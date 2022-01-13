@@ -39,7 +39,7 @@ export class GetKeyHistoryComponent extends BaseComponent implements OnInit {
     const date = new Date(dateStr);
 
     return moment(date).format('YYYY-MM-DD HH:mm');
-  }
+  };
 
   selectValue(value: any) {
     this.dialogRef.close(value);

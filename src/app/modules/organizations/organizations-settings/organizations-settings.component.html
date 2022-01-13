@@ -1,35 +1,34 @@
-
 <mat-card *ngIf="organization" class="row">
-    <h3>Organization Information</h3>
+  <h3>Organization Information</h3>
 
-    <mat-form-field appearance="fill" class="col-sm-6">
-        <mat-label>Project Name</mat-label>
-        <input matInput id="name" name="name" [(ngModel)]="organization.name" required>
-    </mat-form-field>
+  <mat-form-field appearance="fill" class="col-sm-6">
+    <mat-label>Project Name</mat-label>
+    <input [(ngModel)]="organization.name" id="name" matInput name="name" required>
+  </mat-form-field>
 
-    <mat-form-field *ngIf="users" appearance="fill" class="col-sm-6">
-        <mat-label>Owner</mat-label>
-        <mat-select [(ngModel)]="organization.owner" required>
-            <mat-option *ngFor="let user of this.users; trackBy: trackByUserId" value="{{ user.id }}">
-                {{ user.name }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field *ngIf="users" appearance="fill" class="col-sm-6">
+    <mat-label>Owner</mat-label>
+    <mat-select [(ngModel)]="organization.owner" required>
+      <mat-option *ngFor="let user of this.users; trackBy: trackByUserId" value="{{ user.id }}">
+        {{ user.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <div class="col-sm-12" style="text-align: right;">
-        <button class="action" (click)="saveOrganization()" mat-raised-button color="primary">Save</button>
-    </div>
+  <div class="col-sm-12" style="text-align: right;">
+    <button (click)="saveOrganization()" class="action" color="primary" mat-raised-button>Save</button>
+  </div>
 
 </mat-card>
 
 
 <mat-card *ngIf="organization" class="row danger">
-    <h3 style="margin-bottom: 0;">Danger Zone</h3>
+  <h3 style="margin-bottom: 0;">Danger Zone</h3>
 
-    <div class="entry">
-        <span class="header">Delete organization?</span>
-        <br />
-        <span class="text">Once you delete an organization, there is no going back. Please be certain.</span>
-        <button class="action" (click)="openDeleteDialog()" mat-flat-button color="warn">Delete</button>
-    </div>
+  <div class="entry">
+    <span class="header">Delete organization?</span>
+    <br/>
+    <span class="text">Once you delete an organization, there is no going back. Please be certain.</span>
+    <button (click)="openDeleteDialog()" class="action" color="warn" mat-flat-button>Delete</button>
+  </div>
 </mat-card>

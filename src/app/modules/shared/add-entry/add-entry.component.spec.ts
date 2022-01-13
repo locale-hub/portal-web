@@ -8,9 +8,9 @@ describe('AddEntryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEntryComponent ]
+      declarations: [AddEntryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

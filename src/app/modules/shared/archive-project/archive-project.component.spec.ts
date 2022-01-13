@@ -8,9 +8,9 @@ describe('ArchiveProjectComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArchiveProjectComponent ]
+      declarations: [ArchiveProjectComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

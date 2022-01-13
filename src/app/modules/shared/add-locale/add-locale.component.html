@@ -1,30 +1,30 @@
-
 <h2 mat-dialog-title>Add new locale</h2>
 
 <mat-dialog-content class="mat-typography">
-    <form class="modal-form">
-        <mat-form-field *ngIf="locales" appearance="fill" class="full-width">
-            <mat-label>Select a locale</mat-label>
-            <input type="text" placeholder="French, English, ..." matInput
-                   [formControl]="myControl" [matAutocomplete]="autocomplete">
-            <mat-autocomplete #autocomplete class="full-width">
-                <mat-option *ngFor="let locale of filteredLocales | async" [value]="locale.name" (click)="selectedLocale = locale.tag">
-                    {{ locale.tag }} - {{ locale.name }}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+  <form class="modal-form">
+    <mat-form-field *ngIf="locales" appearance="fill" class="full-width">
+      <mat-label>Select a locale</mat-label>
+      <input [formControl]="myControl" [matAutocomplete]="autocomplete" matInput
+             placeholder="French, English, ..." type="text">
+      <mat-autocomplete #autocomplete class="full-width">
+        <mat-option (click)="selectedLocale = locale.tag" *ngFor="let locale of filteredLocales | async"
+                    [value]="locale.name">
+          {{ locale.tag }} - {{ locale.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
-        <app-file-upload
-            accept=".json, .xml, .strings"
-            [(file)]="file"
-        ></app-file-upload>
-    </form>
+    <app-file-upload
+        [(file)]="file"
+        accept=".json, .xml, .strings"
+    ></app-file-upload>
+  </form>
 
 </mat-dialog-content>
 
 <mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
-    <button mat-button (click)="close()">Cancel</button>
-    <button [disabled]="!selectedLocale" (click)="addLocale()" mat-flat-button color="primary">
-        Add this locale
-    </button>
+  <button (click)="close()" mat-button>Cancel</button>
+  <button (click)="addLocale()" [disabled]="!selectedLocale" color="primary" mat-flat-button>
+    Add this locale
+  </button>
 </mat-dialog-actions>

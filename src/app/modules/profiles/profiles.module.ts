@@ -33,4 +33,5 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTooltipModule,
   ]
 })
-export class ProfilesModule {}
+export class ProfilesModule {
+}

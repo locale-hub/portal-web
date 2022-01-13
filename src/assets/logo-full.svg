@@ -1,15 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="461.172" height="135.544" viewBox="0 0 461.172 135.544">
+<svg height="135.544" viewBox="0 0 461.172 135.544" width="461.172" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="linear-gradient" x1="0.284" y1="-0.517" x2="0.619" y2="1.335" gradientUnits="objectBoundingBox">
+    <linearGradient gradientUnits="objectBoundingBox" id="linear-gradient" x1="0.284" x2="0.619" y1="-0.517" y2="1.335">
       <stop offset="0" stop-color="#02cffc"/>
       <stop offset="1" stop-color="#0074ad"/>
     </linearGradient>
   </defs>
-  <rect id="Rectangle_95" data-name="Rectangle 95" width="461.172" height="135.544" rx="12" fill="url(#linear-gradient)"/>
-  <text id="Locale_Hub" data-name="Locale Hub" transform="translate(134.598 83.365)" fill="#fff" font-size="44" font-family="Ubuntu-Bold, Ubuntu" font-weight="700" letter-spacing="0.137em"><tspan x="0" y="0">Locale Hub</tspan></text>
-  <rect id="Rectangle_96" data-name="Rectangle 96" width="90.777" height="90.777" rx="12" transform="translate(27.413 22.428)" fill="#fff"/>
-  <g id="Group_101" data-name="Group 101" transform="translate(57.489 41.534)">
-    <path id="Path_120" data-name="Path 120" d="M339.942-967.552a3.182,3.182,0,0,0-3.182,3.182v30.59a3.182,3.182,0,0,0,3.182,3.182,3.182,3.182,0,0,0,3.182-3.182v-30.59A3.182,3.182,0,0,0,339.942-967.552Z" transform="translate(-336.76 967.552)" fill="#02c7f7"/>
-    <path id="Path_121" data-name="Path 121" d="M449.147-846.848a9.327,9.327,0,0,0-2.977.487v-11.471a3.182,3.182,0,0,0-3.182-3.182,3.182,3.182,0,0,0-3.182,3.182v25.457a3.182,3.182,0,0,0,3.182,3.182,3.182,3.182,0,0,0,3.182-3.182v-5.132a2.977,2.977,0,0,1,2.977-2.977,2.977,2.977,0,0,1,2.977,2.977v13.858h.005a3.18,3.18,0,0,0,3.177,3.079,3.18,3.18,0,0,0,3.177-3.079h.005v-13.858A9.341,9.341,0,0,0,449.147-846.848Z" transform="translate(-427.693 873.537)" fill="#02c7f7"/>
+  <rect data-name="Rectangle 95" fill="url(#linear-gradient)" height="135.544" id="Rectangle_95" rx="12"
+        width="461.172"/>
+  <text data-name="Locale Hub" fill="#fff" font-family="Ubuntu-Bold, Ubuntu" font-size="44" font-weight="700"
+        id="Locale_Hub" letter-spacing="0.137em" transform="translate(134.598 83.365)">
+    <tspan x="0" y="0">Locale Hub</tspan>
+  </text>
+  <rect data-name="Rectangle 96" fill="#fff" height="90.777" id="Rectangle_96" rx="12"
+        transform="translate(27.413 22.428)" width="90.777"/>
+  <g data-name="Group 101" id="Group_101" transform="translate(57.489 41.534)">
+    <path
+        d="M339.942-967.552a3.182,3.182,0,0,0-3.182,3.182v30.59a3.182,3.182,0,0,0,3.182,3.182,3.182,3.182,0,0,0,3.182-3.182v-30.59A3.182,3.182,0,0,0,339.942-967.552Z"
+        data-name="Path 120"
+        fill="#02c7f7"
+        id="Path_120" transform="translate(-336.76 967.552)"/>
+    <path
+        d="M449.147-846.848a9.327,9.327,0,0,0-2.977.487v-11.471a3.182,3.182,0,0,0-3.182-3.182,3.182,3.182,0,0,0-3.182,3.182v25.457a3.182,3.182,0,0,0,3.182,3.182,3.182,3.182,0,0,0,3.182-3.182v-5.132a2.977,2.977,0,0,1,2.977-2.977,2.977,2.977,0,0,1,2.977,2.977v13.858h.005a3.18,3.18,0,0,0,3.177,3.079,3.18,3.18,0,0,0,3.177-3.079h.005v-13.858A9.341,9.341,0,0,0,449.147-846.848Z"
+        data-name="Path 121"
+        fill="#02c7f7"
+        id="Path_121" transform="translate(-427.693 873.537)"/>
   </g>
 </svg>

@@ -22,8 +22,7 @@ const routes: Routes = [
 ];
 
 const jwtModuleOptions: JwtModuleOptions = {
-  config: {
-  }
+  config: {}
 };
 
 @NgModule({
@@ -44,4 +43,5 @@ const jwtModuleOptions: JwtModuleOptions = {
     RouterModule
   ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

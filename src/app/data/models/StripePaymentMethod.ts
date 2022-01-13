@@ -1,4 +1,3 @@
-
 export interface StripePaymentMethod {
   id: string;
   type: string;

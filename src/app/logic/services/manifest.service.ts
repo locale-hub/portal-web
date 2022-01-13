@@ -32,11 +32,12 @@ export class ManifestService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   get(projectId: string): Observable<ManifestsGetResponse> {
     const url = `${this.baseUrl}`.replace(this.urlProjectId, projectId);
-    return this.http.get<ManifestsGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<ManifestsGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<ManifestsGetResponse>('get manifest', undefined)),
         map<ManifestsGetResponseWithoutStatus, ManifestsGetResponse>((response): ManifestsGetResponse => {
@@ -71,7 +72,7 @@ export class ManifestService {
   getHistory(projectId: string, key: string, locale: string): Observable<ManifestsHistoryGetResponse> {
     const url = `${this.baseUrl}/history?key=${key}&locale=${locale}`.replace(this.urlProjectId, projectId);
 
-    return this.http.get<ManifestsHistoryGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<ManifestsHistoryGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<ManifestsHistoryGetResponse>('get history', undefined))
       );

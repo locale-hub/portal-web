@@ -33,7 +33,7 @@ export class MessageService {
       duration: 4 * 1000,
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
-      panelClass: [ 'mat-snackbar-margin-top' ]
+      panelClass: ['mat-snackbar-margin-top']
     }).afterDismissed().subscribe(() => {
       this.isDisplaying = false;
 

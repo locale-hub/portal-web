@@ -1,51 +1,49 @@
-
 <h2 mat-dialog-title>History for key {{ key }}.</h2>
 
 <mat-dialog-content class="mat-typography">
 
-    <div class="row">
-        <mat-table *ngIf="history" [dataSource]="history" class="col-12 mat-elevation-z2 full-width">
+  <div class="row">
+    <mat-table *ngIf="history" [dataSource]="history" class="col-12 mat-elevation-z2 full-width">
 
-            <!-- Date Column -->
-            <ng-container matColumnDef="date">
-                <mat-header-cell *matHeaderCellDef class="mat-column-date">Date</mat-header-cell>
-                <mat-cell *matCellDef="let history" class="mat-column-date">
-                    {{ formatDate(history.date) }}
-                </mat-cell>
-            </ng-container>
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef class="mat-column-date">Date</mat-header-cell>
+        <mat-cell *matCellDef="let history" class="mat-column-date">
+          {{ formatDate(history.date) }}
+        </mat-cell>
+      </ng-container>
 
-            <!-- Value Column -->
-            <ng-container matColumnDef="value" class="mat-column-value">
-                <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
-                <mat-cell *matCellDef="let history">
-                    {{ history.value }}
-                </mat-cell>
-            </ng-container>
+      <!-- Value Column -->
+      <ng-container class="mat-column-value" matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+        <mat-cell *matCellDef="let history">
+          {{ history.value }}
+        </mat-cell>
+      </ng-container>
 
-            <!-- Action Column -->
-            <ng-container matColumnDef="action" class="mat-column-value">
-                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-                <mat-cell *matCellDef="let history">
-                    <button mat-icon-button [matMenuTriggerFor]="deleteEntry">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #deleteEntry xPosition="before">
-                        <button mat-menu-item (click)="selectValue(history.value)">Use this value</button>
-                    </mat-menu>
-                </mat-cell>
-            </ng-container>
+      <!-- Action Column -->
+      <ng-container class="mat-column-value" matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell *matCellDef="let history">
+          <button [matMenuTriggerFor]="deleteEntry" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #deleteEntry xPosition="before">
+            <button (click)="selectValue(history.value)" mat-menu-item>Use this value</button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
 
-            <mat-header-row *matHeaderRowDef="['date', 'value', 'action']"></mat-header-row>
-            <mat-row *matRowDef="let key; columns: ['date', 'value', 'action'];"></mat-row>
-        </mat-table>
-    </div>
-
+      <mat-header-row *matHeaderRowDef="['date', 'value', 'action']"></mat-header-row>
+      <mat-row *matRowDef="let key; columns: ['date', 'value', 'action'];"></mat-row>
+    </mat-table>
+  </div>
 
 
 </mat-dialog-content>
 
-<mat-dialog-actions  align="end" style="margin-bottom: 0;">
-    <button mat-stroked-button mat-dialog-close="false" (click)="selectValue(undefined)">
-        Close
-    </button>
+<mat-dialog-actions align="end" style="margin-bottom: 0;">
+  <button (click)="selectValue(undefined)" mat-dialog-close="false" mat-stroked-button>
+    Close
+  </button>
 </mat-dialog-actions>

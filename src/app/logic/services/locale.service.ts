@@ -22,10 +22,11 @@ export class LocaleService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   list(): Observable<LocalesListResponse> {
-    return this.http.get<LocalesListResponse>(this.baseUrl, { headers: this.corsHeaders })
+    return this.http.get<LocalesListResponse>(this.baseUrl, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<LocalesListResponse>('list locales', undefined))
       );

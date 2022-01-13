@@ -8,9 +8,9 @@ describe('AddLocaleComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddLocaleComponent ]
+      declarations: [AddLocaleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

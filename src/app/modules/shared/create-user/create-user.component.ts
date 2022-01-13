@@ -10,7 +10,7 @@ import {BaseComponent} from '../../helpers/BaseComponent';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent extends BaseComponent{
+export class CreateUserComponent extends BaseComponent {
   organizationId: string;
   userInviteForm: FormGroup;
   userInvite: { organizationId: string, email: string, name: string } = {

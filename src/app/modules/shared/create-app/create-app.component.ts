@@ -12,7 +12,6 @@ import {BaseComponent} from '../../helpers/BaseComponent';
   styleUrls: ['./create-app.component.scss'],
 })
 export class CreateAppComponent extends BaseComponent {
-  private projectId: string;
   types = AppType;
   app: App = {
     createdAt: '',
@@ -23,8 +22,8 @@ export class CreateAppComponent extends BaseComponent {
     name: '',
     key: ''
   };
-
   appTypes: string[] = [...Object.values(AppType)];
+  private projectId: string;
 
   constructor(
     private dialogRef: MatDialogRef<CreateAppComponent>,

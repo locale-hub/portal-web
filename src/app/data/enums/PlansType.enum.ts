@@ -1,4 +1,3 @@
-
 export enum PlansType {
   FREE = 'free',
   BASIC = 'basic',

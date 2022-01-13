@@ -1,12 +1,12 @@
-<div class="circle" [ngStyle]="{
+<div [ngStyle]="{
     'background-color':  circleColor,
     width: size + 'px',
     height: size + 'px'
-}">
+}" class="circle">
 
-    <div class="initials" [style]="{
+  <div [style]="{
          'font-size': fontSize + 'rem'
-    }">
-        {{ initials }}
-    </div>
+    }" class="initials">
+    {{ initials }}
+  </div>
 </div>

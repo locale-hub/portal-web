@@ -82,4 +82,5 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ReactiveFormsModule
   ]
 })
-export class SharedModule {}
+export class SharedModule {
+}

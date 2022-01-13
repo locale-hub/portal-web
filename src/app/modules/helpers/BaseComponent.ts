@@ -7,7 +7,7 @@ import {DisposeBag} from './dispose-bag';
 import {Component, OnDestroy} from '@angular/core';
 
 
-@Component({ template: '' })
+@Component({template: ''})
 export abstract class BaseComponent implements OnDestroy {
   protected disposeBag: DisposeBag;
 

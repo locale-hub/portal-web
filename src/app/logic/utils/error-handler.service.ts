@@ -23,7 +23,8 @@ if (environment.features.sentry) {
   providedIn: 'root'
 })
 export class AppErrorHandler implements ErrorHandler {
-  constructor() {}
+  constructor() {
+  }
 
   extractError(error) {
     // Try to unwrap zone.js error.
@@ -70,7 +71,7 @@ export class AppErrorHandler implements ErrorHandler {
       // Capture handled exception and send it to Sentry.
       const eventId = Sentry.captureException(extractedError);
       // Optionally show user dialog to provide details on what happened.
-      Sentry.showReportDialog({ eventId });
+      Sentry.showReportDialog({eventId});
     }
 
     console.error(extractedError);

@@ -9,7 +9,7 @@ import {BaseComponent} from '../../helpers/BaseComponent';
   templateUrl: './delete-app.component.html',
   styleUrls: ['./delete-app.component.scss']
 })
-export class DeleteAppComponent extends BaseComponent{
+export class DeleteAppComponent extends BaseComponent {
   appNameConfirmation: string;
   app: App;
 

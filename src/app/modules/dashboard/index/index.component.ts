@@ -39,7 +39,7 @@ export class IndexComponent extends BaseComponent implements OnInit {
 
   organizationName(organizationId: string): string {
     return this.organizations
-      .filter((o) => o.id === organizationId)[0]?.name
+        .filter((o) => o.id === organizationId)[0]?.name
       ?? organizationId;
   }
 
@@ -51,7 +51,7 @@ export class IndexComponent extends BaseComponent implements OnInit {
 
   openDeleteDialogForProject(project: Project) {
     this.dialog.open(DeleteProjectComponent, {
-      data: { project },
+      data: {project},
     });
   }
 }

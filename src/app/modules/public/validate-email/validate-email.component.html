@@ -1,24 +1,23 @@
-
 <div class="content row">
 
-    <mat-card *ngIf="!display" class="col-12" style="text-align: center;">
-        <h2>Adding your email...</h2>
-    </mat-card>
+  <mat-card *ngIf="!display" class="col-12" style="text-align: center;">
+    <h2>Adding your email...</h2>
+  </mat-card>
 
-    <mat-card *ngIf="display && success" class="col-12" style="text-align: center;">
-        <h2>Email added</h2>
-        <p>Your email "{{ invitation.email }}" has been added to you account!</p>
-        <button mat-raised-button color="accent" routerLink="/profile" style="margin-top: 12px;">
-            Go back to my account
-        </button>
-    </mat-card>
+  <mat-card *ngIf="display && success" class="col-12" style="text-align: center;">
+    <h2>Email added</h2>
+    <p>Your email "{{ invitation.email }}" has been added to you account!</p>
+    <button color="accent" mat-raised-button routerLink="/profile" style="margin-top: 12px;">
+      Go back to my account
+    </button>
+  </mat-card>
 
-    <mat-card *ngIf="display && !success" class="col-12" style="text-align: center;">
-        <h2>An Error happened</h2>
-        <p>We could not validate your email. The link might be expired, please try again</p>
-        <button mat-raised-button color="accent" routerLink="/profile" style="margin-top: 12px;">
-            Go back to my account
-        </button>
-    </mat-card>
+  <mat-card *ngIf="display && !success" class="col-12" style="text-align: center;">
+    <h2>An Error happened</h2>
+    <p>We could not validate your email. The link might be expired, please try again</p>
+    <button color="accent" mat-raised-button routerLink="/profile" style="margin-top: 12px;">
+      Go back to my account
+    </button>
+  </mat-card>
 
 </div>

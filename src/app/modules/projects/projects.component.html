@@ -1,65 +1,68 @@
 <mat-drawer-container>
 
-  <mat-drawer *ngIf="project" mode="side" opened [class.mat-drawer-reduced]="isReducedMenu">
-    <div class="title" [class.mat-drawer-reduced]="isReducedMenu">
+  <mat-drawer *ngIf="project" [class.mat-drawer-reduced]="isReducedMenu" mode="side" opened>
+    <div [class.mat-drawer-reduced]="isReducedMenu" class="title">
       <h1 *ngIf="!isReducedMenu">{{ project.name }}</h1>
       <h1 *ngIf="isReducedMenu">{{ project.name[0] }}</h1>
     </div>
 
 
-    <button mat-button [routerLink]="['/projects', project.id, 'overview']" routerLinkActive="active">
+    <button [routerLink]="['/projects', project.id, 'overview']" mat-button routerLinkActive="active">
       <mat-icon>dashboard</mat-icon>
       <span *ngIf="!isReducedMenu">Overview</span>
     </button>
 
-    <button mat-button [routerLink]="['/projects', project.id, 'i18n']" routerLinkActive="active">
+    <button [routerLink]="['/projects', project.id, 'i18n']" mat-button routerLinkActive="active">
       <mat-icon>translate</mat-icon>
       <span *ngIf="!isReducedMenu">Translation</span>
     </button>
 
-    <button mat-button [routerLink]="['/projects', project.id, 'exports']" routerLinkActive="active">
+    <button [routerLink]="['/projects', project.id, 'exports']" mat-button routerLinkActive="active">
       <mat-icon>import_export</mat-icon>
       <span *ngIf="!isReducedMenu">Import/Export</span>
     </button>
 
-    <button mat-button [routerLink]="['/projects', project.id, 'users']" routerLinkActive="active">
+    <button [routerLink]="['/projects', project.id, 'users']" mat-button routerLinkActive="active">
       <mat-icon>people</mat-icon>
       <span *ngIf="!isReducedMenu">Users</span>
     </button>
 
-    <button mat-button [routerLink]="['/projects', project.id, 'commits']" routerLinkActive="active">
+    <button [routerLink]="['/projects', project.id, 'commits']" mat-button routerLinkActive="active">
       <mat-icon>upload</mat-icon>
       <span *ngIf="!isReducedMenu">Commits</span>
     </button>
 
-    <button *ngIf="sdkFeatureEnabled" mat-button [routerLink]="['/projects', project.id, 'apps']" routerLinkActive="active">
+    <button *ngIf="sdkFeatureEnabled" [routerLink]="['/projects', project.id, 'apps']" mat-button
+            routerLinkActive="active">
       <mat-icon>apps</mat-icon>
       <span *ngIf="!isReducedMenu">Applications</span>
     </button>
 
-    <button mat-button [routerLink]="['/projects', project.id, 'settings']" routerLinkActive="active">
+    <button [routerLink]="['/projects', project.id, 'settings']" mat-button routerLinkActive="active">
       <mat-icon>tunes</mat-icon>
       <span *ngIf="!isReducedMenu">Settings</span>
     </button>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="project-leave" (click)="leaveProject()">
+    <button (click)="leaveProject()" class="project-leave" mat-button>
       <mat-icon>exit_to_app</mat-icon>
       <span *ngIf="!isReducedMenu">Leave Project</span>
     </button>
 
-    <button mat-icon-button class="extend-close-navbar-btn" style="z-index: 13;" (click)="isReducedMenu = !isReducedMenu"
-            [class.menu-reducer-btn-reduced]="isReducedMenu">
+    <button (click)="isReducedMenu = !isReducedMenu" [class.menu-reducer-btn-reduced]="isReducedMenu"
+            class="extend-close-navbar-btn"
+            mat-icon-button
+            style="z-index: 13;">
       <mat-icon *ngIf="isReducedMenu">chevron_right</mat-icon>
       <mat-icon *ngIf="!isReducedMenu">chevron_left</mat-icon>
     </button>
 
   </mat-drawer>
 
-  <mat-drawer-content style="padding: 5vh 2vw;"
-      [class.mat-drawer-opened-margin]="!isReducedMenu"
-      [class.mat-drawer-content-reduced]="isReducedMenu">
+  <mat-drawer-content [class.mat-drawer-content-reduced]="isReducedMenu"
+                      [class.mat-drawer-opened-margin]="!isReducedMenu"
+                      style="padding: 5vh 2vw;">
 
     <router-outlet></router-outlet>
 

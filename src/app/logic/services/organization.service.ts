@@ -29,11 +29,12 @@ export class OrganizationService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   get(organizationId: string): Observable<OrganizationsGetResponse> {
     const url = `${this.baseUrl}/${organizationId}`;
-    return this.http.get<OrganizationsGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<OrganizationsGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<OrganizationsGetResponse>('get organization', undefined))
       );
@@ -54,7 +55,7 @@ export class OrganizationService {
 
   update(organization: Organization): Observable<void> {
     const url = `${this.baseUrl}/${organization.id}`;
-    return this.http.put<void>(url, organization, { headers: this.corsHeaders })
+    return this.http.put<void>(url, organization, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<void>('update organization', undefined))
       );
@@ -62,7 +63,7 @@ export class OrganizationService {
 
   usage(organizationId: string): Observable<OrganizationsUsageGetResponse> {
     const url = `${this.baseUrl}/${organizationId}/usage`;
-    return this.http.get<OrganizationsUsageGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<OrganizationsUsageGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<OrganizationsUsageGetResponse>('get organization usage', undefined))
       );
@@ -70,7 +71,7 @@ export class OrganizationService {
 
   projects(organizationId: string): Observable<OrganizationsProjectsGetResponse> {
     const url = `${this.baseUrl}/${organizationId}/projects`;
-    return this.http.get<OrganizationsProjectsGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<OrganizationsProjectsGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<OrganizationsProjectsGetResponse>('list projects', undefined))
       );
@@ -78,7 +79,7 @@ export class OrganizationService {
 
   users(organizationId: string): Observable<OrganizationsUsersGetResponse> {
     const url = `${this.baseUrl}/${organizationId}/users`;
-    return this.http.get<OrganizationsUsersGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<OrganizationsUsersGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<OrganizationsUsersGetResponse>('list users', undefined))
       );
@@ -86,7 +87,7 @@ export class OrganizationService {
 
   paymentMethods(organizationId: string): Observable<OrganizationsPaymentMethodsGetResponse> {
     const url = `${this.baseUrl}/${organizationId}/payment-methods`;
-    return this.http.get<OrganizationsPaymentMethodsGetResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<OrganizationsPaymentMethodsGetResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<OrganizationsPaymentMethodsGetResponse>('list paymentMethods', undefined))
       );
@@ -124,7 +125,7 @@ export class OrganizationService {
 
   deletePaymentMethod(organizationId: string, paymentMethodId: string): Observable<void> {
     const url = `${this.baseUrl}/${organizationId}/payment-methods/${paymentMethodId}`;
-    return this.http.delete<void>(url, { headers: this.corsHeaders })
+    return this.http.delete<void>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<void>('delete paymentMethods', undefined))
       );

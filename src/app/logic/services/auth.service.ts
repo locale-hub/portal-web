@@ -29,7 +29,8 @@ export class AuthService {
   constructor(
     private jwtHelper: JwtHelperService,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   public resetPasswordRequest(email: string) {
     const url = `${this.baseUrl}/password-reset`;

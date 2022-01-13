@@ -1,4 +1,3 @@
-
 export enum UserRoles {
   INVALID = 'invalid',
   USER = 'user',

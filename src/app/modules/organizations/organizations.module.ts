@@ -43,4 +43,5 @@ import {MatInputModule} from '@angular/material/input';
     MatInputModule,
   ]
 })
-export class OrganizationsModule {}
+export class OrganizationsModule {
+}

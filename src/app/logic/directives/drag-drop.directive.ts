@@ -4,11 +4,9 @@ import {Directive, EventEmitter, HostBinding, HostListener, Output} from '@angul
   selector: '[appDragDrop]'
 })
 export class DragDropDirective {
+  @Output() fileDropped = new EventEmitter<any>();
   private backgroundColorDefault = '#35393E';
   private backgroundColorDragover = '#3F434B';
-
-  @Output() fileDropped = new EventEmitter<any>();
-
   @HostBinding('style.background-color') private background = this.backgroundColorDefault;
   @HostBinding('style.opacity') private opacity = '1';
 
@@ -21,7 +19,8 @@ export class DragDropDirective {
   }
 
   // Dragleave listener
-  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
+  @HostListener('dragleave', ['$event'])
+  public onDragLeave(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.background = this.backgroundColorDefault;
@@ -29,7 +28,8 @@ export class DragDropDirective {
   }
 
   // Drop listener
-  @HostListener('drop', ['$event']) public ondrop(evt) {
+  @HostListener('drop', ['$event'])
+  public ondrop(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.background = this.backgroundColorDefault;

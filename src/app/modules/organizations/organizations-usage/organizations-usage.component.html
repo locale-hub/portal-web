@@ -1,43 +1,46 @@
-
 <div class="content" role="main" style="align-items: unset;">
-    <mat-card *ngIf="usage" class="row">
-        <h1>Storage Usage</h1>
+  <mat-card *ngIf="usage" class="row">
+    <h1>Storage Usage</h1>
 
-        <div class="col-3">
-            <div class="full-width center global-usage">
-                <p class="title mat-primary-text">Plan usage</p>
-                <p class="amount full-width" style="color: #a1a2a5;">
-                    {{ usage.storage.size.toFixed(0) }} / {{ usage.storage.max}} KB
-                </p>
-                <app-mat-progress-circle [value]="(usage.storage.size / usage.storage.max) * 100" displayText="true"></app-mat-progress-circle>
-            </div>
-        </div>
+    <div class="col-3">
+      <div class="full-width center global-usage">
+        <p class="title mat-primary-text">Plan usage</p>
+        <p class="amount full-width" style="color: #a1a2a5;">
+          {{ usage.storage.size.toFixed(0) }} / {{ usage.storage.max}} KB
+        </p>
+        <app-mat-progress-circle [value]="(usage.storage.size / usage.storage.max) * 100"
+                                 displayText="true"></app-mat-progress-circle>
+      </div>
+    </div>
 
-        <div class="col-9 projects-usage">
-            <p class="title mat-primary-text">Projects usage</p>
-            <div *ngFor="let project of usage.storage.projects; trackBy: trackByProjectUsageName" class="usage">
-                <div class="full-width">
-                    <span class="title">{{ project.name }}</span>
-                    <span class="amount" style="color: #a1a2a5;">
+    <div class="col-9 projects-usage">
+      <p class="title mat-primary-text">Projects usage</p>
+      <div *ngFor="let project of usage.storage.projects; trackBy: trackByProjectUsageName" class="usage">
+        <div class="full-width">
+          <span class="title">{{ project.name }}</span>
+          <span class="amount" style="color: #a1a2a5;">
                         {{ project.size.toFixed(0) }} / {{ project.max}} KB
                         <span class="vertical-split">|</span>
-                        <span style="color: white; display: inline-block; width: 35px; text-align: right;">{{ ((project.size / project.max) * 100).toFixed(0) }}%</span>
+                        <span
+                            style="color: white; display: inline-block; width: 35px; text-align: right;">{{ ((project.size / project.max) * 100).toFixed(0) }}
+                          %</span>
                     </span>
-                </div>
-                <mat-progress-bar class="progress full-width" mode="determinate" value="{{ (project.size / project.max) * 100 }}"></mat-progress-bar>
-            </div>
         </div>
-    </mat-card>
+        <mat-progress-bar class="progress full-width" mode="determinate"
+                          value="{{ (project.size / project.max) * 100 }}"></mat-progress-bar>
+      </div>
+    </div>
+  </mat-card>
 
-    <mat-card *ngIf="false && sdkFeatureEnabled && usage" class="sdk-usage row">
-        <h1>SDK API Usage</h1>
+  <mat-card *ngIf="false && sdkFeatureEnabled && usage" class="sdk-usage row">
+    <h1>SDK API Usage</h1>
 
-        <div class="col-4 center global-usage">
-            <p class="title mat-primary-text">Usage during this month</p>
-            <p class="full-width content">
-                {{ usage.api.quantity }}
-            </p>
-        </div>
-    </mat-card>
+    <div class="col-4 center global-usage">
+      <p class="title mat-primary-text">Usage during this month</p>
+      <p class="full-width content">
+        {{ usage.api.quantity }}
+      </p>
+    </div>
+  </mat-card>
 
 </div>

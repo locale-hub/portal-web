@@ -1,24 +1,21 @@
+<mat-card *ngIf="undefined !== projectId" class="row">
+  <h3>Export</h3>
 
-
-
-<mat-card class="row" *ngIf="undefined !== projectId">
-    <h3>Export</h3>
-
-    <div class="col-sm-12">
-        <span style="font-weight: 500;">Download bundle</span>
-        <br />
-        <span>Bundle containing all the translation files with the latest values</span>
-        <div class="default-locale-download">
-            <button mat-stroked-button color="primary" (click)="getAndroidBundle()">Android</button>
-            <button mat-stroked-button color="primary" (click)="getIOSBundle()">iOS</button>
-        </div>
+  <div class="col-sm-12">
+    <span style="font-weight: 500;">Download bundle</span>
+    <br/>
+    <span>Bundle containing all the translation files with the latest values</span>
+    <div class="default-locale-download">
+      <button (click)="getAndroidBundle()" color="primary" mat-stroked-button>Android</button>
+      <button (click)="getIOSBundle()" color="primary" mat-stroked-button>iOS</button>
     </div>
+  </div>
 </mat-card>
 
 <mat-card class="row">
-    <h3>Import</h3>
+  <h3>Import</h3>
 
-    <div class="col-sm-12">
-        <span style="font-weight: 500;">Coming soon...</span>
-    </div>
+  <div class="col-sm-12">
+    <span style="font-weight: 500;">Coming soon...</span>
+  </div>
 </mat-card>

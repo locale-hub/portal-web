@@ -92,16 +92,6 @@ export class ProjectUsersComponent extends BaseComponent implements OnInit {
       .addTo(this.disposeBag);
   }
 
-  private _filter(value: string): User[] {
-    const filterValue = value.toLowerCase();
-
-    return this.organizationUsers
-      .filter(user => {
-        return (0 === this.users.filter(u => u.primaryEmail === user.primaryEmail).length)
-          && (user.primaryEmail.toLowerCase().includes(filterValue) || user.name.toLowerCase().includes(filterValue));
-      });
-  }
-
   public inviteUser() {
     const userId = this.organizationUsers.filter(u => u.primaryEmail === this.userEmailToAdd)[0].id;
     this.projectService.addUser(this.projectId, userId).subscribe(() => {
@@ -128,7 +118,19 @@ export class ProjectUsersComponent extends BaseComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe(() => { this.ngOnInit(); })
+      .subscribe(() => {
+        this.ngOnInit();
+      })
       .addTo(this.disposeBag);
+  }
+
+  private _filter(value: string): User[] {
+    const filterValue = value.toLowerCase();
+
+    return this.organizationUsers
+      .filter(user => {
+        return (0 === this.users.filter(u => u.primaryEmail === user.primaryEmail).length)
+          && (user.primaryEmail.toLowerCase().includes(filterValue) || user.name.toLowerCase().includes(filterValue));
+      });
   }
 }

@@ -29,4 +29,5 @@ import {CommonModule} from '@angular/common';
     CommonModule,
   ]
 })
-export class AuthModule {}
+export class AuthModule {
+}

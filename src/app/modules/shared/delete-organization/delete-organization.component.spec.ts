@@ -8,9 +8,9 @@ describe('DeleteOrganizationComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteOrganizationComponent ]
+      declarations: [DeleteOrganizationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -22,15 +22,15 @@ const routes: Routes = [
       sectionName: 'projects'
     },
     children: [
-      { path: '', redirectTo: 'overview', pathMatch: 'full', data: { subSectionName: 'overview' }  },
-      { path: 'apps', component: ProjectAppsComponent, data: { subSectionName: 'apps-list' } },
-      { path: 'commits/:commitId', component: ProjectCommitsDetailsComponent, data: { subSectionName: 'commits-details' }  },
-      { path: 'commits', component: ProjectCommitsComponent, data: { subSectionName: 'commits-list' }  },
-      { path: 'exports', component: ProjectExportsComponent, data: { subSectionName: 'exports' }  },
-      { path: 'i18n', component: ProjectI18nComponent, data: { subSectionName: 'translation' }  },
-      { path: 'overview', component: ProjectOverviewComponent, data: { subSectionName: 'overview' }  },
-      { path: 'settings', component: ProjectSettingsComponent, data: { subSectionName: 'settings' }  },
-      { path: 'users', component: ProjectUsersComponent, data: { subSectionName: 'users' }  }
+      {path: '', redirectTo: 'overview', pathMatch: 'full', data: {subSectionName: 'overview'}},
+      {path: 'apps', component: ProjectAppsComponent, data: {subSectionName: 'apps-list'}},
+      {path: 'commits/:commitId', component: ProjectCommitsDetailsComponent, data: {subSectionName: 'commits-details'}},
+      {path: 'commits', component: ProjectCommitsComponent, data: {subSectionName: 'commits-list'}},
+      {path: 'exports', component: ProjectExportsComponent, data: {subSectionName: 'exports'}},
+      {path: 'i18n', component: ProjectI18nComponent, data: {subSectionName: 'translation'}},
+      {path: 'overview', component: ProjectOverviewComponent, data: {subSectionName: 'overview'}},
+      {path: 'settings', component: ProjectSettingsComponent, data: {subSectionName: 'settings'}},
+      {path: 'users', component: ProjectUsersComponent, data: {subSectionName: 'users'}}
     ]
   }
 ];
@@ -40,4 +40,5 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProjectsRoutingModule {}
+export class ProjectsRoutingModule {
+}

@@ -1,33 +1,32 @@
-
 <div class="content" role="main" style="align-items: unset;">
 
-    <div class="row">
-        <div class="col-12 col-md-8 header">
-            <h1>Users</h1>
-        </div>
-
-        <div *ngIf="isUserOwner" class="col-12 col-md-4" style="text-align: right; padding-right: 0;">
-            <button mat-raised-button color="primary" class="action user-add" (click)="openInviteUser();">
-                <mat-icon>group_add</mat-icon>
-                Add User
-            </button>
-        </div>
+  <div class="row">
+    <div class="col-12 col-md-8 header">
+      <h1>Users</h1>
     </div>
 
-    <div *ngIf="users" class="row">
+    <div *ngIf="isUserOwner" class="col-12 col-md-4" style="text-align: right; padding-right: 0;">
+      <button (click)="openInviteUser();" class="action user-add" color="primary" mat-raised-button>
+        <mat-icon>group_add</mat-icon>
+        Add User
+      </button>
+    </div>
+  </div>
 
-        <div class="col-12 cards-container">
-            <mat-card class="col-12 mat-elevation-z0 row projects-header">
+  <div *ngIf="users" class="row">
+
+    <div class="col-12 cards-container">
+      <mat-card class="col-12 mat-elevation-z0 row projects-header">
             <span class="row">
                 <span class="col-4">Name</span>
                 <span class="col-4">Email</span>
                 <span class="col-3 center">Role</span>
                 <span class="col-1 center"><!-- Actions --></span>
             </span>
-            </mat-card>
+      </mat-card>
 
-            <div *ngFor="let user of users; trackBy: trackByUserId" class="project-row">
-                <mat-card class="col-12 mat-elevation-z0 row">
+      <div *ngFor="let user of users; trackBy: trackByUserId" class="project-row">
+        <mat-card class="col-12 mat-elevation-z0 row">
                 <span class="row">
                     <span class="col-4 project-item">
                         {{ user.name }}
@@ -37,17 +36,17 @@
                     </span>
                     <span class="col-3 center">{{ user.role }}</span>
                     <span class="col-1 center">
-                        <button *ngIf="isUserOwner" mat-icon-button [matMenuTriggerFor]="projectActionMenu">
+                        <button *ngIf="isUserOwner" [matMenuTriggerFor]="projectActionMenu" mat-icon-button>
                             <mat-icon>more_horiz</mat-icon>
                         </button>
                         <mat-menu #projectActionMenu xPosition="before">
-                          <button mat-menu-item class="mat-warn-text" (click)="openDeleteUser(user)">Delete</button>
+                          <button (click)="openDeleteUser(user)" class="mat-warn-text" mat-menu-item>Delete</button>
                         </mat-menu>
                     </span>
                 </span>
-                </mat-card>
-            </div>
-        </div>
+        </mat-card>
+      </div>
     </div>
+  </div>
 
 </div>

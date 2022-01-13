@@ -1,4 +1,3 @@
-
 <div class="row">
   <h1>Overview</h1>
 </div>
@@ -7,7 +6,7 @@
   <div *ngIf="data && data.deployedCommit" class="col-sm-12 col-md-3">
     <mat-card style="height: calc(100% - 24px);">
       <mat-card-content>
-        <p class="mat-primary-text" >Deployed commit</p>
+        <p class="mat-primary-text">Deployed commit</p>
         <mat-card-subtitle>Title: {{ data.deployedCommit.title }}</mat-card-subtitle>
       </mat-card-content>
       <span *ngIf="data.deployedCommit.description">Description: {{ data.deployedCommit.description }}</span>
@@ -32,7 +31,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="data && (data.deployedCommit || data.progress)">
+<div *ngIf="data && (data.deployedCommit || data.progress)" class="row">
   <h3>Actions</h3>
 </div>
 
@@ -40,7 +39,7 @@
 
   <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
     <mat-card routerLink="../i18n">
-      <img mat-card-image src="../../../../assets/images/shared_goals.svg" alt="Translate image">
+      <img alt="Translate image" mat-card-image src="../../../../assets/images/shared_goals.svg">
       <mat-card-content>
         <mat-card-title>Translate</mat-card-title>
       </mat-card-content>
@@ -49,7 +48,7 @@
 
   <div *ngIf="sdkFeatureEnabled" class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
     <mat-card routerLink="../apps">
-      <img mat-card-image src="../../../../assets/images/progressive_app.svg" alt="Add apps image">
+      <img alt="Add apps image" mat-card-image src="../../../../assets/images/progressive_app.svg">
       <mat-card-content>
         <mat-card-title>App management</mat-card-title>
       </mat-card-content>
@@ -58,7 +57,7 @@
 
   <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
     <mat-card routerLink="../users">
-      <img mat-card-image src="../../../../assets/images/selecting_team.svg" alt="Add member image">
+      <img alt="Add member image" mat-card-image src="../../../../assets/images/selecting_team.svg">
       <mat-card-content>
         <mat-card-title>Team management</mat-card-title>
       </mat-card-content>
@@ -67,7 +66,7 @@
 
   <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
     <mat-card (click)="openSdkDocumentation()">
-      <img mat-card-image src="../../../../assets/images/programmer.svg" alt="Integration documentation image">
+      <img alt="Integration documentation image" mat-card-image src="../../../../assets/images/programmer.svg">
       <mat-card-content>
         <mat-card-title>Integrations</mat-card-title>
       </mat-card-content>

@@ -25,7 +25,8 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   public update(user: User) {
     const url = `${this.baseUrl}`;
@@ -88,7 +89,7 @@ export class UserService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.get<MeDashboardResponse>(url, { headers })
+    return this.http.get<MeDashboardResponse>(url, {headers})
       .pipe(
         catchError(ServiceHelper.handleError<MeDashboardResponse>('dashboard', undefined))
       );

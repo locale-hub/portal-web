@@ -27,11 +27,12 @@ export class CommitService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   list(projectId: string): Observable<CommitsListResponse> {
     const url = `${this.baseUrl}`.replace(this.urlProjectId, projectId);
-    return this.http.get<CommitsListResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<CommitsListResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<CommitsListResponse>('list commit', undefined))
       );
@@ -69,7 +70,7 @@ export class CommitService {
       changeList,
     };
 
-    return this.http.post<void>(url, body, { headers: this.corsHeaders })
+    return this.http.post<void>(url, body, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<void>('create manifest', undefined))
       );

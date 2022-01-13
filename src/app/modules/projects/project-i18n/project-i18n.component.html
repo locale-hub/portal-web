@@ -1,11 +1,10 @@
-
 <div *ngIf="manifest" class="row">
   <div class="col-12 col-md-6 col-lg-8 header">
     <p>
       <span>
         use <code>[one] & [many]</code> for plurals, and <code>[0], [1], [...]</code> for arrays.
       </span>
-      <br />
+      <br/>
       <span *ngIf="project && project.archived">
         <u>This project is archived and cannot be edited.</u>
       </span>
@@ -16,39 +15,47 @@
   </div>
 
   <div class="col-12 col-md-3 col-lg-2">
-    <button mat-flat-button color="primary" class="action add-entry" [disabled]="project && project.archived" (click)="openAddEntryDialog();">
+    <button (click)="openAddEntryDialog();" [disabled]="project && project.archived" class="action add-entry"
+            color="primary"
+            mat-flat-button>
       <mat-icon>translate</mat-icon>
       Add Translation key
     </button>
   </div>
   <div class="col-12 col-md-3 col-lg-2">
-    <button mat-flat-button class="action commit" color="warn" [disabled]="(project && project.archived) || !changesHasBeenMade" (click)="openCommitDialog();">
+    <button (click)="openCommitDialog();" [disabled]="(project && project.archived) || !changesHasBeenMade"
+            class="action commit"
+            color="warn" mat-flat-button>
       <mat-icon>upload</mat-icon>
       Commit
     </button>
   </div>
 
-  <hr class="col-12 separator" />
+  <hr class="col-12 separator"/>
 </div>
 
 
 <div *ngIf="manifest" class="row">
   <div class="col-sm-12 col-md-10">
     <mat-button-toggle-group class="locales" style="overflow:visible;">
-      <mat-button-toggle style="width: 72px;" *ngFor="let locale of manifest.locales" (click)="selectedLocale = locale"
-                         [class.mat-button-toggle-checked]="selectedLocale === locale">
+      <mat-button-toggle (click)="selectedLocale = locale" *ngFor="let locale of manifest.locales"
+                         [class.mat-button-toggle-checked]="selectedLocale === locale"
+                         style="width: 72px;">
         <span (click)="deleteLocale(locale)" class="remove-locale-badge">X</span>
         <mat-icon *ngIf="isLocaleMissAKey(locale)"
-          matTooltip="{{ countMissingTranslationForLocale(locale) }}/{{ manifest.keys.length }} missing"
-          matTooltipPosition="above"
-        >warning</mat-icon>
+                  matTooltip="{{ countMissingTranslationForLocale(locale) }}/{{ manifest.keys.length }} missing"
+                  matTooltipPosition="above"
+        >warning
+        </mat-icon>
         {{ locale }}
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <div class="col-sm-12 col-md-2">
-    <button mat-flat-button class="action add-locale" color="primary" (click)="openAddLocaleDialog()" [disabled]="project && project.archived">
+    <button (click)="openAddLocaleDialog()" [disabled]="project && project.archived" class="action add-locale"
+            color="primary"
+            mat-flat-button>
       <mat-icon>flag</mat-icon>
       Add a locale
     </button>
@@ -66,11 +73,11 @@
 <div class="row">
   <mat-form-field class="col-11">
     <mat-label>Filter translation keys</mat-label>
-    <input [(ngModel)]="filterSearchText" matInput placeholder="homepage, payment_page.title" />
+    <input [(ngModel)]="filterSearchText" matInput placeholder="homepage, payment_page.title"/>
   </mat-form-field>
 
   <div class="col-1">
-    <button mat-button class="action" [matMenuTriggerFor]="advancedFiltersMenu">
+    <button [matMenuTriggerFor]="advancedFiltersMenu" class="action" mat-button>
       <mat-icon>filter_list</mat-icon>
     </button>
     <mat-menu #advancedFiltersMenu xPosition="before">
@@ -85,27 +92,27 @@
 </div>
 
 <div *ngIf="manifest" class="row">
-<div *ngIf="manifest.locales.includes(selectedLocale)" class="col-12 cards-container">
-  <mat-card class="col-12 mat-elevation-z0 row translation-header">
+  <div *ngIf="manifest.locales.includes(selectedLocale)" class="col-12 cards-container">
+    <mat-card class="col-12 mat-elevation-z0 row translation-header">
       <span class="row">
         <span class="col-1">Status</span>
         <span class="col-3">Translation Key</span>
         <span class="col-6">Text Preview</span>
         <span class="col-2 center">Actions</span>
       </span>
-  </mat-card>
-  <span *ngFor="let key of manifest.keys">
-    <app-translation-row class="row"
-            *ngIf="shouldDisplayTranslationKey(key)"
-            (changeHappened)="refresh()"
-            [project]="project"
-            [key]="key"
-            [selectedLocale]="selectedLocale"
-            [manifest]="manifest"
-            [originalManifest]="originalManifest"
+    </mat-card>
+    <span *ngFor="let key of manifest.keys">
+    <app-translation-row (changeHappened)="refresh()"
+                         *ngIf="shouldDisplayTranslationKey(key)"
+                         [key]="key"
+                         [manifest]="manifest"
+                         [originalManifest]="originalManifest"
+                         [project]="project"
+                         [selectedLocale]="selectedLocale"
+                         class="row"
     ></app-translation-row>
   </span>
-</div>
+  </div>
 </div>
 
 

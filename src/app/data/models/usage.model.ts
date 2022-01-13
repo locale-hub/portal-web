@@ -1,4 +1,3 @@
-
 export interface OrganizationUsage {
   storage: OrganizationStorageUsage;
   api: OrganizationApiUsage;

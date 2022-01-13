@@ -1,4 +1,3 @@
-
 <h2 mat-dialog-title>Create a new Organization</h2>
 
 <mat-dialog-content class="mat-typography">
@@ -6,13 +5,13 @@
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="organization.name" id="name" name="name" required>
+      <input [(ngModel)]="organization.name" id="name" matInput name="name" required>
     </mat-form-field>
   </form>
 
 </mat-dialog-content>
 
 <mat-dialog-actions style="float: right">
-  <button mat-button mat-dialog-close (click)="close()">Cancel</button>
-  <button (click)="create()" mat-flat-button color="primary">Create</button>
+  <button (click)="close()" mat-button mat-dialog-close>Cancel</button>
+  <button (click)="create()" color="primary" mat-flat-button>Create</button>
 </mat-dialog-actions>

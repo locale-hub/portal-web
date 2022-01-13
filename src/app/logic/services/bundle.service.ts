@@ -24,11 +24,12 @@ export class BundleService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   get(projectId: string, format: FileFormat): Observable<any> {
     const url = `${this.baseUrl}?format=${format}`.replace(this.urlProjectId, projectId);
-    return this.http.get<any>(url, { responseType: 'arraybuffer' as 'json', headers: this.corsHeaders })
+    return this.http.get<any>(url, {responseType: 'arraybuffer' as 'json', headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<any>('get bundle', undefined))
       );

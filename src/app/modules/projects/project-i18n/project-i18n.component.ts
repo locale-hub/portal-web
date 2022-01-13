@@ -180,7 +180,7 @@ export class ProjectI18nComponent extends BaseComponent implements OnInit {
       translatable: true,
       status
     };
-  }
+  };
 
   isLocaleMissAKey = (locale: string): boolean => {
     for (const key of this.manifest.keys) {
@@ -189,7 +189,7 @@ export class ProjectI18nComponent extends BaseComponent implements OnInit {
       }
     }
     return false;
-  }
+  };
 
   countMissingTranslationForLocale(locale: string) {
     let count = 0;
@@ -219,7 +219,7 @@ export class ProjectI18nComponent extends BaseComponent implements OnInit {
     }
 
     return true;
-  }
+  };
 
   refresh() {
     for (const locale of this.manifest.locales) {

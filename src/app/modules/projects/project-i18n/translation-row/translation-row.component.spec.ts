@@ -8,9 +8,9 @@ describe('TranslationRowComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TranslationRowComponent ]
+      declarations: [TranslationRowComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

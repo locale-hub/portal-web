@@ -10,7 +10,8 @@ export class MatProgressCircleComponent implements OnInit {
   @Input() value: number;
   @Input() displayText = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.value = parseInt(this.value.toFixed(0), 10);

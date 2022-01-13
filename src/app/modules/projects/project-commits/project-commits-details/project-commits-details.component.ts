@@ -12,10 +12,9 @@ import * as moment from 'moment';
   styleUrls: ['./project-commits-details.component.scss']
 })
 export class ProjectCommitsDetailsComponent implements OnInit {
+  commit: Commit;
   private projectId: string;
   private commitId: string;
-
-  commit: Commit;
 
   constructor(
     private route: ActivatedRoute,

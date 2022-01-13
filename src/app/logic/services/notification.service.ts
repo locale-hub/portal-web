@@ -23,7 +23,8 @@ export class NotificationService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   public list(): Observable<MeNotificationsResponse> {
     const url = `${this.baseUrl}`;

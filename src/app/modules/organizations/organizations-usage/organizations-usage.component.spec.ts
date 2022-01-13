@@ -8,9 +8,9 @@ describe('OrganizationsUsageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrganizationsUsageComponent ]
+      declarations: [OrganizationsUsageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

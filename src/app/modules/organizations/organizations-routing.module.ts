@@ -18,11 +18,11 @@ const routes: Routes = [
       sectionName: 'organizations'
     },
     children: [
-      { path: '',   redirectTo: 'projects', pathMatch: 'full', data: { subSectionName: 'projects' }  },
-      { path: 'projects', component: OrganizationsProjectsComponent, data: { subSectionName: 'projects' }  },
-      { path: 'usage', component: OrganizationsUsageComponent, data: { subSectionName: 'usage' }  },
-      { path: 'settings', component: OrganizationsSettingsComponent, data: { subSectionName: 'settings' }  },
-      { path: 'users', component: OrganizationsUsersComponent, data: { subSectionName: 'users' }  }
+      {path: '', redirectTo: 'projects', pathMatch: 'full', data: {subSectionName: 'projects'}},
+      {path: 'projects', component: OrganizationsProjectsComponent, data: {subSectionName: 'projects'}},
+      {path: 'usage', component: OrganizationsUsageComponent, data: {subSectionName: 'usage'}},
+      {path: 'settings', component: OrganizationsSettingsComponent, data: {subSectionName: 'settings'}},
+      {path: 'users', component: OrganizationsUsersComponent, data: {subSectionName: 'users'}}
     ]
   },
 ];
@@ -32,4 +32,5 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class OrganizationsRoutingModule {}
+export class OrganizationsRoutingModule {
+}

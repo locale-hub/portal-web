@@ -11,4 +11,4 @@ declare module 'rxjs' {
 
 Subscription.prototype.addTo = (disposeBag: DisposeBag) => {
   disposeBag.add(this);
-}
+};

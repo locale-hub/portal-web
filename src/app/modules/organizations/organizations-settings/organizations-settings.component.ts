@@ -62,7 +62,7 @@ export class OrganizationsSettingsComponent extends BaseComponent {
 
   openDeleteDialog() {
     this.dialog.open(DeleteOrganizationComponent, {
-      data: { organization: this.organization },
+      data: {organization: this.organization},
     });
   }
 }

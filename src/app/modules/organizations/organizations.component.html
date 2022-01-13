@@ -1,47 +1,53 @@
 <mat-drawer-container>
 
-    <mat-drawer *ngIf="organization" mode="side" opened [class.mat-drawer-reduced]="isReducedMenu">
-        <div class="title" [class.mat-drawer-reduced]="isReducedMenu">
-            <h1 *ngIf="!isReducedMenu">{{ organization.name }}</h1>
-            <h1 *ngIf="isReducedMenu">{{ organization.name[0] }}</h1>
-        </div>
+  <mat-drawer *ngIf="organization" [class.mat-drawer-reduced]="isReducedMenu" mode="side" opened>
+    <div [class.mat-drawer-reduced]="isReducedMenu" class="title">
+      <h1 *ngIf="!isReducedMenu">{{ organization.name }}</h1>
+      <h1 *ngIf="isReducedMenu">{{ organization.name[0] }}</h1>
+    </div>
 
-        <button mat-button [routerLink]="['/organizations', organization.id, 'projects']" routerLinkActive="active">
-            <mat-icon>view_column</mat-icon>
-            <span *ngIf="!isReducedMenu">Projects</span>
-        </button>
+    <button [routerLink]="['/organizations', organization.id, 'projects']" mat-button routerLinkActive="active">
+      <mat-icon>view_column</mat-icon>
+      <span *ngIf="!isReducedMenu">Projects</span>
+    </button>
 
-        <button mat-button [routerLink]="['/organizations', organization.id, 'users']" routerLinkActive="active">
-            <mat-icon>people</mat-icon>
-            <span *ngIf="!isReducedMenu">Users</span>
-        </button>
+    <button [routerLink]="['/organizations', organization.id, 'users']" mat-button routerLinkActive="active">
+      <mat-icon>people</mat-icon>
+      <span *ngIf="!isReducedMenu">Users</span>
+    </button>
 
-        <button mat-button *ngIf="organization && user && organization.owner === user.id" [routerLink]="['/organizations', organization.id, 'usage']" routerLinkActive="active">
-            <mat-icon>data_usage</mat-icon>
-            <span *ngIf="!isReducedMenu">Usage</span>
-        </button>
+    <button *ngIf="organization && user && organization.owner === user.id"
+            [routerLink]="['/organizations', organization.id, 'usage']"
+            mat-button routerLinkActive="active">
+      <mat-icon>data_usage</mat-icon>
+      <span *ngIf="!isReducedMenu">Usage</span>
+    </button>
 
-        <button mat-button *ngIf="organization && user && organization.owner === user.id" [routerLink]="['/organizations', organization.id, 'settings']" routerLinkActive="active">
-            <mat-icon>tune</mat-icon>
-            <span *ngIf="!isReducedMenu">Settings</span>
-        </button>
+    <button *ngIf="organization && user && organization.owner === user.id"
+            [routerLink]="['/organizations', organization.id, 'settings']"
+            mat-button routerLinkActive="active">
+      <mat-icon>tune</mat-icon>
+      <span *ngIf="!isReducedMenu">Settings</span>
+    </button>
 
 
-        <button mat-icon-button class="extend-close-navbar-btn" style="z-index: 13;" (click)="isReducedMenu = !isReducedMenu"
-                [class.menu-reducer-btn-reduced]="isReducedMenu">
-            <mat-icon *ngIf="isReducedMenu">chevron_right</mat-icon>
-            <mat-icon *ngIf="!isReducedMenu">chevron_left</mat-icon>
-        </button>
+    <button (click)="isReducedMenu = !isReducedMenu" [class.menu-reducer-btn-reduced]="isReducedMenu"
+            class="extend-close-navbar-btn"
+            mat-icon-button
+            style="z-index: 13;">
+      <mat-icon *ngIf="isReducedMenu">chevron_right</mat-icon>
+      <mat-icon *ngIf="!isReducedMenu">chevron_left</mat-icon>
+    </button>
 
-    </mat-drawer>
+  </mat-drawer>
 
-    <mat-drawer-content style="padding: 5vh 2vw;"
-        [class.mat-drawer-opened-margin]="!isReducedMenu"
-        [class.mat-drawer-content-reduced]="isReducedMenu">
+  <mat-drawer-content [class.mat-drawer-content-reduced]="isReducedMenu"
+                      [class.mat-drawer-opened-margin]="!isReducedMenu"
+                      style="padding: 5vh 2vw;">
 
-        <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
-    </mat-drawer-content>
+  </mat-drawer-content>
 </mat-drawer-container>
 
 

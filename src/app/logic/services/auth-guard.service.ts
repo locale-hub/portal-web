@@ -8,7 +8,8 @@ import {Router} from '@angular/router';
 export class AuthGuardService {
   constructor(
     public auth: AuthService,
-    public router: Router) {}
+    public router: Router) {
+  }
 
   async canActivate(): Promise<boolean> {
     if (!this.auth.isAuthenticated()) {

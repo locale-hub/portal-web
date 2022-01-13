@@ -1,4 +1,3 @@
-
 export interface ApiError {
   statusCode: number;
   code: string;

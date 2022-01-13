@@ -101,7 +101,7 @@ export class ProjectCommitsComponent extends BaseComponent implements OnInit {
   }
 
   async showCommitDetails(id: string) {
-    await this.router.navigate([id], { relativeTo: this.route });
+    await this.router.navigate([id], {relativeTo: this.route});
   }
 
   commitsPerDate = () => {
@@ -114,12 +114,12 @@ export class ProjectCommitsComponent extends BaseComponent implements OnInit {
     );
 
     return _sortBy(_toPairs(result), 0).reverse();
-  }
+  };
 
   formatCommitDate = (commit: Commit): string => {
     const date = new Date(commit.createdAt);
     return moment(date).format('YYYY-MM-DD [at] HH:mm');
-  }
+  };
 
   getCommitAuthor(commit: Commit): User {
     return this.users.filter((u) => u.id === commit.authorId)[0] ?? null;

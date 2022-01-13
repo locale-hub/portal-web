@@ -8,9 +8,9 @@ describe('MatProgressCircleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatProgressCircleComponent ]
+      declarations: [MatProgressCircleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

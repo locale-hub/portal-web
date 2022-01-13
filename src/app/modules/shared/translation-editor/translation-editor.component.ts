@@ -40,40 +40,6 @@ export class TranslationEditorComponent extends BaseComponent implements OnInit 
     this.nestedTooltip = this.updateTooltip();
   }
 
-  private updateTooltip() {
-    const value = this.entry.value;
-    if (null === value) {
-      return undefined;
-    }
-    // @ts-ignore
-    const allMatches = [...value.matchAll(/{{\s*(\w|\.|-)+\s*}}/gi)]
-      .map((match) => match[0].replace(/{{\s*/gi, '').replace(/\s*}}/gi, ''));
-    const matches = [...new Set(allMatches)];
-
-    if (0 === matches.length) {
-      return '';
-    }
-
-    let nestedTooltip = '<span>';
-    for (const matchKey of matches) {
-      const matchValue = this.get(matchKey);
-      if (undefined === matchValue) {
-        continue;
-      }
-      nestedTooltip += `- ${matchKey}: ${matchValue}<br />`;
-    }
-    nestedTooltip += '</span>';
-    return nestedTooltip;
-  }
-
-  private get(key: string) {
-    return undefined !== this.manifest[this.locale]
-      ? undefined !== this.manifest[this.locale][key]
-        ? this.manifest[this.locale][key].value
-        : undefined
-      : undefined;
-  }
-
   deleteKey(): void {
     this.dialogRef.close({
       deleted: true,
@@ -120,5 +86,39 @@ export class TranslationEditorComponent extends BaseComponent implements OnInit 
 
   inputChange() {
     this.nestedTooltip = this.updateTooltip();
+  }
+
+  private updateTooltip() {
+    const value = this.entry.value;
+    if (null === value) {
+      return undefined;
+    }
+    // @ts-ignore
+    const allMatches = [...value.matchAll(/{{\s*(\w|\.|-)+\s*}}/gi)]
+      .map((match) => match[0].replace(/{{\s*/gi, '').replace(/\s*}}/gi, ''));
+    const matches = [...new Set(allMatches)];
+
+    if (0 === matches.length) {
+      return '';
+    }
+
+    let nestedTooltip = '<span>';
+    for (const matchKey of matches) {
+      const matchValue = this.get(matchKey);
+      if (undefined === matchValue) {
+        continue;
+      }
+      nestedTooltip += `- ${matchKey}: ${matchValue}<br />`;
+    }
+    nestedTooltip += '</span>';
+    return nestedTooltip;
+  }
+
+  private get(key: string) {
+    return undefined !== this.manifest[this.locale]
+      ? undefined !== this.manifest[this.locale][key]
+        ? this.manifest[this.locale][key].value
+        : undefined
+      : undefined;
   }
 }

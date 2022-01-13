@@ -1,4 +1,3 @@
-
 <div class="content" role="main" style="align-items: unset;">
 
   <div *ngIf="projects" class="row">
@@ -23,16 +22,16 @@
                     </span>
                     <span class="col-2">
                         <span>{{ getProgress(project.id) }}%</span>
-                        <mat-progress-bar mode="determinate" color="primary" [value]="getProgress(project.id)">
+                        <mat-progress-bar [value]="getProgress(project.id)" color="primary" mode="determinate">
                         </mat-progress-bar>
                     </span>
                     <span class="col-2 center">{{ project.createdAt | date: 'dd/MM/yyyy' }}</span>
                     <span class="col-1 center">
-                        <button mat-icon-button [matMenuTriggerFor]="projectActionMenu">
+                        <button [matMenuTriggerFor]="projectActionMenu" mat-icon-button>
                             <mat-icon>more_horiz</mat-icon>
                         </button>
                         <mat-menu #projectActionMenu xPosition="before">
-                          <button mat-menu-item class="mat-warn-text" (click)="openDeleteDialogForProject(project)">Delete</button>
+                          <button (click)="openDeleteDialogForProject(project)" class="mat-warn-text" mat-menu-item>Delete</button>
                         </mat-menu>
                     </span>
                 </span>

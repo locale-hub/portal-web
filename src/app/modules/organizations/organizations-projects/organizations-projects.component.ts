@@ -69,7 +69,7 @@ export class OrganizationsProjectsComponent extends BaseComponent implements OnI
 
   openDeleteDialogForProject(project: Project) {
     this.dialog.open(DeleteProjectComponent, {
-      data: { project },
+      data: {project},
     });
   }
 }

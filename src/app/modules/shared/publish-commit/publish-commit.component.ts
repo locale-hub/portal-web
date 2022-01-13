@@ -8,7 +8,7 @@ import {BaseComponent} from '../../helpers/BaseComponent';
   templateUrl: './publish-commit.component.html',
   styleUrls: ['./publish-commit.component.scss']
 })
-export class PublishCommitComponent extends BaseComponent{
+export class PublishCommitComponent extends BaseComponent {
   commitId: string;
   projectId: string;
 

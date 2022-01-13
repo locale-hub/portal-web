@@ -8,9 +8,9 @@ describe('PublishCommitComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublishCommitComponent ]
+      declarations: [PublishCommitComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

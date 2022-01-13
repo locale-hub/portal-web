@@ -8,9 +8,9 @@ describe('ResetPasswordApplyComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResetPasswordApplyComponent ]
+      declarations: [ResetPasswordApplyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,3 @@
-
 export default class FileUtils {
 
   static readFile = async (file: File): Promise<string> => {
@@ -11,6 +10,6 @@ export default class FileUtils {
 
       fileReader.readAsText(file);
     });
-  }
+  };
 
 }

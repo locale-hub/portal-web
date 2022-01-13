@@ -20,4 +20,5 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule {
+}

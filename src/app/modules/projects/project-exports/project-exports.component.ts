@@ -53,7 +53,7 @@ export class ProjectExportsComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    const blob = new Blob([data], { type: 'application/zip'});
+    const blob = new Blob([data], {type: 'application/zip'});
     const url = window.URL.createObjectURL(blob);
     const pwa = window.open(url);
     if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {

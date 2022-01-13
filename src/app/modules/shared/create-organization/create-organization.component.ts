@@ -12,7 +12,7 @@ import {BaseComponent} from '../../helpers/BaseComponent';
   templateUrl: './create-organization.component.html',
   styleUrls: ['./create-organization.component.scss']
 })
-export class CreateOrganizationComponent extends BaseComponent{
+export class CreateOrganizationComponent extends BaseComponent {
   organizationFrom: FormGroup;
   organization: Organization = {
     id: '',

@@ -1,4 +1,3 @@
-
 export enum AppType {
   OTHER = 'other',
   ANDROID = 'android',

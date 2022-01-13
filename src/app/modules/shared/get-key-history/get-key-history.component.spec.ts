@@ -8,9 +8,9 @@ describe('GetKeyHistoryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GetKeyHistoryComponent ]
+      declarations: [GetKeyHistoryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,3 @@
-
 export enum FileFormat {
   ANDROID = 'android',
   IOS = 'ios',

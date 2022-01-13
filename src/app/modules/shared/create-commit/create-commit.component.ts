@@ -87,7 +87,7 @@ export class CreateCommitComponent extends BaseComponent {
       }
     }
     return false;
-  }
+  };
 
   isLocaleKeyValid = (locale: string, key: any) => {
     if (undefined === this.manifest.manifest[locale]
@@ -107,7 +107,7 @@ export class CreateCommitComponent extends BaseComponent {
     }
 
     return false;
-  }
+  };
 
   entryStatus = (locale: string, key: string) => {
     switch (this.manifest.manifest[locale][key].status) {
@@ -120,7 +120,7 @@ export class CreateCommitComponent extends BaseComponent {
     }
 
     return '';
-  }
+  };
 
   selectLocale(locale: string) {
     this.selectedKeys = Object.keys(this.manifest.manifest[locale]);

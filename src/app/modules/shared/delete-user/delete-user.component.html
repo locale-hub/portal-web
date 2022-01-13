@@ -1,22 +1,21 @@
-
 <h2 mat-dialog-title>Are you sure?</h2>
 
 <mat-dialog-content class="mat-typography">
-    <form class="modal-form">
+  <form class="modal-form">
 
-        <p>
-            This action cannot be undone.<br />
-            This will permanently revoke access to the user <b>{{ userName }}</b> to this project.<br />
-            You can still invite this user again if necessary.
-        </p>
+    <p>
+      This action cannot be undone.<br/>
+      This will permanently revoke access to the user <b>{{ userName }}</b> to this project.<br/>
+      You can still invite this user again if necessary.
+    </p>
 
-    </form>
+  </form>
 
 </mat-dialog-content>
 
 <mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
-    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
-    <button (click)="deleteUser()" mat-flat-button color="warn" mat-dialog-close style="color: white;">
-        Revoke access to {{ userName }}
-    </button>
+  <button (click)="close()" mat-button mat-dialog-close>Cancel</button>
+  <button (click)="deleteUser()" color="warn" mat-dialog-close mat-flat-button style="color: white;">
+    Revoke access to {{ userName }}
+  </button>
 </mat-dialog-actions>

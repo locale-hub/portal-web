@@ -1,4 +1,3 @@
-
 export const environment = {
   features: {
     sdk: 'true' === window['env']['LH_FEATURES_SDK'] ?? false,

@@ -28,11 +28,12 @@ export class ProjectService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   list(): Observable<ProjectsListResponse> {
     const url = `${this.baseUrl}`;
-    return this.http.get<ProjectsListResponse>(url, { headers: this.corsHeaders })
+    return this.http.get<ProjectsListResponse>(url, {headers: this.corsHeaders})
       .pipe(
         catchError(ServiceHelper.handleError<ProjectsListResponse>('list projects', undefined))
       );
@@ -40,35 +41,35 @@ export class ProjectService {
 
   get(id: string): Observable<ProjectsGetResponse> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<ProjectsGetResponse>(url, { headers: this.corsHeaders }).pipe(
+    return this.http.get<ProjectsGetResponse>(url, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<ProjectsGetResponse>(`get project id=${id}`, undefined))
     );
   }
 
   create(project: Project): Observable<ProjectsPostResponse> {
     const url = `${this.baseUrl}`;
-    return this.http.post<ProjectsPostResponse>(url, project, { headers: this.corsHeaders }).pipe(
+    return this.http.post<ProjectsPostResponse>(url, project, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<ProjectsPostResponse>(`post project`, undefined))
     );
   }
 
   put(project: Project): Observable<void> {
     const url = `${this.baseUrl}/${project.id}`;
-    return this.http.put<void>(url, project, { headers: this.corsHeaders }).pipe(
+    return this.http.put<void>(url, project, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<void>(`updated project id=${project.id}`, undefined))
     );
   }
 
   delete(project: Project): Observable<void> {
     const url = `${this.baseUrl}/${project.id}`;
-    return this.http.delete<void>(url, { headers: this.corsHeaders }).pipe(
+    return this.http.delete<void>(url, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<void>(`deleted project id=${project.id}`, undefined))
     );
   }
 
   getUsers(id: string): Observable<ProjectsUsersGetResponse> {
     const url = `${this.baseUrl}/${id}/users`;
-    return this.http.get<ProjectsUsersGetResponse>(url, { headers: this.corsHeaders }).pipe(
+    return this.http.get<ProjectsUsersGetResponse>(url, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<ProjectsUsersGetResponse>('get project users', undefined))
     );
   }
@@ -78,14 +79,14 @@ export class ProjectService {
     return this.http.post<void>(url, {
       userId,
       role: UserRoles.USER,
-    }, { headers: this.corsHeaders }).pipe(
+    }, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<void>('add project users', undefined))
     );
   }
 
   deleteUser(projectId: string, userId: string): Observable<void> {
     const url = `${this.baseUrl}/${projectId}/users/${userId}`;
-    return this.http.delete<void>(url, { headers: this.corsHeaders }).pipe(
+    return this.http.delete<void>(url, {headers: this.corsHeaders}).pipe(
       catchError(ServiceHelper.handleError<void>('delete project users', undefined))
     );
   }

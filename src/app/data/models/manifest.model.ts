@@ -1,4 +1,3 @@
-
 export interface Manifest {
   locales: string[];
   keys: string[];

@@ -21,7 +21,8 @@ export class OrganizationsComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private organizationService: OrganizationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.user = this.authService.user();

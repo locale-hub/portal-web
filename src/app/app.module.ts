@@ -22,7 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [ AppComponent ],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     AuthModule,
@@ -46,10 +46,11 @@ import {FormsModule} from '@angular/forms';
   ],
   providers: [
     HttpClientModule,
-    { provide: ErrorHandler, useClass: AppErrorHandler }
+    {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

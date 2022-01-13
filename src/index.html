@@ -4,48 +4,62 @@
   <meta charset="utf-8">
   <title>Locale Hub - Easy localization & dynamic content delivery</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="assets/logo.svg">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="assets/logo.svg" rel="icon" type="image/x-icon">
 
-  <link rel="preload" href="assets/css/bootstrap-grid.min.css" as="style" media="screen" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" media="screen"></noscript>
-  <link rel="preload" href="assets/css/roboto-font.css" as="style" media="screen" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="assets/css/roboto-font.css" media="screen"></noscript>
-  <link rel="preload" href="assets/css/material-icons.css" as="style" media="screen" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="assets/css/material-icons.css" media="screen"></noscript>
+  <link as="style" href="assets/css/bootstrap-grid.min.css" media="screen"
+        onload="this.onload=null;this.rel='stylesheet'"
+        rel="preload">
+  <noscript>
+    <link href="assets/css/bootstrap-grid.min.css" media="screen" rel="stylesheet">
+  </noscript>
+  <link as="style" href="assets/css/roboto-font.css" media="screen" onload="this.onload=null;this.rel='stylesheet'"
+        rel="preload">
+  <noscript>
+    <link href="assets/css/roboto-font.css" media="screen" rel="stylesheet">
+  </noscript>
+  <link as="style" href="assets/css/material-icons.css" media="screen" onload="this.onload=null;this.rel='stylesheet'"
+        rel="preload">
+  <noscript>
+    <link href="assets/css/material-icons.css" media="screen" rel="stylesheet">
+  </noscript>
 
   <!--
    SEO tags
   -->
-  <meta name="description" content="Locale Hub is turnkey solution for localization and translation your applications and services.
-        Start using it today to deliver dynamic content to production in a matter of minutes!" />
-  <meta name="robots" content="index, archive" />
-  <link rel="canonical" content="https://locale-hub.com" />
+  <meta content="Locale Hub is turnkey solution for localization and translation your applications and services.
+        Start using it today to deliver dynamic content to production in a matter of minutes!" name="description"/>
+  <meta content="index, archive" name="robots"/>
+  <link content="https://locale-hub.com" rel="canonical"/>
 
-  <meta property="og:title" content="Locale Hub - Easy localization and Dynamic Content delivery" />
-  <meta property="og:description" content="Locale Hub is turnkey solution for localization and translation your applications and services.
-    Start using it today to deliver dynamic content to production in a matter of minutes!" />
-  <meta property="og:url" content="https://locale-hub.com/" />
-  <meta property="og:image" content="https://locale-hub.com/assets/logo.png" />
+  <meta content="Locale Hub - Easy localization and Dynamic Content delivery" property="og:title"/>
+  <meta content="Locale Hub is turnkey solution for localization and translation your applications and services.
+    Start using it today to deliver dynamic content to production in a matter of minutes!" property="og:description"/>
+  <meta content="https://locale-hub.com/" property="og:url"/>
+  <meta content="https://locale-hub.com/assets/logo.png" property="og:image"/>
 
-  <meta name="twitter:card" content="Locale Hub - Easy localization and Dynamic Content delivery" />
-  <meta name="twitter:site" content="https://locale-hub.com/" />
-  <meta name="twitter:creator" content="Locale Hub" />
+  <meta content="Locale Hub - Easy localization and Dynamic Content delivery" name="twitter:card"/>
+  <meta content="https://locale-hub.com/" name="twitter:site"/>
+  <meta content="Locale Hub" name="twitter:creator"/>
 
   <!-- Load environment variables -->
   <script src="assets/env.js"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script defer async src="https://www.googletagmanager.com/gtag/js?id=G-P6XQM6NRST"></script>
-  <script defer async>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-P6XQM6NRST"></script>
+  <script async defer>
+      window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'G-P6XQM6NRST');
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-P6XQM6NRST');
   </script>
 </head>
 <body class="mat-typography">
-  <app-root></app-root>
+<app-root></app-root>
 </body>
 </html>

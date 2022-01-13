@@ -1,42 +1,43 @@
 <mat-card class="col-12 mat-elevation-z0 row">
-    <div class="row headers">
+  <div class="row headers">
 
-      <div class="col-1 column-header">
-        <mat-icon *ngIf="false === isLocaleKeyValid()"
-            matTooltip="Missing translation"
-            matTooltipPosition="above"
-            color="warn"
-        >warning</mat-icon>
-        <span class="dot" [class]="statusClass"
-          [matTooltip]="statusMessage()"
-          matTooltipPosition="above"></span>
-      </div>
+    <div class="col-1 column-header">
+      <mat-icon *ngIf="false === isLocaleKeyValid()"
+                color="warn"
+                matTooltip="Missing translation"
+                matTooltipPosition="above"
+      >warning
+      </mat-icon>
+      <span [class]="statusClass" [matTooltip]="statusMessage()"
+            class="dot"
+            matTooltipPosition="above"></span>
+    </div>
 
-      <div class="col-3 column-key translation-key">
-        {{ key }}
-      </div>
+    <div class="col-3 column-key translation-key">
+      {{ key }}
+    </div>
 
-      <div class="col-6 column-value">
-        <p [class.missing-translation]="false === isLocaleKeyValid()">
-          {{ previewText() }}
-        </p>
-      </div>
+    <div class="col-6 column-value">
+      <p [class.missing-translation]="false === isLocaleKeyValid()">
+        {{ previewText() }}
+      </p>
+    </div>
 
-      <span class="col-2 column-action center">
-        <button *ngIf="!isDeletedKey()" color="primary" mat-stroked-button
-                (click)="openTranslationEditor()"
-                [disabled]="project && project.archived"
+    <span class="col-2 column-action center">
+        <button (click)="openTranslationEditor()" *ngIf="!isDeletedKey()" [disabled]="project && project.archived"
+                color="primary"
+                mat-stroked-button
         >
           <mat-icon>edit</mat-icon>
           Open Editor
         </button>
-        <button *ngIf="isDeletedKey()" mat-stroked-button color="warn"
-                (click)="revertDeleteKey()"
+        <button (click)="revertDeleteKey()" *ngIf="isDeletedKey()" color="warn"
+                mat-stroked-button
         >
           <mat-icon>undo</mat-icon>
           Revert deletion
         </button>
 
       </span>
-    </div>
+  </div>
 </mat-card>

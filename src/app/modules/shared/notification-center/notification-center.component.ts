@@ -73,7 +73,7 @@ export class NotificationCenterComponent extends BaseComponent implements OnInit
 
   listByStatus(status: NotificationStatus): Notification[] {
     return this.allNotifications
-      .filter((n) => status === n.status)
+        .filter((n) => status === n.status)
       ?? [];
   }
 

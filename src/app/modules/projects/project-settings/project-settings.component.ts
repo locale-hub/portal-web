@@ -90,13 +90,13 @@ export class ProjectSettingsComponent extends BaseComponent implements OnInit {
 
   openArchiveDialog() {
     this.dialog.open(ArchiveProjectComponent, {
-      data: { project: this.project },
+      data: {project: this.project},
     });
   }
 
   openDeleteDialog() {
     this.dialog.open(DeleteProjectComponent, {
-      data: { project: this.project },
+      data: {project: this.project},
     });
   }
 

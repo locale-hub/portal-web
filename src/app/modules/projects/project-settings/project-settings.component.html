@@ -1,16 +1,15 @@
-
 <mat-card *ngIf="this.project" class="row">
   <h3>Project Information</h3>
   <p *ngIf="project.archived">Archived projects cannot be updated</p>
 
   <mat-form-field appearance="fill" class="col-sm-4">
     <mat-label>Project Name</mat-label>
-    <input matInput id="name" name="name" [(ngModel)]="project.name" required [disabled]="project.archived">
+    <input [(ngModel)]="project.name" [disabled]="project.archived" id="name" matInput name="name" required>
   </mat-form-field>
 
   <mat-form-field *ngIf="users" appearance="fill" class="col-sm-4">
     <mat-label>Owner</mat-label>
-    <mat-select [(ngModel)]="project.userId" required [disabled]="project.archived">
+    <mat-select [(ngModel)]="project.userId" [disabled]="project.archived" required>
       <mat-option *ngFor="let user of this.users; trackBy: trackByUserId" value="{{ user.id }}">
         {{ user.name }}
       </mat-option>
@@ -19,7 +18,7 @@
 
   <mat-form-field appearance="fill" class="col-sm-4">
     <mat-label>Default locale</mat-label>
-    <mat-select [(ngModel)]="project.defaultLocale" required [disabled]="project.archived">
+    <mat-select [(ngModel)]="project.defaultLocale" [disabled]="project.archived" required>
       <mat-option *ngFor="let locale of this.locales" value="{{ locale.tag }}">
         {{ locale.name }}
       </mat-option>
@@ -27,7 +26,7 @@
   </mat-form-field>
 
   <div class="col-sm-12" style="text-align: right;">
-    <button (click)="saveProject()" mat-raised-button color="primary" [disabled]="project.archived">Save</button>
+    <button (click)="saveProject()" [disabled]="project.archived" color="primary" mat-raised-button>Save</button>
   </div>
 
 </mat-card>
@@ -37,15 +36,17 @@
 
   <div class="entry">
     <span class="header">Archive this project?</span>
-    <br />
+    <br/>
     <span class="text">Mark this repository as archived, read-only and API disabled.</span>
-    <button class="action" [disabled]="project.archived" (click)="openArchiveDialog()" mat-flat-button color="warn">Archive</button>
+    <button (click)="openArchiveDialog()" [disabled]="project.archived" class="action" color="warn" mat-flat-button>
+      Archive
+    </button>
   </div>
 
   <div class="entry">
     <span class="header">Delete this project?</span>
-    <br />
+    <br/>
     <span class="text">Once you delete a repository, there is no going back. Please be certain.</span>
-    <button class="action" (click)="openDeleteDialog()" mat-flat-button color="warn">Delete</button>
+    <button (click)="openDeleteDialog()" class="action" color="warn" mat-flat-button>Delete</button>
   </div>
 </mat-card>

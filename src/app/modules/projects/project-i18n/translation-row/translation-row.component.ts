@@ -68,19 +68,6 @@ export class TranslationRowComponent extends BaseComponent implements OnInit {
       .addTo(this.disposeBag);
   }
 
-  private deleteKey = () => {
-    for (const locale of this.manifest.locales) {
-      const entry = this.manifest.manifest[locale][this.key];
-      if (KeyStatus.CREATED === entry.status) {
-        this.manifest.keys = this.manifest.keys.filter((keyName: string) => keyName !== this.key);
-        return;
-      } else {
-        entry.status = KeyStatus.DELETED;
-      }
-    }
-    this.statusClass = this.entryStatus();
-  }
-
   entryStatus = (): string => {
     if (undefined === this.manifest.manifest[this.selectedLocale]
       || undefined === this.manifest.manifest[this.selectedLocale][this.key]
@@ -98,7 +85,7 @@ export class TranslationRowComponent extends BaseComponent implements OnInit {
     }
 
     return '';
-  }
+  };
 
   isLocaleKeyValid = (): boolean => {
     if (undefined === this.manifest.manifest[this.selectedLocale]
@@ -118,18 +105,57 @@ export class TranslationRowComponent extends BaseComponent implements OnInit {
     }
 
     return true;
-  }
+  };
 
   revertDeleteKey = (): void => {
     for (const locale of this.manifest.locales) {
       this.manifest.manifest[locale][this.key].status = this.getStatus(false);
     }
     this.statusClass = this.entryStatus();
-  }
+  };
 
   isDeletedKey = (): boolean => {
     return KeyStatus.DELETED === this.manifest.manifest[this.selectedLocale][this.key].status;
+  };
+
+  statusMessage(): string {
+    const key = this.manifest.manifest[this.selectedLocale][this.key].key;
+    switch (this.manifest.manifest[this.selectedLocale][this.key].status) {
+      case KeyStatus.DELETED:
+        return `'${key}' will be deleted when you commit`;
+      case KeyStatus.CREATED:
+        return `'${key}' has been created and will be saved when you commit`;
+      case KeyStatus.EDITED:
+        return `'${key}' has been edited and will be saved when you commit`;
+    }
+    return '';
   }
+
+  previewText(): string {
+    const value = this.manifest.manifest[this.selectedLocale][this.key].value;
+    const length = value?.trim().length ?? 0;
+
+    if (96 <= length) {
+      return value.slice(0, 93) + '...';
+    } else if (0 !== length) {
+      return value;
+    }
+
+    return 'Translation missing';
+  }
+
+  private deleteKey = () => {
+    for (const locale of this.manifest.locales) {
+      const entry = this.manifest.manifest[locale][this.key];
+      if (KeyStatus.CREATED === entry.status) {
+        this.manifest.keys = this.manifest.keys.filter((keyName: string) => keyName !== this.key);
+        return;
+      } else {
+        entry.status = KeyStatus.DELETED;
+      }
+    }
+    this.statusClass = this.entryStatus();
+  };
 
   private getStatus(ignoreDeleted: boolean = true): KeyStatus {
     // TODO: bug - When revert a deletion, the status is not refreshing for other locales (because DataSource)
@@ -153,32 +179,5 @@ export class TranslationRowComponent extends BaseComponent implements OnInit {
     }
 
     return status;
-  }
-
-  statusMessage(): string {
-    const key = this.manifest.manifest[this.selectedLocale][this.key].key;
-    switch (this.manifest.manifest[this.selectedLocale][this.key].status) {
-      case KeyStatus.DELETED:
-        return `'${key}' will be deleted when you commit`;
-      case KeyStatus.CREATED:
-        return `'${key}' has been created and will be saved when you commit`;
-      case KeyStatus.EDITED:
-        return `'${key}' has been edited and will be saved when you commit`;
-    }
-    return '';
-  }
-
-  previewText(): string {
-    const value = this.manifest.manifest[this.selectedLocale][this.key].value;
-    const length = value?.trim().length ?? 0;
-
-    if (96 <= length) {
-        return value.slice(0, 93) + '...';
-    }
-    else if (0 !== length) {
-      return value;
-    }
-
-    return 'Translation missing';
   }
 }
