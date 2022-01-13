@@ -41,10 +41,7 @@
 
             <div class="row avatar-container">
                 <app-avatar style="margin: auto;"
-                    [user]="user"
-                            size="140"
-                            fontSize="5"
-                    avatarSize="192"
+                    [user]="user" size="140" fontSize="5"
                 ></app-avatar>
             </div>
         </mat-card>
@@ -84,7 +81,7 @@
                 <button mat-raised-button color="primary" (click)="updateUserPassword()">
                     Update password
                 </button>
-                <a *ngIf="false" href="#!" style="margin-left: 16px; text-decoration-line: unset;">I forgot my password</a>
+                <a *ngIf="false" href="#" style="margin-left: 16px; text-decoration-line: unset;">I forgot my password</a>
             </div>
         </div>
     </mat-card>

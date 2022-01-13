@@ -4,7 +4,7 @@
 
   <mat-form-field appearance="fill">
     <div matPrefix class="branch-select-prefix">
-      <img src="assets/icons/branch.svg" />
+      <img src="assets/icons/branch.svg"  alt="branch image"/>
     </div>
     <mat-label>
       Branch
@@ -44,17 +44,11 @@
       <ng-container *ngIf="getCommitAuthor(commit); let author;">
 
         <mat-card-title-group class="col-sm-12 col-md-6" style="padding-left: 0;">
-          <app-avatar class="commit-user"
-            [user]="author"
-            avatarSize="64"
-                      size="46"
-            [class.avatar]="author.avatar"
-            [class.initials]="!author.avatar"
+          <app-avatar class="commit-user initials"
+            [user]="author" size="46"
           ></app-avatar>
 
-          <div class="commit-title"
-               [class.avatar]="author.avatar"
-               [class.initials]="!author.avatar">
+          <div class="commit-title initials">
             <mat-card-title>
               {{ commit.title }}
             </mat-card-title>

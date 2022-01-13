@@ -23,8 +23,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions style="justify-content: center; margin-bottom: 0;">
-    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
-    <button [disabled]="!selectedLocale" (click)="addLocale()" mat-flat-button color="primary" mat-dialog-close>
+    <button mat-button (click)="close()">Cancel</button>
+    <button [disabled]="!selectedLocale" (click)="addLocale()" mat-flat-button color="primary">
         Add this locale
     </button>
 </mat-dialog-actions>

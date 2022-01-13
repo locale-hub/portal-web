@@ -19,7 +19,9 @@ if (environment.features.sentry) {
   });
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AppErrorHandler implements ErrorHandler {
   constructor() {}
 

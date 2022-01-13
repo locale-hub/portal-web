@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../logic/services/auth.service';
-import {ActivatedRoute, NavigationEnd, Router, RoutesRecognized} from '@angular/router';
-import {MessageService} from '../logic/services/message.service';
-import {environment} from '../../environments/environment';
+import {AuthService} from './logic/services/auth.service';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {MessageService} from './logic/services/message.service';
+import {environment} from '../environments/environment';
 import {interval, Subscription} from 'rxjs';
-import {CreateProjectComponent} from './shared/create-project/create-project.component';
-import {Project} from '../data/models/project.model';
+import {CreateProjectComponent} from './modules/shared/create-project/create-project.component';
+import {Project} from './data/models/project.model';
 import {MatDialog} from '@angular/material/dialog';
-import {CreateOrganizationComponent} from './shared/create-organization/create-organization.component';
-import {Organization} from '../data/models/organization.model';
-import {UserService} from '../logic/services/user.service';
-import {RouteDataModel} from '../data/models/route-data.model';
+import {CreateOrganizationComponent} from './modules/shared/create-organization/create-organization.component';
+import {Organization} from './data/models/organization.model';
+import {UserService} from './logic/services/user.service';
+import {RouteDataModel} from './data/models/route-data.model';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 declare let gtag: Function;
@@ -45,12 +45,15 @@ export class AppComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private router: Router
   ) {
-    router.events.subscribe((event) => {
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
       if (!(event instanceof NavigationEnd)) {
         return;
       }
 
-      const data = (route.snapshot.firstChild.firstChild ?? route.snapshot.firstChild).data as RouteDataModel;
+      const data = (this.route.snapshot.firstChild.firstChild ?? this.route.snapshot.firstChild).data as RouteDataModel;
 
       this.currentPageName = data.sectionName;
       switch (this.currentPageName) {
@@ -69,9 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
 
-  ngOnInit() {
     this.isUserAuthenticated = this.authService.isAuthenticated();
     if (this.isUserAuthenticated) {
       this.userService.dashboard().subscribe((data) => {

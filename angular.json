@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "sourceMap": true,
             "outputPath": "dist/portal-web",
             "index": "src/index-dev.html",
             "main": "src/main.ts",
@@ -38,6 +39,30 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "index": "src/index-dev.html",
+              "fileReplacements": [
+              ],
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
             "production": {
               "index": "src/index.html",
               "fileReplacements": [
@@ -74,6 +99,9 @@
             "browserTarget": "portal-web:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "portal-web:build:development"
+            },
             "production": {
               "browserTarget": "portal-web:build:production"
             }
@@ -119,6 +147,9 @@
             "devServerTarget": "portal-web:serve"
           },
           "configurations": {
+            "development": {
+              "devServerTarget": "portal-web:serve:development"
+            },
             "production": {
               "devServerTarget": "portal-web:serve:production"
             }
