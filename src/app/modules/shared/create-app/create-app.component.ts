@@ -4,13 +4,14 @@ import {App} from '../../../data/models/app.model';
 import {AppService} from '../../../logic/services/app.service';
 import {AppType} from '../../../data/enums/AppType.enum';
 import {MessageService} from '../../../logic/services/message.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-create-app',
   templateUrl: './create-app.component.html',
   styleUrls: ['./create-app.component.scss'],
 })
-export class CreateAppComponent {
+export class CreateAppComponent extends BaseComponent {
   private projectId: string;
   types = AppType;
   app: App = {
@@ -31,6 +32,7 @@ export class CreateAppComponent {
     private messageService: MessageService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
     this.projectId = data.projectId;
   }
 
@@ -39,10 +41,12 @@ export class CreateAppComponent {
   }
 
   create() {
-    this.appService.create(this.projectId, this.app)
+    this.appService
+      .create(this.projectId, this.app)
       .subscribe((data) => {
         this.messageService.log(`Project ${data.application.name} created!`);
         this.dialogRef.close(data.application);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 }

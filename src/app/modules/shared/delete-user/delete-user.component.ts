@@ -1,14 +1,14 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {UserService} from '../../../logic/services/user.service';
 import {OrganizationService} from '../../../logic/services/organization.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user.component.html',
   styleUrls: ['./delete-user.component.scss']
 })
-export class DeleteUserComponent {
+export class DeleteUserComponent extends BaseComponent {
   userId: string;
   userName: string;
 
@@ -17,6 +17,7 @@ export class DeleteUserComponent {
     private dialogRef: MatDialogRef<DeleteUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
     this.userId = data.userId;
     this.userName = data.userName;
   }
@@ -26,9 +27,11 @@ export class DeleteUserComponent {
   }
 
   deleteUser() {
-    this.organizationService.revokeUser(this.userId)
+    this.organizationService
+      .revokeUser(this.userId)
       .subscribe(() => {
         this.dialogRef.close();
-      });
+      })
+      .addTo(this.disposeBag);
   }
 }

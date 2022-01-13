@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MatProgressCircleComponent } from './mat-progress-circle.component';
+import {MatProgressCircleComponent} from './mat-progress-circle.component';
 
 describe('MatProgressCircleComponent', () => {
   let component: MatProgressCircleComponent;

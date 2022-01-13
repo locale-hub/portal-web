@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Locale} from '../../data/models/locale.model';
 import {AuthService} from './auth.service';
 import ServiceHelper from '../utils/ServiceHelper';
 import {LocalesListResponse} from '../../data/responses/locales-list.response';

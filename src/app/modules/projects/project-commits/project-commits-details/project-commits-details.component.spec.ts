@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { ProjectCommitsDetailsComponent } from './project-commits-details.component';
+import {ProjectCommitsDetailsComponent} from './project-commits-details.component';
 
 describe('ProjectCommitsDetailsComponent', () => {
   let component: ProjectCommitsDetailsComponent;

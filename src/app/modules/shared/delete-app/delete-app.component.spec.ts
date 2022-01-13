@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { DeleteAppComponent } from './delete-app.component';
+import {DeleteAppComponent} from './delete-app.component';
 
 describe('DeleteAppComponent', () => {
   let component: DeleteAppComponent;

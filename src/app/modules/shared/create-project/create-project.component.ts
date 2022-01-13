@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormGroup} from '@angular/forms';
-import { Project } from '../../../data/models/project.model';
-import { ProjectService } from '../../../logic/services/project.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Project} from '../../../data/models/project.model';
+import {ProjectService} from '../../../logic/services/project.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MessageService} from '../../../logic/services/message.service';
 import {Organization} from '../../../data/models/organization.model';
@@ -41,16 +41,20 @@ export class CreateProjectComponent extends BaseComponent {
       ]),
     });
 
-    this.userService.dashboard().subscribe((data) => {
-      if (undefined === data) {
-        return;
-      }
-      this.organizations = data.organizations;
-    });
+    this.userService
+      .dashboard()
+      .subscribe((data) => {
+        if (undefined === data) {
+          return;
+        }
+        this.organizations = data.organizations;
+      })
+      .addTo(this.disposeBag);
   }
 
   create() {
-    this.projectsService.create(this.project)
+    this.projectsService
+      .create(this.project)
       .subscribe((data) => {
         if (undefined === data) {
           return;
@@ -59,7 +63,8 @@ export class CreateProjectComponent extends BaseComponent {
         const project = data.project;
         this.messageService.log(`Project ${project.name} created!`);
         this.dialogRef.close(project);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   close() {

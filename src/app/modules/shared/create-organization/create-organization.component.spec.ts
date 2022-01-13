@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { CreateOrganizationComponent } from './create-organization.component';
+import {CreateOrganizationComponent} from './create-organization.component';
 
 describe('CreateProjectComponent', () => {
   let component: CreateOrganizationComponent;

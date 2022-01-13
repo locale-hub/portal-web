@@ -7,14 +7,15 @@ import {parseStringPromise} from 'xml2js';
 import FileUtils from '../../../logic/utils/file.util';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
-import {startWith, map} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-add-locale',
   templateUrl: './add-locale.component.html',
   styleUrls: ['./add-locale.component.scss']
 })
-export class AddLocaleComponent implements OnInit {
+export class AddLocaleComponent extends BaseComponent implements OnInit {
   selectedLocale: string;
 
   locales: Locale[];
@@ -29,12 +30,14 @@ export class AddLocaleComponent implements OnInit {
     private localeService: LocaleService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
   }
 
   ngOnInit(): void {
     const existingLocales = this.data.existingLocales;
 
-    this.localeService.list()
+    this.localeService
+      .list()
       .subscribe((response) => {
         this.locales = response.locales
           .filter((locale: Locale) => !existingLocales.includes(locale.tag))
@@ -52,7 +55,8 @@ export class AddLocaleComponent implements OnInit {
                 });
             }),
           );
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   close() {

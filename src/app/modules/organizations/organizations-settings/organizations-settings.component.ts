@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {User} from '../../../data/models/user.model';
 import {Organization} from '../../../data/models/organization.model';
@@ -25,28 +25,39 @@ export class OrganizationsSettingsComponent extends BaseComponent {
     private messageService: MessageService,
   ) {
     super();
-    this.route.paramMap.subscribe(params => {
-      const organizationId = params.get('organizationId');
-      this.organizationService.get(organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-        this.organization = data.organization;
-      });
+    this.route.paramMap
+      .subscribe(params => {
+        const organizationId = params.get('organizationId');
+        this.organizationService
+          .get(organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+            this.organization = data.organization;
+          })
+          .addTo(this.disposeBag);
 
-      this.organizationService.users(organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-        this.users = data.users;
-      });
-    });
+        this.organizationService
+          .users(organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+            this.users = data.users;
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   saveOrganization() {
-    this.organizationService.update(this.organization).subscribe(() => {
-      this.messageService.log('Updated!');
-    });
+    this.organizationService
+      .update(this.organization)
+      .subscribe(() => {
+        this.messageService.log('Updated!');
+      })
+      .addTo(this.disposeBag);
   }
 
   openDeleteDialog() {

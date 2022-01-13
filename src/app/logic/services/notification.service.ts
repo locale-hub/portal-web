@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MeNotificationsResponse} from '../../data/responses/me-notifications.response';
 import {HttpClient, HttpHeaders} from '@angular/common/http';

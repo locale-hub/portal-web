@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { AddLocaleComponent } from './add-locale.component';
+import {AddLocaleComponent} from './add-locale.component';
 
 describe('AddLocaleComponent', () => {
   let component: AddLocaleComponent;

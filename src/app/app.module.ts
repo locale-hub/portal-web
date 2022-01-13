@@ -12,7 +12,6 @@ import {ProjectsModule} from './modules/projects/projects.module';
 import {PublicModule} from './modules/public/public.module';
 import {SharedModule} from './modules/shared/shared.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';

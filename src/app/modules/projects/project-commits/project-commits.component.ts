@@ -14,14 +14,15 @@ import {MessageService} from '../../../logic/services/message.service';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {ProjectService} from '../../../logic/services/project.service';
 import {User} from '../../../data/models/user.model';
-import { Clipboard } from '@angular/cdk/clipboard';
+import {Clipboard} from '@angular/cdk/clipboard';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-project-commits',
   templateUrl: './project-commits.component.html',
   styleUrls: ['./project-commits.component.scss']
 })
-export class ProjectCommitsComponent implements OnInit {
+export class ProjectCommitsComponent extends BaseComponent implements OnInit {
   projectId: string;
   commits: Commit[];
   users: User[];
@@ -37,50 +38,66 @@ export class ProjectCommitsComponent implements OnInit {
     private commitsService: CommitService,
     private messageService: MessageService,
     private clipboard: Clipboard
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.projectId = params.get('projectId');
+    this.route.paramMap
+      .subscribe(params => {
+        this.projectId = params.get('projectId');
 
-      this.commitsService.list(this.projectId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-
-        this.commits = data.commits;
-      });
-
-      this.projectService.get(this.projectId).subscribe(async (projectData) => {
-        if (undefined === projectData) {
-          return await this.router.navigate(['/']);
-        }
-
-        this.organizationService.users(projectData.project.organizationId)
+        this.commitsService
+          .list(this.projectId)
           .subscribe(async (data) => {
             if (undefined === data) {
               return await this.router.navigate(['/']);
             }
 
-            this.users = data.users;
-          });
-      });
-    });
+            this.commits = data.commits;
+          })
+          .addTo(this.disposeBag);
+
+        this.projectService
+          .get(this.projectId)
+          .subscribe(async (projectData) => {
+            if (undefined === projectData) {
+              return await this.router.navigate(['/']);
+            }
+
+            this.organizationService
+              .users(projectData.project.organizationId)
+              .subscribe(async (data) => {
+                if (undefined === data) {
+                  return await this.router.navigate(['/']);
+                }
+
+                this.users = data.users;
+              })
+              .addTo(this.disposeBag);
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   publishCommit(id: string) {
-    this.dialog.open(PublishCommitComponent, {
-      data: {
-        projectId: this.projectId,
-        commitId: id,
-      },
-    }).afterClosed().subscribe((published: boolean) => {
-      if (undefined === published || false === published) {
-        return;
-      }
-      this.messageService.log('Your content has been published');
-      this.ngOnInit();
-    });
+    this.dialog
+      .open(PublishCommitComponent, {
+        data: {
+          projectId: this.projectId,
+          commitId: id,
+        },
+      })
+      .afterClosed()
+      .subscribe((published: boolean) => {
+        if (undefined === published || false === published) {
+          return;
+        }
+        this.messageService.log('Your content has been published');
+        this.ngOnInit();
+      })
+      .addTo(this.disposeBag);
   }
 
   async showCommitDetails(id: string) {

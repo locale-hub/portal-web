@@ -1,15 +1,14 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {App} from '../../../data/models/app.model';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {AppService} from '../../../logic/services/app.service';
 import {CommitService} from '../../../logic/services/commit.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-publish-commit',
   templateUrl: './publish-commit.component.html',
   styleUrls: ['./publish-commit.component.scss']
 })
-export class PublishCommitComponent {
+export class PublishCommitComponent extends BaseComponent{
   commitId: string;
   projectId: string;
 
@@ -18,6 +17,7 @@ export class PublishCommitComponent {
     private commitService: CommitService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
     this.projectId = data.projectId;
     this.commitId = data.commitId;
   }
@@ -27,9 +27,11 @@ export class PublishCommitComponent {
   }
 
   deleteApp() {
-    this.commitService.publish(this.projectId, this.commitId)
+    this.commitService
+      .publish(this.projectId, this.commitId)
       .subscribe(() => {
         this.dialogRef.close(true);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 }

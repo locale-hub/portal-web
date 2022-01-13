@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../logic/services/auth.service';
 import {MessageService} from '../../../logic/services/message.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-reset-password-apply',
   templateUrl: './reset-password-apply.component.html',
   styleUrls: ['./reset-password-apply.component.scss']
 })
-export class ResetPasswordApplyComponent implements OnInit {
+export class ResetPasswordApplyComponent extends BaseComponent implements OnInit {
   token: string;
   email: string;
   password1: string;
@@ -19,12 +20,16 @@ export class ResetPasswordApplyComponent implements OnInit {
     private messageService: MessageService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.token = params.get('token');
-    });
+    this.route.paramMap
+      .subscribe(params => {
+        this.token = params.get('token');
+      })
+      .addTo(this.disposeBag);
   }
 
   sendResetPasswordApply() {
@@ -33,13 +38,16 @@ export class ResetPasswordApplyComponent implements OnInit {
       return;
     }
 
-    this.authService.resetPasswordApply(this.token, this.email, this.password1).subscribe(async (_) => {
-      if (undefined === _) {
-        return;
-      }
+    this.authService
+      .resetPasswordApply(this.token, this.email, this.password1)
+      .subscribe(async (_) => {
+        if (undefined === _) {
+          return;
+        }
 
-      this.messageService.log('Password has been with success!');
-      await this.router.navigate(['/']);
-    });
+        this.messageService.log('Password has been with success!');
+        await this.router.navigate(['/']);
+      })
+      .addTo(this.disposeBag);
   }
 }

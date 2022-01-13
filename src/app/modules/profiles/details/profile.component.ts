@@ -6,13 +6,14 @@ import {MessageService} from '../../../logic/services/message.service';
 import {Email} from '../../../data/models/email.model';
 import {EmailStatus} from '../../../data/enums/EmailStatus.enum';
 import {MatDialog} from '@angular/material/dialog';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent extends BaseComponent implements OnInit {
   private readonly emailRegex = new RegExp(
     '(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])'
   );
@@ -31,18 +32,22 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private messageService: MessageService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.user = this.authService.user();
   }
 
   updateUser() {
-    this.userService.update(this.user)
+    this.userService
+      .update(this.user)
       .subscribe(() => {
         this.ngOnInit();
         this.messageService.log('Information saved');
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   updateUserPassword() {
@@ -51,9 +56,12 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.userService.updatePassword(this.password.old, this.password.new1).subscribe(() => {
-      this.messageService.log('Password updated');
-    });
+    this.userService
+      .updatePassword(this.password.old, this.password.new1)
+      .subscribe(() => {
+        this.messageService.log('Password updated');
+      })
+      .addTo(this.disposeBag);
   }
 
   private passwordsDoesNotMatches(): boolean {
@@ -68,14 +76,16 @@ export class ProfileComponent implements OnInit {
       status: EmailStatus.PENDING,
       createdAt: '',
     });
-    this.userService.update(this.user)
+    this.userService
+      .update(this.user)
       .subscribe((updated) => {
         if (undefined !== updated) {
           this.messageService.log('Please check your emails');
         }
 
         this.ngOnInit();
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   deleteEmail(email: Email) {
@@ -86,11 +96,13 @@ export class ProfileComponent implements OnInit {
 
     if (deletionConfirmed) {
       this.user.emails = this.user.emails.filter((e) => e.email !== email.email);
-      this.userService.update(this.user)
+      this.userService
+        .update(this.user)
         .subscribe(() => {
           this.ngOnInit();
           this.messageService.log('Email removed');
-        });
+        })
+        .addTo(this.disposeBag);
     }
   }
 

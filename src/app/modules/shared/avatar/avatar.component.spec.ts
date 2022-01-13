@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { AvatarComponent } from './avatar.component';
+import {AvatarComponent} from './avatar.component';
 
 describe('AvatarComponent', () => {
   let component: AvatarComponent;

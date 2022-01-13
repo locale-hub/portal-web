@@ -4,13 +4,14 @@ import {Project} from '../../../../data/models/project.model';
 import {KeyStatus} from '../../../../data/enums/keyStatus.enum';
 import {MatDialog} from '@angular/material/dialog';
 import {TranslationEditorComponent} from '../../../shared/translation-editor/translation-editor.component';
+import {BaseComponent} from '../../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-translation-row',
   templateUrl: './translation-row.component.html',
   styleUrls: ['./translation-row.component.scss']
 })
-export class TranslationRowComponent implements OnInit {
+export class TranslationRowComponent extends BaseComponent implements OnInit {
   extended = false;
 
   @Input() project: Project;
@@ -25,7 +26,9 @@ export class TranslationRowComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.manifest.manifest[this.selectedLocale][this.key].status = this.getStatus();
@@ -33,32 +36,36 @@ export class TranslationRowComponent implements OnInit {
   }
 
   openTranslationEditor(): void {
-    this.dialog.open(TranslationEditorComponent, {
-      width: '75vw',
-      height: '80vh',
-      data: {
-        project: this.project,
-        manifest: this.manifest.manifest,
-        initialEntry: this.originalManifest.manifest[this.selectedLocale]?.[this.key] ?? null,
-        entry: this.manifest.manifest[this.selectedLocale][this.key],
-        key: this.key,
-        locale: this.selectedLocale,
-      }
-    }).afterClosed().subscribe((response) => {
-      if (undefined === response) {
-        return;
-      }
+    this.dialog
+      .open(TranslationEditorComponent, {
+        width: '75vw',
+        height: '80vh',
+        data: {
+          project: this.project,
+          manifest: this.manifest.manifest,
+          initialEntry: this.originalManifest.manifest[this.selectedLocale]?.[this.key] ?? null,
+          entry: this.manifest.manifest[this.selectedLocale][this.key],
+          key: this.key,
+          locale: this.selectedLocale,
+        }
+      })
+      .afterClosed()
+      .subscribe((response) => {
+        if (undefined === response) {
+          return;
+        }
 
-      if (response.deleted) {
-        this.deleteKey();
-        return;
-      }
+        if (response.deleted) {
+          this.deleteKey();
+          return;
+        }
 
-      this.manifest.manifest[this.selectedLocale][this.key] = response.updatedEntry;
-      this.manifest.manifest[this.selectedLocale][this.key].status = this.getStatus();
-      this.statusClass = this.entryStatus();
-      this.changeHappened.emit();
-    });
+        this.manifest.manifest[this.selectedLocale][this.key] = response.updatedEntry;
+        this.manifest.manifest[this.selectedLocale][this.key].status = this.getStatus();
+        this.statusClass = this.entryStatus();
+        this.changeHappened.emit();
+      })
+      .addTo(this.disposeBag);
   }
 
   private deleteKey = () => {

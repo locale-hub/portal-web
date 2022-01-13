@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AddEntryComponent} from './add-entry/add-entry.component';
 import {AddLocaleComponent} from './add-locale/add-locale.component';

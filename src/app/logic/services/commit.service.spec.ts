@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { CommitService } from './commit.service';
+import {CommitService} from './commit.service';
 
 describe('CommitsService', () => {
   let service: CommitService;

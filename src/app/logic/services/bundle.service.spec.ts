@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { BundleService } from './bundle.service';
+import {BundleService} from './bundle.service';
 
 describe('ManifestFormatService', () => {
   let service: BundleService;

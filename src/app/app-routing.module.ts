@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {JwtModule, JwtModuleOptions} from '@auth0/angular-jwt';
 import {AuthRoutingModule} from './modules/auth/auth-routing.module';
 import {DashboardRoutingModule} from './modules/dashboard/dashboard-routing.module';

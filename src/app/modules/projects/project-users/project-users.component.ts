@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {User} from '../../../data/models/user.model';
 import {OrganizationService} from '../../../logic/services/organization.service';
@@ -8,7 +8,7 @@ import {Project} from '../../../data/models/project.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith, tap} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 import {DeleteUserComponent} from '../../shared/delete-user/delete-user.component';
 import {AuthService} from '../../../logic/services/auth.service';
 import {UserRoles} from '../../../data/enums/UserRoles.enum';
@@ -44,42 +44,52 @@ export class ProjectUsersComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.projectId = params.get('projectId');
-      this.projectService.get(this.projectId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-
-        this.project = data.project;
-
-        this.organizationsService.users(this.project.organizationId)
-          .subscribe(async (userData) => {
-            if (undefined === userData) {
+    this.route.paramMap
+      .subscribe(params => {
+        this.projectId = params.get('projectId');
+        this.projectService
+          .get(this.projectId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
               return await this.router.navigate(['/']);
             }
-            this.organizationUsers = userData.users;
-            const authUserRole = this.organizationUsers
-              .filter((u) => u.id = this.authService.user().id)[0]
-              .role;
-            this.isUserAdmin = UserRoles.OWNER === authUserRole || UserRoles.ADMIN === authUserRole;
 
-            this.filteredUsers = this.myControl.valueChanges
-              .pipe(
-                startWith(''),
-                map(value => this._filter(value))
-              );
-          });
-      });
+            this.project = data.project;
 
-      this.projectService.getUsers(this.projectId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
+            this.organizationsService
+              .users(this.project.organizationId)
+              .subscribe(async (userData) => {
+                if (undefined === userData) {
+                  return await this.router.navigate(['/']);
+                }
+                this.organizationUsers = userData.users;
+                const authUserRole = this.organizationUsers
+                  .filter((u) => u.id = this.authService.user().id)[0]
+                  .role;
+                this.isUserAdmin = UserRoles.OWNER === authUserRole || UserRoles.ADMIN === authUserRole;
 
-        this.users = data.users;
-      });
-    });
+                this.filteredUsers = this.myControl.valueChanges
+                  .pipe(
+                    startWith(''),
+                    map(value => this._filter(value))
+                  );
+              })
+              .addTo(this.disposeBag);
+          })
+          .addTo(this.disposeBag);
+
+        this.projectService
+          .getUsers(this.projectId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+
+            this.users = data.users;
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   private _filter(value: string): User[] {
@@ -110,13 +120,15 @@ export class ProjectUsersComponent extends BaseComponent implements OnInit {
   }
 
   openDeleteUser(user: User) {
-    this.dialog.open(DeleteUserComponent, {
-      data: {
-        userId: user.id,
-        userName: user.name
-      }
-    }).afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
+    this.dialog
+      .open(DeleteUserComponent, {
+        data: {
+          userId: user.id,
+          userName: user.name
+        }
+      })
+      .afterClosed()
+      .subscribe(() => { this.ngOnInit(); })
+      .addTo(this.disposeBag);
   }
 }

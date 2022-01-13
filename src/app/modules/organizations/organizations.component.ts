@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrganizationService} from '../../logic/services/organization.service';
 import {Organization} from '../../data/models/organization.model';
 import {AuthService} from '../../logic/services/auth.service';

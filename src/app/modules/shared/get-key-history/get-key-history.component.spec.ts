@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { GetKeyHistoryComponent } from './get-key-history.component';
+import {GetKeyHistoryComponent} from './get-key-history.component';
 
 describe('GetKeyHistoryComponent', () => {
   let component: GetKeyHistoryComponent;

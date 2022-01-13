@@ -1,5 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import * as lodash from 'lodash-es';
+import {Component, Inject} from '@angular/core';
 
 import {Project} from '../../../data/models/project.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -7,13 +6,15 @@ import {ManifestWithStatus} from '../../../data/models/manifestWithStatus.model'
 import {KeyStatus} from '../../../data/enums/keyStatus.enum';
 import {ManifestEntry} from '../../../data/models/manifestEntry.model';
 import {CommitService} from '../../../logic/services/commit.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
+// @ts-ignore
 @Component({
   selector: 'app-create-commit',
   templateUrl: './create-commit.component.html',
   styleUrls: ['./create-commit.component.scss']
 })
-export class CreateCommitComponent {
+export class CreateCommitComponent extends BaseComponent {
   project: Project;
   fullManifest: ManifestWithStatus;
   manifest: ManifestWithStatus;
@@ -28,6 +29,7 @@ export class CreateCommitComponent {
     private commitService: CommitService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
     this.project = data.project;
     this.selectedLocale = this.project.defaultLocale;
 
@@ -62,10 +64,12 @@ export class CreateCommitComponent {
   }
 
   updateManifest() {
-    this.commitService.post(this.project.id, this.fullManifest, this.commitTitle, this.commitDescription)
+    this.commitService
+      .post(this.project.id, this.fullManifest, this.commitTitle, this.commitDescription)
       .subscribe(() => {
         this.dialogRef.close(true);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   isLocaleMissAKey = (locale: string): boolean => {

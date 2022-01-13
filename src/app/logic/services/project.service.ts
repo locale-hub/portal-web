@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project } from '../../data/models/project.model';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Project} from '../../data/models/project.model';
+import {Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 import {AuthService} from './auth.service';
 import ServiceHelper from '../utils/ServiceHelper';
 import {UserRoles} from '../../data/enums/UserRoles.enum';

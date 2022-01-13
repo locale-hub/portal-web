@@ -50,66 +50,69 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.router.events.subscribe((event) => {
-      if (!(event instanceof NavigationEnd)) {
-        return;
-      }
+    this.router.events
+      .subscribe((event) => {
+        if (!(event instanceof NavigationEnd)) {
+          return;
+        }
 
-      const data = (this.route.snapshot.firstChild.firstChild ?? this.route.snapshot.firstChild).data as RouteDataModel;
+        const data = (this.route.snapshot.firstChild.firstChild ?? this.route.snapshot.firstChild).data as RouteDataModel;
 
-      this.currentPageName = data.sectionName;
-      switch (this.currentPageName) {
-        case 'organizations':
-          this.showOrganizations = true;
-          break;
-        case 'projects':
-          this.showProjects = true;
-          break;
-      }
+        this.currentPageName = data.sectionName;
+        switch (this.currentPageName) {
+          case 'organizations':
+            this.showOrganizations = true;
+            break;
+          case 'projects':
+            this.showProjects = true;
+            break;
+        }
 
-      if (this.isProduction) {
-        const sectionName = data.sectionName + (undefined !== data.subSectionName ? `-${data.subSectionName}` : '');
-        gtag('config', 'G-P6XQM6NRST', {
-          page_path: sectionName,
-        });
-      }
-    });
+        if (this.isProduction) {
+          const sectionName = data.sectionName + (undefined !== data.subSectionName ? `-${data.subSectionName}` : '');
+          gtag('config', 'G-P6XQM6NRST', {
+            page_path: sectionName,
+          });
+        }
+      })
+      .addTo(this.disposeBag);
 
     this.isUserAuthenticated = this.authService.isAuthenticated();
     if (this.isUserAuthenticated) {
-      this.userService.dashboard().subscribe((data) => {
-        if (undefined === data) {
-          return;
-        }
-        this.organizations = data.organizations;
-        this.projects = data.projects;
-      });
+      this.userService.dashboard()
+        .subscribe((data) => {
+          if (undefined === data) {
+            return;
+          }
+          this.organizations = data.organizations;
+          this.projects = data.projects;
+        })
+        .addTo(this.disposeBag);
     }
 
-    AuthService.onUserLogin.subscribe((user) => {
-      if (undefined === user) {
-        this.isUserAuthenticated = false;
-        return;
-      }
-      this.isUserAuthenticated = true;
-
-      this.userService.dashboard().subscribe((data) => {
-        if (undefined === data) {
+    AuthService.onUserLogin
+      .subscribe((user) => {
+        if (undefined === user) {
+          this.isUserAuthenticated = false;
           return;
         }
-        this.organizations = data.organizations;
-        this.projects = data.projects;
-      });
+        this.isUserAuthenticated = true;
 
-      const source = interval(environment.refreshTokenInterval);
-      this.refreshTokenSubscription = source.subscribe(() => {
-        this.authService.refreshToken();
-      });
-    });
-  }
+        this.userService.dashboard().subscribe((data) => {
+          if (undefined === data) {
+            return;
+          }
+          this.organizations = data.organizations;
+          this.projects = data.projects;
+        });
 
-  ngOnDestroy() {
-    this.refreshTokenSubscription.unsubscribe();
+        interval(environment.refreshTokenInterval)
+          .subscribe(() => {
+            this.authService.refreshToken();
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   async logout() {
@@ -123,22 +126,28 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
   }
 
   openCreateProjectDialog(): void {
-    this.dialog.open(CreateProjectComponent).afterClosed().subscribe(async (project: Project) => {
-      if (undefined === project) {
-        return;
-      }
+    this.dialog.open(CreateProjectComponent)
+      .afterClosed()
+      .subscribe(async (project: Project) => {
+        if (undefined === project) {
+          return;
+        }
 
-      await this.router.navigate(['/projects', project.id]);
-    });
+        await this.router.navigate(['/projects', project.id]);
+      })
+      .addTo(this.disposeBag);
   }
 
   openCreateOrganizationDialog() {
-    this.dialog.open(CreateOrganizationComponent).afterClosed().subscribe(async (organization: Organization) => {
-      if (undefined === organization) {
-        return;
-      }
+    this.dialog.open(CreateOrganizationComponent)
+      .afterClosed()
+      .subscribe(async (organization: Organization) => {
+        if (undefined === organization) {
+          return;
+        }
 
-      await this.router.navigate(['/organizations', organization.id, 'projects']);
-    });
+        await this.router.navigate(['/organizations', organization.id, 'projects']);
+      })
+      .addTo(this.disposeBag);
   }
 }

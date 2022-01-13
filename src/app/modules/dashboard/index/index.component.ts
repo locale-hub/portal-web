@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from '../../../data/models/project.model';
 import {UserService} from '../../../logic/services/user.service';
 import {Organization} from '../../../data/models/organization.model';
@@ -25,14 +25,16 @@ export class IndexComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.dashboard().subscribe((data) => {
-      if (undefined === data) {
-        return;
-      }
-      this.organizations = data.organizations;
-      this.projects = data.projects;
-      this.progress = data.progress;
-    });
+    this.userService.dashboard()
+      .subscribe((data) => {
+        if (undefined === data) {
+          return;
+        }
+        this.organizations = data.organizations;
+        this.projects = data.projects;
+        this.progress = data.progress;
+      })
+      .addTo(this.disposeBag);
   }
 
   organizationName(organizationId: string): string {

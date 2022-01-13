@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { CreateAppComponent } from './create-app.component';
+import {CreateAppComponent} from './create-app.component';
 
 describe('CreateAppComponent', () => {
   let component: CreateAppComponent;

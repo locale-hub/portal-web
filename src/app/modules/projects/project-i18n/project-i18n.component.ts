@@ -11,13 +11,14 @@ import {AddLocaleComponent} from '../../shared/add-locale/add-locale.component';
 import {AddEntryComponent} from '../../shared/add-entry/add-entry.component';
 import {KeyStatus} from '../../../data/enums/keyStatus.enum';
 import {CreateCommitComponent} from '../../shared/create-commit/create-commit.component';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-project-i18n',
   templateUrl: './project-i18n.component.html',
   styleUrls: ['./project-i18n.component.scss']
 })
-export class ProjectI18nComponent implements OnInit {
+export class ProjectI18nComponent extends BaseComponent implements OnInit {
   originalManifest: ManifestWithStatus;
   manifest: ManifestWithStatus;
   project: Project;
@@ -35,52 +36,63 @@ export class ProjectI18nComponent implements OnInit {
     private projectService: ProjectService,
     private manifestService: ManifestService,
     public dialog: MatDialog
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const projectId = params.get('projectId');
+    this.route.paramMap
+      .subscribe(params => {
+        const projectId = params.get('projectId');
 
-      this.projectService.get(projectId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-
-        this.project = data.project;
-      });
-
-      this.manifestService.get(projectId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-        const manifest = data.manifest;
-        manifest.keys = manifest.keys.sort((a, b) => a.localeCompare(b));
-
-        manifest.locales.forEach((locale: string) => {
-          manifest.keys.forEach((key: string) => {
-            if (undefined === manifest.manifest[locale][key]) {
-              manifest.manifest[locale][key] = this.defaultEntry(locale, key);
+        this.projectService
+          .get(projectId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
             }
-          });
-        });
 
-        // stringify/parse operation is to force creation of a new Object.
-        this.originalManifest = JSON.parse(JSON.stringify(manifest));
-        this.manifest = manifest;
-        if (0 !== this.manifest.locales.length) {
-          this.selectedLocale = this.manifest.locales[0];
-        }
-      });
-    });
+            this.project = data.project;
+          })
+          .addTo(this.disposeBag);
+
+        this.manifestService
+          .get(projectId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+            const manifest = data.manifest;
+            manifest.keys = manifest.keys.sort((a, b) => a.localeCompare(b));
+
+            manifest.locales.forEach((locale: string) => {
+              manifest.keys.forEach((key: string) => {
+                if (undefined === manifest.manifest[locale][key]) {
+                  manifest.manifest[locale][key] = this.defaultEntry(locale, key);
+                }
+              });
+            });
+
+            // stringify/parse operation is to force creation of a new Object.
+            this.originalManifest = JSON.parse(JSON.stringify(manifest));
+            this.manifest = manifest;
+            if (0 !== this.manifest.locales.length) {
+              this.selectedLocale = this.manifest.locales[0];
+            }
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   openAddLocaleDialog(): void {
-    this.dialog.open(AddLocaleComponent, {
-      width: '36vw',
-      data: {
-        existingLocales: this.manifest.locales,
-      }
-    })
+    this.dialog
+      .open(AddLocaleComponent, {
+        width: '36vw',
+        data: {
+          existingLocales: this.manifest.locales,
+        }
+      })
       .afterClosed()
       .subscribe((res: { locale: string, entries: { [key: string]: string } }) => {
         if (undefined === res || undefined === res.locale) {
@@ -116,29 +128,35 @@ export class ProjectI18nComponent implements OnInit {
 
         this.selectedLocale = res.locale;
         this.refresh();
-      }
-    );
+      })
+      .addTo(this.disposeBag);
   }
 
   openCommitDialog(): void {
-    this.dialog.open(CreateCommitComponent, {
-      width: '75vw',
-      height: '80vh',
-      data: {
-        project: this.project,
-        manifest: this.manifest
-      }
-    }).afterClosed().subscribe((isCommitCreated: boolean) => {
-      if (true === isCommitCreated) {
-        this.messageService.log('Changes saved');
-        window.location.reload();
-      }
-    });
+    this.dialog
+      .open(CreateCommitComponent, {
+        width: '75vw',
+        height: '80vh',
+        data: {
+          project: this.project,
+          manifest: this.manifest
+        }
+      })
+      .afterClosed()
+      .subscribe((isCommitCreated: boolean) => {
+        if (true === isCommitCreated) {
+          this.messageService.log('Changes saved');
+          window.location.reload();
+        }
+      })
+      .addTo(this.disposeBag);
   }
 
   openAddEntryDialog(): void {
-    this.dialog.open(AddEntryComponent)
-      .afterClosed().subscribe((newKey: string) => {
+    this.dialog
+      .open(AddEntryComponent)
+      .afterClosed()
+      .subscribe((newKey: string) => {
         if (undefined === newKey || -1 !== this.manifest.keys.indexOf(newKey)) {
           return;
         }
@@ -150,7 +168,8 @@ export class ProjectI18nComponent implements OnInit {
           entry.status = KeyStatus.CREATED;
           this.manifest.manifest[locale][newKey] = entry;
         }
-    });
+      })
+      .addTo(this.disposeBag);
   }
 
   defaultEntry = (locale: string, key: string, value: string = null, status: KeyStatus = KeyStatus.DEFAULT) => {

@@ -36,45 +36,56 @@ export class ProjectSettingsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.projectId = params.get('projectId');
-      this.projectService.get(this.projectId).subscribe(async (data) => {
+    this.route.paramMap
+      .subscribe(params => {
+        this.projectId = params.get('projectId');
+        this.projectService
+          .get(this.projectId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+
+            this.project = data.project;
+
+            this.organizationService.users(this.project.organizationId)
+              .subscribe(async (userData) => {
+                if (undefined === userData) {
+                  return await this.router.navigate(['/']);
+                }
+                this.users = userData.users.sort((a: User, b: User) => {
+                  return a.name.localeCompare(b.name);
+                });
+              });
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
+
+    this.localeService
+      .list()
+      .subscribe(async (data) => {
         if (undefined === data) {
           return await this.router.navigate(['/']);
         }
-
-        this.project = data.project;
-
-        this.organizationService.users(this.project.organizationId)
-          .subscribe(async (userData) => {
-            if (undefined === userData) {
-              return await this.router.navigate(['/']);
-            }
-            this.users = userData.users.sort((a: User, b: User) => {
-              return a.name.localeCompare(b.name);
-            });
-          });
-      });
-    });
-
-    this.localeService.list().subscribe(async (data) => {
-      if (undefined === data) {
-        return await this.router.navigate(['/']);
-      }
-      this.locales = data.locales.sort((a: Locale, b: Locale) => {
-        return a.name.localeCompare(b.name);
-      });
-    });
+        this.locales = data.locales.sort((a: Locale, b: Locale) => {
+          return a.name.localeCompare(b.name);
+        });
+      })
+      .addTo(this.disposeBag);
   }
 
   saveProject() {
-    this.projectService.put(this.project).subscribe((data) => {
-      if (undefined === data) {
-        return;
-      }
+    this.projectService
+      .put(this.project)
+      .subscribe((data) => {
+        if (undefined === data) {
+          return;
+        }
 
-      this.messageService.log('Project updated');
-    });
+        this.messageService.log('Project updated');
+      })
+      .addTo(this.disposeBag);
   }
 
   openArchiveDialog() {

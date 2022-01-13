@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TranslationEditorComponent } from './translation-editor.component';
+import {TranslationEditorComponent} from './translation-editor.component';
 
 describe('TranslationEditorComponent', () => {
   let component: TranslationEditorComponent;

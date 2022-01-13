@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { TranslationRowComponent } from './translation-row.component';
+import {TranslationRowComponent} from './translation-row.component';
 
 describe('TranslationRowComponent', () => {
   let component: TranslationRowComponent;

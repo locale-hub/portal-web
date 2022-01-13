@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../logic/services/auth.service';
 import {User} from '../../../data/models/user.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MessageService} from '../../../logic/services/message.service';
+import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
   config = environment;
 
   name: string;
@@ -23,10 +23,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private messageService: MessageService
+    private router: Router
   ) {
+    super();
   }
 
   async ngOnInit() {
@@ -37,7 +36,8 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.registerInProgress = true;
-    this.authService.register(this.name, this.email, this.password)
+    this.authService
+      .register(this.name, this.email, this.password)
       .subscribe(async (user: User) => {
         this.registerInProgress = false;
         if (undefined === user) {
@@ -45,12 +45,14 @@ export class LoginComponent implements OnInit {
         }
 
         await this.router.navigate(['/']);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   login() {
     this.loginInProgress = true;
-    this.authService.authenticate(this.email, this.password)
+    this.authService
+      .authenticate(this.email, this.password)
       .subscribe(async (user: User) => {
         this.loginInProgress = false;
         if (undefined === user) {
@@ -58,7 +60,8 @@ export class LoginComponent implements OnInit {
         }
 
         await this.router.navigate(['/']);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
 }

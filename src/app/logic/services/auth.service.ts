@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
 import {HttpClient, HttpHeaders} from '@angular/common/http';

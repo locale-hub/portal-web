@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../data/models/user.model';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {CreateUserComponent} from '../../shared/create-user/create-user.component';
@@ -29,24 +29,32 @@ export class OrganizationsUsersComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.organizationId = params.get('organizationId');
-      this.organizationService.get(this.organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
+    this.route.paramMap
+      .subscribe(params => {
+        this.organizationId = params.get('organizationId');
+        this.organizationService
+          .get(this.organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
 
-        const user = this.authService.user();
-        this.isUserOwner = user.id === data.organization.owner;
-      });
+            const user = this.authService.user();
+            this.isUserOwner = user.id === data.organization.owner;
+          })
+          .addTo(this.disposeBag);
 
-      this.organizationService.users(this.organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-        this.users = data.users;
-      });
-    });
+        this.organizationService
+          .users(this.organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+            this.users = data.users;
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   public openInviteUser() {

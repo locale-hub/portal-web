@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { ProfilesRoutingModule } from './profiles-routing.module';
+import {ProfilesRoutingModule} from './profiles-routing.module';
 import {ProfileComponent} from './details/profile.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Commit} from '../../../../data/models/commit.model';
 import {CommitService} from '../../../../logic/services/commit.service';
 import {CommitsGetResponse} from '../../../../data/responses/commits-get.response';
 import {KeyStatus} from '../../../../data/enums/keyStatus.enum';
 import * as moment from 'moment';
-import _extend from 'lodash-es/extend';
 
 @Component({
   selector: 'app-project-commits-details',

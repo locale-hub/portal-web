@@ -1,16 +1,15 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {App} from '../../../data/models/app.model';
 import {AppService} from '../../../logic/services/app.service';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-delete-app',
   templateUrl: './delete-app.component.html',
   styleUrls: ['./delete-app.component.scss']
 })
-export class DeleteAppComponent {
+export class DeleteAppComponent extends BaseComponent{
   appNameConfirmation: string;
   app: App;
 
@@ -19,6 +18,7 @@ export class DeleteAppComponent {
     private appService: AppService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
     this.app = data.app;
   }
 
@@ -27,12 +27,14 @@ export class DeleteAppComponent {
   }
 
   deleteApp() {
-    this.appService.delete(this.app)
+    this.appService
+      .delete(this.app)
       .subscribe((isDeleted) => {
         this.dialogRef.close({
           app: this.app,
           isDeleted
         });
-      });
+      })
+      .addTo(this.disposeBag);
   }
 }

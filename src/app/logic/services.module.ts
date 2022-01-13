@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DragDropDirective} from './directives/drag-drop.directive';
 import {MatSnackBarModule} from '@angular/material/snack-bar';

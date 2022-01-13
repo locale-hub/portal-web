@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {App} from '../../../data/models/app.model';
@@ -26,40 +26,53 @@ export class ProjectAppsComponent extends BaseComponent implements OnInit {
     public dialog: MatDialog
   ) {
     super();
-    this.route.paramMap.subscribe(params => {
-      this.projectId = params.get('projectId');
-    });
+    this.route.paramMap
+      .subscribe(params => {
+        this.projectId = params.get('projectId');
+      })
+      .addTo(this.disposeBag);
   }
 
   ngOnInit(): void {
     this.isFeatureEnabled = true;
-    this.appService.list(this.projectId).subscribe(async (data) => {
-      if (undefined === data) {
-        return await this.router.navigate(['/']);
-      }
-      this.isFeatureEnabled = undefined !== data.applications;
-      this.apps = data.applications;
-    });
+    this.appService
+      .list(this.projectId)
+      .subscribe(async (data) => {
+        if (undefined === data) {
+          return await this.router.navigate(['/']);
+        }
+        this.isFeatureEnabled = undefined !== data.applications;
+        this.apps = data.applications;
+      })
+      .addTo(this.disposeBag);
   }
 
   openCreateAppDialog(): void {
-    this.dialog.open(CreateAppComponent, {
-      data: {
-        projectId: this.projectId
-      }
-    }).afterClosed().subscribe(() => this.ngOnInit());
+    this.dialog
+      .open(CreateAppComponent, {
+        data: {
+          projectId: this.projectId
+        }
+      })
+      .afterClosed()
+      .subscribe(() => this.ngOnInit())
+      .addTo(this.disposeBag);
   }
 
   openDeleteAppDialog(app: App): void {
-    this.dialog.open(DeleteAppComponent, {
-      data: {
-        app
-      }
-    }).afterClosed().subscribe((response: { app: App, isDeleted: boolean }) => {
-      if (response.isDeleted) {
-        this.messageService.log(`App ${app.name} deleted`);
-        this.apps = this.apps.filter(value => app.id !== value.id);
-      }
-    });
+    this.dialog
+      .open(DeleteAppComponent, {
+        data: {
+          app
+        }
+      })
+      .afterClosed()
+      .subscribe((response: { app: App, isDeleted: boolean }) => {
+        if (response.isDeleted) {
+          this.messageService.log(`App ${app.name} deleted`);
+          this.apps = this.apps.filter(value => app.id !== value.id);
+        }
+      })
+      .addTo(this.disposeBag);
   }
 }

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { OrganizationsUsersComponent } from './organizations-users.component';
+import {OrganizationsUsersComponent} from './organizations-users.component';
 
 describe('OrganizationsUsersComponent', () => {
   let component: OrganizationsUsersComponent;

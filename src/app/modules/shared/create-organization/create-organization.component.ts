@@ -5,13 +5,14 @@ import {MessageService} from '../../../logic/services/message.service';
 import {Organization} from '../../../data/models/organization.model';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {PlansType} from '../../../data/enums/PlansType.enum';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-create-organization',
   templateUrl: './create-organization.component.html',
   styleUrls: ['./create-organization.component.scss']
 })
-export class CreateOrganizationComponent {
+export class CreateOrganizationComponent extends BaseComponent{
   organizationFrom: FormGroup;
   organization: Organization = {
     id: '',
@@ -31,6 +32,7 @@ export class CreateOrganizationComponent {
     private organizationsService: OrganizationService,
     private messageService: MessageService
   ) {
+    super();
     this.organizationFrom = new FormGroup({
       name: new FormControl(this.organization.name, [
         Validators.required,
@@ -40,7 +42,8 @@ export class CreateOrganizationComponent {
   }
 
   create() {
-    this.organizationsService.create(this.organization)
+    this.organizationsService
+      .create(this.organization)
       .subscribe((data) => {
         if (undefined === data) {
           return;
@@ -49,7 +52,8 @@ export class CreateOrganizationComponent {
         const organization = data.organization;
         this.messageService.log(`Organization ${organization.name} created!`);
         this.dialogRef.close(organization);
-      });
+      })
+      .addTo(this.disposeBag);
   }
 
   close() {

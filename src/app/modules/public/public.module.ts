@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { PublicRoutingModule } from './public-routing.module';
+import {PublicRoutingModule} from './public-routing.module';
 import {ValidateEmailComponent} from './validate-email/validate-email.component';
 import {MatCardModule} from '@angular/material/card';
 import {CommonModule} from '@angular/common';

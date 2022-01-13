@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { ProjectsRoutingModule } from './projects-routing.module';
+import {ProjectsRoutingModule} from './projects-routing.module';
 import {ProjectsComponent} from './projects.component';
 import {ProjectAppsComponent} from './project-apps/project-apps.component';
 import {ProjectCommitsDetailsComponent} from './project-commits/project-commits-details/project-commits-details.component';

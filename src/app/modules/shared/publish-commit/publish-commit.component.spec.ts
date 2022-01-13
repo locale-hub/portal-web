@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { PublishCommitComponent } from './publish-commit.component';
+import {PublishCommitComponent} from './publish-commit.component';
 
 describe('PublishCommitComponent', () => {
   let component: PublishCommitComponent;

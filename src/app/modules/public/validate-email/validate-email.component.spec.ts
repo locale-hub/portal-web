@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { ValidateEmailComponent } from './validate-email.component';
+import {ValidateEmailComponent} from './validate-email.component';
 
 describe('ValidateEmailComponent', () => {
   let component: ValidateEmailComponent;

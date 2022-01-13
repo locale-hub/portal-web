@@ -3,16 +3,16 @@ import {Notification} from '../../../data/models/notification.model';
 import {NotificationService} from '../../../logic/services/notification.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {NotificationStatus} from '../../../data/enums/notification-status.enum';
-import {CreateAppComponent} from '../create-app/create-app.component';
 import {ModalComponent} from '../modal/modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-notification-center',
   templateUrl: './notification-center.component.html',
   styleUrls: ['./notification-center.component.scss']
 })
-export class NotificationCenterComponent implements OnInit {
+export class NotificationCenterComponent extends BaseComponent implements OnInit {
   opened = false;
   showStatus = NotificationStatus.UNREAD;
   notificationStatus = NotificationStatus;
@@ -24,6 +24,7 @@ export class NotificationCenterComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog
   ) {
+    super();
     router.events.subscribe(async (event) => {
       if (event instanceof NavigationEnd) {
         this.notificationsService.list().subscribe(data => {
@@ -37,12 +38,15 @@ export class NotificationCenterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notificationsService.list().subscribe(data => {
-      if (undefined === data) {
-        return;
-      }
-      this.allNotifications = data.notifications;
-    });
+    this.notificationsService
+      .list()
+      .subscribe(data => {
+        if (undefined === data) {
+          return;
+        }
+        this.allNotifications = data.notifications;
+      })
+      .addTo(this.disposeBag);
   }
 
   newNotificationsCount() {
@@ -54,14 +58,17 @@ export class NotificationCenterComponent implements OnInit {
   }
 
   discard(id: string) {
-    this.notificationsService.discard(id).subscribe(() => {
-      this.allNotifications = this.allNotifications.map((notification) => {
-        if (id === notification.id) {
-          notification.status = NotificationStatus.READ;
-        }
-        return notification;
-      });
-    });
+    this.notificationsService
+      .discard(id)
+      .subscribe(() => {
+        this.allNotifications = this.allNotifications.map((notification) => {
+          if (id === notification.id) {
+            notification.status = NotificationStatus.READ;
+          }
+          return notification;
+        });
+      })
+      .addTo(this.disposeBag);
   }
 
   listByStatus(status: NotificationStatus): Notification[] {
@@ -83,6 +90,7 @@ export class NotificationCenterComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe(() => this.opened = true);
+      .subscribe(() => this.opened = true)
+      .addTo(this.disposeBag);
   }
 }

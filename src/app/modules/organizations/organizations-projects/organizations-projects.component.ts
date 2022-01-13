@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import { ProjectService } from '../../../logic/services/project.service';
-import { Project } from '../../../data/models/project.model';
+import {ProjectService} from '../../../logic/services/project.service';
+import {Project} from '../../../data/models/project.model';
 import {User} from '../../../data/models/user.model';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -31,26 +31,34 @@ export class OrganizationsProjectsComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const organizationId = params.get('organizationId');
-      this.organizationService.projects(organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-        this.projects = data.projects;
-        this.progress = data.progress;
-      });
+    this.route.paramMap
+      .subscribe(params => {
+        const organizationId = params.get('organizationId');
+        this.organizationService
+          .projects(organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+            this.projects = data.projects;
+            this.progress = data.progress;
+          })
+          .addTo(this.disposeBag);
 
-      this.organizationService.users(organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-        this.users = data.users.reduce((map, user) => {
-          map[user.id] = user;
-          return map;
-        }, {});
-      });
-    });
+        this.organizationService
+          .users(organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+            this.users = data.users.reduce((map, user) => {
+              map[user.id] = user;
+              return map;
+            }, {});
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 
   getProgress(projectId: string) {

@@ -4,13 +4,14 @@ import {Project} from '../../../data/models/project.model';
 import {KeyStatus} from '../../../data/enums/keyStatus.enum';
 import {ManifestEntry} from '../../../data/models/manifestEntry.model';
 import {GetKeyHistoryComponent} from '../get-key-history/get-key-history.component';
+import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
   selector: 'app-translation-editor',
   templateUrl: './translation-editor.component.html',
   styleUrls: ['./translation-editor.component.scss']
 })
-export class TranslationEditorComponent implements OnInit {
+export class TranslationEditorComponent extends BaseComponent implements OnInit {
 
   project: Project;
   manifest: { [locale: string]: { [key: string]: ManifestEntry } };
@@ -26,6 +27,7 @@ export class TranslationEditorComponent implements OnInit {
     private dialogRef: MatDialogRef<TranslationEditorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    super();
     this.project = data.project;
     this.manifest = data.manifest;
     this.initialEntry = data.initialEntry;
@@ -97,19 +99,23 @@ export class TranslationEditorComponent implements OnInit {
   showHistory() {
     const projectId = this.project.id;
 
-    this.dialog.open(GetKeyHistoryComponent, {
-      data: {
-        projectId,
-        locale: this.locale,
-        key: this.key,
-      }
-    }).afterClosed().subscribe((newValue: string) => {
-      if (undefined === newValue) {
-        return;
-      }
-      this.entry.value = newValue;
-      this.entry.status = KeyStatus.EDITED;
-    });
+    this.dialog
+      .open(GetKeyHistoryComponent, {
+        data: {
+          projectId,
+          locale: this.locale,
+          key: this.key,
+        }
+      })
+      .afterClosed()
+      .subscribe((newValue: string) => {
+        if (undefined === newValue) {
+          return;
+        }
+        this.entry.value = newValue;
+        this.entry.status = KeyStatus.EDITED;
+      })
+      .addTo(this.disposeBag);
   }
 
   inputChange() {

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { OrganizationsRoutingModule } from './organizations-routing.module';
+import {OrganizationsRoutingModule} from './organizations-routing.module';
 import {OrganizationsComponent} from './organizations.component';
 import {OrganizationsProjectsComponent} from './organizations-projects/organizations-projects.component';
 import {OrganizationsUsageComponent} from './organizations-usage/organizations-usage.component';

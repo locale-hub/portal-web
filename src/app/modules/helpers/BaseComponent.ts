@@ -3,8 +3,21 @@ import {Organization} from '../../data/models/organization.model';
 import {User} from '../../data/models/user.model';
 import {ProjectUsage} from '../../data/models/usage.model';
 import {App} from '../../data/models/app.model';
+import {DisposeBag} from './dispose-bag';
+import {Component, OnDestroy} from '@angular/core';
 
-export abstract class BaseComponent {
+
+@Component({ template: '' })
+export abstract class BaseComponent implements OnDestroy {
+  protected disposeBag: DisposeBag;
+
+  protected constructor() {
+    this.disposeBag = new DisposeBag();
+  }
+
+  public ngOnDestroy(): void {
+    this.disposeBag.unsubscribe();
+  }
 
   public trackByOrganizationId(index: number, item: Organization) {
     return item.id;

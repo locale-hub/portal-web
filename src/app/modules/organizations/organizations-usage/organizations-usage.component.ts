@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrganizationUsage} from '../../../data/models/usage.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrganizationService} from '../../../logic/services/organization.service';
@@ -23,21 +23,29 @@ export class OrganizationsUsageComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const organizationId = params.get('organizationId');
-      this.organizationService.get(organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
-      });
+    this.route.paramMap
+      .subscribe(params => {
+        const organizationId = params.get('organizationId');
+        this.organizationService
+          .get(organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
+          })
+          .addTo(this.disposeBag);
 
-      this.organizationService.usage(organizationId).subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
+        this.organizationService
+          .usage(organizationId)
+          .subscribe(async (data) => {
+            if (undefined === data) {
+              return await this.router.navigate(['/']);
+            }
 
-        this.usage = data.usage;
-      });
-    });
+            this.usage = data.usage;
+          })
+          .addTo(this.disposeBag);
+      })
+      .addTo(this.disposeBag);
   }
 }

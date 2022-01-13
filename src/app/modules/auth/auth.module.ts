@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './login/login.component';
+import {AuthRoutingModule} from './auth-routing.module';
+import {LoginComponent} from './login/login.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {ResetPasswordApplyComponent} from './reset-password-apply/reset-password-apply.component';
 import {MatFormFieldModule} from '@angular/material/form-field';

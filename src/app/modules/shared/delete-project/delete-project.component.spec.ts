@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { DeleteProjectComponent } from './delete-project.component';
+import {DeleteProjectComponent} from './delete-project.component';
 
 describe('DeleteProjectComponent', () => {
   let component: DeleteProjectComponent;
