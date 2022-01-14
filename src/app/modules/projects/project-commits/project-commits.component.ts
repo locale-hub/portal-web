@@ -16,6 +16,7 @@ import {ProjectService} from '../../../logic/services/project.service';
 import {User} from '../../../data/models/user.model';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-commits',
@@ -43,40 +44,32 @@ export class ProjectCommitsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe(params => {
-        this.projectId = params.get('projectId');
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+        tap(projectId => this.projectId = projectId)
+      );
 
-        this.commitsService
-          .list(this.projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.commitsService.list(projectId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.commits = data.commits;
+      })
+      .addTo(this.disposeBag);
 
-            this.commits = data.commits;
-          })
-          .addTo(this.disposeBag);
-
-        this.projectService
-          .get(this.projectId)
-          .subscribe(async (projectData) => {
-            if (undefined === projectData) {
-              return await this.router.navigate(['/']);
-            }
-
-            this.organizationService
-              .users(projectData.project.organizationId)
-              .subscribe(async (data) => {
-                if (undefined === data) {
-                  return await this.router.navigate(['/']);
-                }
-
-                this.users = data.users;
-              })
-              .addTo(this.disposeBag);
-          })
-          .addTo(this.disposeBag);
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.get(projectId)),
+        filter(data => undefined !== data),
+        map(data => data.project),
+        mergeMap(project => this.organizationService.users(project.organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.users = data.users;
       })
       .addTo(this.disposeBag);
   }

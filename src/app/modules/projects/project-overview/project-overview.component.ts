@@ -4,6 +4,7 @@ import {ProjectService} from '../../../logic/services/project.service';
 import {environment} from '../../../../environments/environment';
 import {ProjectsGetResponse} from '../../../data/responses/projects-get.response';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-overview',
@@ -19,26 +20,24 @@ export class ProjectOverviewComponent extends BaseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectsService: ProjectService
+    private projectService: ProjectService
   ) {
     super();
   }
 
   ngOnInit() {
-    this.route.paramMap
-      .subscribe(params => {
-        const projectId = params.get('projectId');
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+      );
 
-        this.projectsService
-          .get(projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-
-            this.data = data;
-          })
-          .addTo(this.disposeBag);
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.get(projectId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.data = data;
       })
       .addTo(this.disposeBag);
   }

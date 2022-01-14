@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {User} from '../../../data/models/user.model';
 import {Organization} from '../../../data/models/organization.model';
@@ -7,13 +7,14 @@ import {MatDialog} from '@angular/material/dialog';
 import {DeleteOrganizationComponent} from '../../shared/delete-organization/delete-organization.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organizations-settings',
   templateUrl: './organizations-settings.component.html',
   styleUrls: ['./organizations-settings.component.scss']
 })
-export class OrganizationsSettingsComponent extends BaseComponent {
+export class OrganizationsSettingsComponent extends BaseComponent implements OnInit {
   organization: Organization;
   users: User[];
 
@@ -25,28 +26,31 @@ export class OrganizationsSettingsComponent extends BaseComponent {
     private messageService: MessageService,
   ) {
     super();
-    this.route.paramMap
-      .subscribe(params => {
-        const organizationId = params.get('organizationId');
-        this.organizationService
-          .get(organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-            this.organization = data.organization;
-          })
-          .addTo(this.disposeBag);
+  }
 
-        this.organizationService
-          .users(organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-            this.users = data.users;
-          })
-          .addTo(this.disposeBag);
+  ngOnInit(): void {
+    const organizationId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('organizationId')),
+      );
+
+    organizationId$
+      .pipe(
+        mergeMap(organizationId => this.organizationService.get(organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.organization = data.organization;
+      })
+      .addTo(this.disposeBag);
+
+    organizationId$
+      .pipe(
+        mergeMap(organizationId => this.organizationService.users(organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.users = data.users;
       })
       .addTo(this.disposeBag);
   }

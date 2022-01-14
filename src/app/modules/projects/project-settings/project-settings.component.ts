@@ -11,6 +11,7 @@ import {ArchiveProjectComponent} from '../../shared/archive-project/archive-proj
 import {User} from '../../../data/models/user.model';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-settings',
@@ -36,29 +37,25 @@ export class ProjectSettingsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap
-      .subscribe(params => {
-        this.projectId = params.get('projectId');
-        this.projectService
-          .get(this.projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+      );
 
-            this.project = data.project;
-
-            this.organizationService.users(this.project.organizationId)
-              .subscribe(async (userData) => {
-                if (undefined === userData) {
-                  return await this.router.navigate(['/']);
-                }
-                this.users = userData.users.sort((a: User, b: User) => {
-                  return a.name.localeCompare(b.name);
-                });
-              });
-          })
-          .addTo(this.disposeBag);
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.get(projectId)),
+        filter(data => undefined !== data),
+        map(data => data.project),
+        tap(project => this.project = project),
+        mergeMap(project => this.organizationService.users(project.organizationId)),
+        filter(data => undefined !== data),
+        map(data => data.users),
+      )
+      .subscribe(users => {
+        this.users = users.sort((a: User, b: User) => {
+          return a.name.localeCompare(b.name);
+        });
       })
       .addTo(this.disposeBag);
 

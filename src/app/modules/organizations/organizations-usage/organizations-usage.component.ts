@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {OrganizationService} from '../../../logic/services/organization.service';
 import {environment} from '../../../../environments/environment';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organizations-usage',
@@ -24,27 +25,13 @@ export class OrganizationsUsageComponent extends BaseComponent implements OnInit
 
   ngOnInit() {
     this.route.paramMap
-      .subscribe(params => {
-        const organizationId = params.get('organizationId');
-        this.organizationService
-          .get(organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-          })
-          .addTo(this.disposeBag);
-
-        this.organizationService
-          .usage(organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-
-            this.usage = data.usage;
-          })
-          .addTo(this.disposeBag);
+      .pipe(
+        map((params) => params.get('organizationId')),
+        mergeMap(organizationId => this.organizationService.usage(organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.usage = data.usage;
       })
       .addTo(this.disposeBag);
   }

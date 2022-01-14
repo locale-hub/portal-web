@@ -8,7 +8,7 @@ import {Project} from '../../../data/models/project.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {filter, map, mergeMap, startWith, tap} from 'rxjs/operators';
 import {DeleteUserComponent} from '../../shared/delete-user/delete-user.component';
 import {AuthService} from '../../../logic/services/auth.service';
 import {UserRoles} from '../../../data/enums/UserRoles.enum';
@@ -44,50 +44,44 @@ export class ProjectUsersComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe(params => {
-        this.projectId = params.get('projectId');
-        this.projectService
-          .get(this.projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+      );
 
-            this.project = data.project;
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.get(projectId)),
+        filter(data => undefined !== data),
+        map(data => data.project),
+        tap(project => this.project = project),
+        mergeMap(project => this.organizationsService.users(project.organizationId)),
+        filter(data => undefined !== data),
+        map(data => data.users),
+      )
+      .subscribe(users => {
+        this.organizationUsers = users;
+        const authUserRole = this.organizationUsers
+          .filter((u) => u.id = this.authService.user().id)[0]
+          .role;
+        this.isUserAdmin = UserRoles.OWNER === authUserRole || UserRoles.ADMIN === authUserRole;
 
-            this.organizationsService
-              .users(this.project.organizationId)
-              .subscribe(async (userData) => {
-                if (undefined === userData) {
-                  return await this.router.navigate(['/']);
-                }
-                this.organizationUsers = userData.users;
-                const authUserRole = this.organizationUsers
-                  .filter((u) => u.id = this.authService.user().id)[0]
-                  .role;
-                this.isUserAdmin = UserRoles.OWNER === authUserRole || UserRoles.ADMIN === authUserRole;
+        this.filteredUsers = this.myControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+      })
+      .addTo(this.disposeBag);
 
-                this.filteredUsers = this.myControl.valueChanges
-                  .pipe(
-                    startWith(''),
-                    map(value => this._filter(value))
-                  );
-              })
-              .addTo(this.disposeBag);
-          })
-          .addTo(this.disposeBag);
-
-        this.projectService
-          .getUsers(this.projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-
-            this.users = data.users;
-          })
-          .addTo(this.disposeBag);
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.getUsers(projectId)),
+        filter(data => undefined !== data),
+        map(data => data.users),
+      )
+      .subscribe(users => {
+        this.users = users;
       })
       .addTo(this.disposeBag);
   }

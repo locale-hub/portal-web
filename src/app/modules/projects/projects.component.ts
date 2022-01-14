@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../logic/services/auth.service';
 import {environment} from '../../../environments/environment';
 import {BaseComponent} from '../helpers/BaseComponent';
+import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects',
@@ -27,15 +28,18 @@ export class ProjectsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap
-      .subscribe(params => {
-        const projectId = params.get('projectId');
-        this.projectService.get(projectId).subscribe(async (data) => {
-          if (undefined === data) {
-            return await this.router.navigate(['/']);
-          }
-          this.project = data.project;
-        });
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+      );
+
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.get(projectId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.project = data.project;
       })
       .addTo(this.disposeBag);
   }

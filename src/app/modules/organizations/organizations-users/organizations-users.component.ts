@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../../logic/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organizations-users',
@@ -29,30 +30,30 @@ export class OrganizationsUsersComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe(params => {
-        this.organizationId = params.get('organizationId');
-        this.organizationService
-          .get(this.organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
+    const organizationId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('organizationId')),
+        tap(organizationId => this.organizationId = organizationId),
+      );
 
-            const user = this.authService.user();
-            this.isUserOwner = user.id === data.organization.owner;
-          })
-          .addTo(this.disposeBag);
+    organizationId$
+      .pipe(
+        mergeMap(organizationId => this.organizationService.get(organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        const user = this.authService.user();
+        this.isUserOwner = user.id === data.organization.owner;
+      })
+      .addTo(this.disposeBag);
 
-        this.organizationService
-          .users(this.organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-            this.users = data.users;
-          })
-          .addTo(this.disposeBag);
+    organizationId$
+      .pipe(
+        mergeMap(organizationId => this.organizationService.users(organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.users = data.users;
       })
       .addTo(this.disposeBag);
   }

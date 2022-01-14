@@ -9,6 +9,7 @@ import {ProjectTranslationProgress} from '../../../data/models/project-translati
 import {DeleteProjectComponent} from '../../shared/delete-project/delete-project.component';
 import {MatDialog} from '@angular/material/dialog';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organizations-projects',
@@ -31,32 +32,30 @@ export class OrganizationsProjectsComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe(params => {
-        const organizationId = params.get('organizationId');
-        this.organizationService
-          .projects(organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-            this.projects = data.projects;
-            this.progress = data.progress;
-          })
-          .addTo(this.disposeBag);
+    const organizationId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('organizationId')),
+      );
 
-        this.organizationService
-          .users(organizationId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-            this.users = data.users.reduce((map, user) => {
-              map[user.id] = user;
-              return map;
-            }, {});
-          })
-          .addTo(this.disposeBag);
+    organizationId$
+      .pipe(
+        mergeMap(organizationId => this.organizationService.projects(organizationId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.projects = data.projects;
+        this.progress = data.progress;
+      })
+      .addTo(this.disposeBag);
+
+    organizationId$
+      .pipe(
+        mergeMap(organizationId => this.organizationService.users(organizationId)),
+        filter(data => undefined !== data),
+        map(data => data.users),
+      )
+      .subscribe(users => {
+        this.users = users.reduce((map, user) => { map[user.id] = user; return map; }, {});
       })
       .addTo(this.disposeBag);
   }

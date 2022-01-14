@@ -12,6 +12,7 @@ import {AddEntryComponent} from '../../shared/add-entry/add-entry.component';
 import {KeyStatus} from '../../../data/enums/keyStatus.enum';
 import {CreateCommitComponent} from '../../shared/create-commit/create-commit.component';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-i18n',
@@ -41,46 +42,45 @@ export class ProjectI18nComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe(params => {
-        const projectId = params.get('projectId');
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+      );
 
-        this.projectService
-          .get(projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.projectService.get(projectId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        this.project = data.project;
+      })
+      .addTo(this.disposeBag);
+
+
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.manifestService.get(projectId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
+        const manifest = data.manifest;
+        manifest.keys = manifest.keys.sort((a, b) => a.localeCompare(b));
+
+        manifest.locales.forEach((locale: string) => {
+          manifest.keys.forEach((key: string) => {
+            if (undefined === manifest.manifest[locale][key]) {
+              manifest.manifest[locale][key] = this.defaultEntry(locale, key);
             }
+          });
+        });
 
-            this.project = data.project;
-          })
-          .addTo(this.disposeBag);
-
-        this.manifestService
-          .get(projectId)
-          .subscribe(async (data) => {
-            if (undefined === data) {
-              return await this.router.navigate(['/']);
-            }
-            const manifest = data.manifest;
-            manifest.keys = manifest.keys.sort((a, b) => a.localeCompare(b));
-
-            manifest.locales.forEach((locale: string) => {
-              manifest.keys.forEach((key: string) => {
-                if (undefined === manifest.manifest[locale][key]) {
-                  manifest.manifest[locale][key] = this.defaultEntry(locale, key);
-                }
-              });
-            });
-
-            // stringify/parse operation is to force creation of a new Object.
-            this.originalManifest = JSON.parse(JSON.stringify(manifest));
-            this.manifest = manifest;
-            if (0 !== this.manifest.locales.length) {
-              this.selectedLocale = this.manifest.locales[0];
-            }
-          })
-          .addTo(this.disposeBag);
+        // stringify/parse operation is to force creation of a new Object.
+        this.originalManifest = JSON.parse(JSON.stringify(manifest));
+        this.manifest = manifest;
+        if (0 !== this.manifest.locales.length) {
+          this.selectedLocale = this.manifest.locales[0];
+        }
       })
       .addTo(this.disposeBag);
   }

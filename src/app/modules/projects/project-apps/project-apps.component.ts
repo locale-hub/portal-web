@@ -7,6 +7,7 @@ import {CreateAppComponent} from '../../shared/create-app/create-app.component';
 import {MessageService} from '../../../logic/services/message.service';
 import {DeleteAppComponent} from '../../shared/delete-app/delete-app.component';
 import {BaseComponent} from '../../helpers/BaseComponent';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-apps',
@@ -34,13 +35,18 @@ export class ProjectAppsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isFeatureEnabled = true;
-    this.appService
-      .list(this.projectId)
-      .subscribe(async (data) => {
-        if (undefined === data) {
-          return await this.router.navigate(['/']);
-        }
+    const projectId$ = this.route.paramMap
+      .pipe(
+        map((params) => params.get('projectId')),
+        tap(projectId => this.projectId = projectId)
+      );
+
+    projectId$
+      .pipe(
+        mergeMap(projectId => this.appService.list(projectId)),
+        filter(data => undefined !== data),
+      )
+      .subscribe(data => {
         this.isFeatureEnabled = undefined !== data.applications;
         this.apps = data.applications;
       })
