@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 
 import {ProfilesRoutingModule} from './profiles-routing.module';
-import {ProfileComponent} from './details/profile.component';
+import {ProfilesSettingsComponent} from './profiles-settings/profiles-settings.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
@@ -13,10 +13,12 @@ import {SharedModule} from '../shared/shared.module';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ProfilesGetComponent} from './profiles-get/profiles-get.component';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfilesGetComponent,
+    ProfilesSettingsComponent,
   ],
   imports: [
     ProfilesRoutingModule,

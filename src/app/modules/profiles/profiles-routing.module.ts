@@ -2,13 +2,22 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 
-import {ProfileComponent} from './details/profile.component';
+import {ProfilesSettingsComponent} from './profiles-settings/profiles-settings.component';
 import {AuthGuardService} from '../../logic/services/auth-guard.service';
+import {ProfilesGetComponent} from './profiles-get/profiles-get.component';
 
 const routes: Routes = [
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'profiles/settings',
+    component: ProfilesSettingsComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      sectionName: 'profile'
+    }
+  },
+  {
+    path: 'profiles/:userId',
+    component: ProfilesGetComponent,
     canActivate: [AuthGuardService],
     data: {
       sectionName: 'profile'

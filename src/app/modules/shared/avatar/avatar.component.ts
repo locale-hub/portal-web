@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../data/models/user.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-avatar',
@@ -17,6 +18,9 @@ export class AvatarComponent implements OnInit {
   @Input()
   public fontSize = 1;
 
+  @Input()
+  public enableProfileLink: boolean = true;
+
   public initials: string;
   public circleColor: string;
 
@@ -26,6 +30,11 @@ export class AvatarComponent implements OnInit {
     '#FFD558', // yellow
     '#3670B2', // blue
   ];
+
+  constructor(
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     this.initials = this.user.name
@@ -37,5 +46,11 @@ export class AvatarComponent implements OnInit {
 
     const color = this.initials.charCodeAt(0) % this.colors.length;
     this.circleColor = this.colors[color];
+  }
+
+  onClick() {
+    if (this.enableProfileLink) {
+      this.router.navigate(['profiles', this.user.id]);
+    }
   }
 }

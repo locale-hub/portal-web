@@ -3,6 +3,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.on-hover:hover {
+    cursor: pointer;
+  }
 }
 
 .circle img {

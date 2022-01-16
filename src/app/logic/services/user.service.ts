@@ -9,12 +9,13 @@ import {User} from '../../data/models/user.model';
 import ServiceHelper from '../utils/ServiceHelper';
 import {Observable} from 'rxjs';
 import {MeDashboardResponse} from '../../data/responses/me-dashboard.response';
+import {UsersGetResponse} from '../../data/responses/users-get.response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private readonly baseUrl: string = `${environment.api.uri}/me`;
+  private readonly baseUrl: string = `${environment.api.uri}`;
   private corsHeaders: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     'Access-Control-Allow-Origin': `${environment.api.uri}`,
@@ -28,8 +29,17 @@ export class UserService {
   ) {
   }
 
+  get(userId: string) {
+    const url = `${this.baseUrl}/users/${userId}`;
+    return this.http.get<UsersGetResponse>(url, {
+      headers: this.corsHeaders,
+    }).pipe(
+      catchError(ServiceHelper.handleError<UsersGetResponse>('Get user', undefined)),
+    );
+  }
+
   public update(user: User) {
-    const url = `${this.baseUrl}`;
+    const url = `${this.baseUrl}/me`;
     return this.http.put<User>(url, {
       user,
     }, {
@@ -47,7 +57,7 @@ export class UserService {
   }
 
   public updatePassword(passwordOld: string, passwordNew: string) {
-    const url = `${this.baseUrl}/password`;
+    const url = `${this.baseUrl}/me/password`;
     return this.http.put<void>(url, {
       old: passwordOld,
       new: passwordNew
@@ -59,7 +69,7 @@ export class UserService {
   }
 
   public validateEmail(token: string) {
-    const url = `${this.baseUrl}/validate-email`;
+    const url = `${this.baseUrl}/me/validate-email`;
     return this.http.post<User>(url, {
       token,
     }, {
@@ -79,7 +89,7 @@ export class UserService {
   }
 
   public dashboard(): Observable<MeDashboardResponse> {
-    const url = `${this.baseUrl}/dashboard`;
+    const url = `${this.baseUrl}/me/dashboard`;
     // Class Headers are not set properly when used right after login.
     // So we create it in the function.
     const headers = new HttpHeaders({
@@ -94,5 +104,4 @@ export class UserService {
         catchError(ServiceHelper.handleError<MeDashboardResponse>('dashboard', undefined))
       );
   }
-
 }

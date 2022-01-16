@@ -83,10 +83,10 @@
       </mat-menu>
 
       <button [matMenuTriggerFor]="userMenu" mat-button>
-        <app-avatar [user]="authService.user()"></app-avatar>
+        <app-avatar [user]="authService.user()" [enableProfileLink]="false"></app-avatar>
       </button>
       <mat-menu #userMenu xPosition="before">
-        <button class="mat-primary profile" mat-menu-item routerLink="/profile">
+        <button class="mat-primary profile" mat-menu-item routerLink="/profiles/settings">
           Profile
         </button>
         <button (click)="logout()" class="mat-warn-text" mat-menu-item>Logout</button>

@@ -31,6 +31,7 @@ import {TranslationRowComponent} from './project-i18n/translation-row/translatio
 import {SharedModule} from '../shared/shared.module';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatTableModule} from '@angular/material/table';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {MatTableModule} from '@angular/material/table';
     TranslationRowComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     ProjectsRoutingModule,
     CommonModule,
     MatButtonModule,

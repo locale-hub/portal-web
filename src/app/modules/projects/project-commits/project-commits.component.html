@@ -43,9 +43,8 @@
         <ng-container *ngIf="getCommitAuthor(commit); let author;">
 
           <mat-card-title-group class="col-sm-12 col-md-6" style="padding-left: 0;">
-            <app-avatar [user]="author"
-                        class="commit-user initials" size="46"
-            ></app-avatar>
+
+            <app-avatar [user]="author" class="commit-user initials" size="46"></app-avatar>
 
             <div class="commit-title initials">
               <mat-card-title>

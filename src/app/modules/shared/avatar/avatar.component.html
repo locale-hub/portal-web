@@ -1,12 +1,14 @@
-<div [ngStyle]="{
-    'background-color':  circleColor,
-    width: size + 'px',
-    height: size + 'px'
-}" class="circle">
+<div [ngStyle]="{ 'background-color':  circleColor, width: size + 'px', height: size + 'px' }"
+     [matTooltip]="user.name"
+     [matTooltipDisabled]="!enableProfileLink"
+     (click)="onClick()"
+     class="circle"
+     [class.on-hover]="enableProfileLink"
+>
 
-  <div [style]="{
-         'font-size': fontSize + 'rem'
-    }" class="initials">
+  <div [style]="{ 'font-size': fontSize + 'rem' }"
+       class="initials"
+  >
     {{ initials }}
   </div>
 </div>

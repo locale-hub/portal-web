@@ -9,11 +9,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {BaseComponent} from '../../helpers/BaseComponent';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-profiles-settings',
+  templateUrl: './profiles-settings.component.html',
+  styleUrls: ['./profiles-settings.component.scss']
 })
-export class ProfileComponent extends BaseComponent implements OnInit {
+export class ProfilesSettingsComponent extends BaseComponent implements OnInit {
   emailStatus = EmailStatus;
   user: User;
   password: { old: string, new1: string, new2: string } = {

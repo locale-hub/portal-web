@@ -1,0 +1,36 @@
+<div class="content row" style="padding: 5vh 2vw;">
+
+  <div *ngIf="user" class="row" style="width: 100%;">
+    <div class="col-sm-12 col-md-8 user-information" style="padding-left: 0;">
+      <mat-card>
+        <h3>Profile</h3>
+
+        <div class="row">
+          <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Name</mat-label>
+            <input [(ngModel)]="user.name" id="name" matInput name="name" [readonly]="true">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Email</mat-label>
+            <input [(ngModel)]="user.primaryEmail" id="email" matInput name="email" [readonly]="true">
+          </mat-form-field>
+
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="col-sm-12 col-md-4 bighead-editor" style="padding-right: 0;">
+      <mat-card style="height: 289px;">
+        <h3>Avatar</h3>
+
+        <div class="row avatar-container">
+          <app-avatar [user]="user" [enableProfileLink]="false"
+                      fontSize="5" size="140" style="margin: auto;"
+          ></app-avatar>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
