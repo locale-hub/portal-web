@@ -13,16 +13,27 @@
   <div *ngIf="opened" class="notification-container"
   >
     <div class="notification-header">
-      <button (click)="showStatus = notificationStatus.UNREAD" [class.active]="notificationStatus.UNREAD === showStatus"
-              class="notification-btn"
-              mat-flat-button>
-        Unread notifications
-      </button>
-      <button (click)="showStatus = notificationStatus.READ" [class.active]="notificationStatus.READ === showStatus"
-              class="notification-btn"
-              mat-flat-button>
-        Archived
-      </button>
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <span class="bold-text">{{listByStatus(notificationStatus.UNREAD).length}}</span>
+          pending notifications
+
+          <button
+              *ngIf="showStatus === notificationStatus.UNREAD"
+              (click)="clearAll()"
+              mat-button class="clear-all">Clear All</button>
+        </div>
+
+        <div class="col-12 col-md-4 view-notifications">
+          <button mat-button style="margin: 0;"
+              *ngIf="showStatus === notificationStatus.UNREAD"
+              (click)="showStatus = notificationStatus.READ">View All &gt;</button>
+          <button mat-button
+              *ngIf="showStatus === notificationStatus.READ"
+              (click)="showStatus = notificationStatus.UNREAD">View Pending &gt;</button>
+        </div>
+
+      </div>
     </div>
 
     <div class="notification-content">
@@ -31,6 +42,10 @@
         <span class="col-12" style="text-align: center;">All clear!</span>
         <img alt="Firework image" class="offset-1 col-10" mat-card-image
              src="../../../../assets/images/fireworks.svg">
+      </div>
+
+      <div *ngIf="0 !== listByStatus(showStatus).length" class="row">
+        <hr class="offset-1 col-10 separator" />
       </div>
 
       <mat-card *ngFor="let notification of listByStatus(showStatus)" class="notification-card">

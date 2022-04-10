@@ -13,7 +13,7 @@ import {BaseComponent} from '../../helpers/BaseComponent';
   styleUrls: ['./notification-center.component.scss']
 })
 export class NotificationCenterComponent extends BaseComponent implements OnInit {
-  opened = false;
+  opened = true;
   showStatus = NotificationStatus.UNREAD;
   notificationStatus = NotificationStatus;
 
@@ -73,7 +73,7 @@ export class NotificationCenterComponent extends BaseComponent implements OnInit
 
   listByStatus(status: NotificationStatus): Notification[] {
     return this.allNotifications
-        .filter((n) => status === n.status)
+        ?.filter((n) => status === n.status)
       ?? [];
   }
 
@@ -92,5 +92,15 @@ export class NotificationCenterComponent extends BaseComponent implements OnInit
       .afterClosed()
       .subscribe(() => this.opened = true)
       .addTo(this.disposeBag);
+  }
+
+  clearAll() {
+    for (const notification of this.listByStatus(NotificationStatus.UNREAD)) {
+      this.discard(notification.id);
+    }
+    this.allNotifications = this.allNotifications.map((notification) => {
+      notification.status = NotificationStatus.READ;
+      return notification;
+    });
   }
 }
